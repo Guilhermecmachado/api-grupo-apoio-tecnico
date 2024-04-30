@@ -1,4 +1,4 @@
-const service = require('../services/projetos-service');
+const service = require('../services/grupos-service');
 module.exports = {
 
     inserir: async (req, res) => {

@@ -1,6 +1,6 @@
 module.exports.cadastros = require('./routes/cadastros-route')
 module.exports.usuarios = require('./routes/usuarios-route')
-module.exports.usuariosPermissoes = require('./usuarios-permissoes-route')
+module.exports.usuariosPermissoes = require('./routes/usuarios-permissoes-route')
 module.exports.projetos = require('./routes/projetos-route')
 module.exports.projetosUsuarios = require('./routes/projetos-usuarios-route')
 module.exports.grupos = require('./routes/grupos-route')
@@ -18,3 +18,5 @@ module.exports.cadastroDemografico = require('./routes/cadastro-demografico-rout
 module.exports.cadastroDemograficoValor = require('./routes/cadastro-demografico-valor-route')
 module.exports.cadastroLazer = require('./routes/cadastro-lazer-route')
 module.exports.cadastroAnimal = require('./routes/cadastro-animal-route')
+module.exports.cadastroPrograma = require('./routes/programas-route')
+module.exports.cadastroEntidades = require('./routes/entidades-route')
