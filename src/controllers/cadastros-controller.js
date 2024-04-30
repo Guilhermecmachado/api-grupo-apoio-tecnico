@@ -8,8 +8,8 @@ module.exports = {
 
         let json = { error: '', result: {} };
         console.log('insert')
-        let cadastro_id = req.body.cadastro_id
-        let cadastro_nome = req.body.cadastro_nome
+        let cadastro_id = req.body.cadastrador_id
+        let cadastro_nome = req.body.cadastrador_nome
         let data_criacao = req.body.data_criacao
         let numero_cadastro = req.body.numero_cadastro
         let primeiro_responsavel = req.body.primeiro_responsavel

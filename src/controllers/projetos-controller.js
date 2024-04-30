@@ -34,42 +34,42 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                nome_projeto: model[i].nome_projeto,
+                status: model[i].status,
+                codigo: model[i].codigo
 
             });
         }
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let json = { error: '', result: {} };
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
+        let id = req.params.id;
+        let entidade_nome = req.body.entidade_nome;
+        let status = req.body.status;
+        let programa_nome = req.body.programa_nome
+        let nome_projeto = req.body.nome_projeto
+        let codigo = req.body.codigo
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
 
-    //     db_codigo = parseInt(id)
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        db_codigo = parseInt(id)
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (id && entidade_nome && status && nome_projeto && codigo && programa_nome) {
+            await service.atualizar(db_codigo, entidade_nome, nome_projeto, codigo, programa_nome, status);
+            json.result = {
+                id,
+                nome_projeto,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

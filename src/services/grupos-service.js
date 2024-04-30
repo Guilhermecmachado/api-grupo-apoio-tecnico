@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (codigo, nome, status) => {
+    inserir: (nome, codigo, status) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_grupos (codigo, nome, status) VALUES (?,?,?)',
-                [codigo, nome, status],
+            db.query('INSERT INTO gta_grupos (nome, codigo, status) VALUES (?,?,?)',
+                [nome, codigo, status],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, nome, status, codigo) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_grupos SET nome = ?, status = ?,codigo = ? WHERE id = ?',
+                [nome, status, codigo, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 

@@ -1,12 +1,12 @@
 
 const db = require('../../db');
-
+//CADASTRO ESTÁ OK
 
 module.exports = {
     inserir: (cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastros (cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) VALUES (?,?,?,?,?,?,?,?,?)',
+            db.query('INSERT INTO gta_cadastros (cadastrador_id, cadastrador_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) VALUES (?,?,?,?,?,?,?,?,?)',
                 [cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status],
                 (error, results) => {
                     if (error) { reject(error); return; }

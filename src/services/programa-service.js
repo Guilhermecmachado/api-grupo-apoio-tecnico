@@ -6,7 +6,7 @@ module.exports = {
     inserir: (programa_nome, status) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_programas (programa_nome, status) VALUES (?,?)',
+            db.query('INSERT INTO gta_programa (programa_nome, status) VALUES (?,?)',
                 [programa_nome, status],
                 (error, results) => {
                     if (error) { reject(error); return; }
@@ -18,27 +18,27 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_programas', (error, results) => {
+            db.query('select * from gta_programa', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, programa_nome, status) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_programa SET programa_nome = ?, status = ? WHERE id = ?',
+                [programa_nome, status, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_programas WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_programa WHERE id = ?', [id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);

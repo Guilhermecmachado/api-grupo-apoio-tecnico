@@ -10,7 +10,9 @@ module.exports = {
         let codigo = req.body.codigo
         let status = req.body.status
         let grupo = req.body.grupo
-        let id_grupo = req.body.id_grupo
+
+        let id = await service.buscarUmCodigo(grupo)
+        let id_grupo = id.id
 
 
         if (nome && codigo && status && grupo && id_grupo) {
@@ -31,42 +33,43 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                nome: model[i].nome,
+                status: model[i].status,
+                codigo: model[i].codigo,
+                grupo: model[i].grupo
 
             });
         }
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let json = { error: '', result: {} };
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
+        let id = req.params.id;
+        let nome = req.body.nome;
+        let grupo = req.body.grupo;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let id_g = await service.buscarUmCodigo(grupo)
+        let id_grupo = id_g.id
+        let codigo = req.body.codigo
+        let status = req.body.status
 
-    //     db_codigo = parseInt(id)
+        db_codigo = parseInt(id)
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        if (nome && grupo && id_grupo && codigo && status) {
+            await service.atualizar(db_codigo, nome, grupo, id_grupo, codigo, status);
+            json.result = {
+                id,
+                nome,
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

@@ -1,9 +1,6 @@
 const service = require('../services/cadastro-dados-controle-service');
 module.exports = {
 
-
-
-
     inserir: async (req, res) => {
 
         let json = { error: '', result: {} };
@@ -29,7 +26,7 @@ module.exports = {
         let uf = req.body.uf
 
 
-        if (cep && cidade && complemento && contato1 && contato2 && data_alteracao && data_criacao && endereco && entrevistado && numero && numero_cadastro && observacoes_contato && primeiro_responsavel_trabalha && projeto_id && projeto_nome && segundo_responsavel_trabalha && tipo_contato1 && tipo_contato2 && uf) {
+        if (cep && cidade && complemento && contato1 && contato2 && data_criacao && endereco && entrevistado && numero && numero_cadastro && primeiro_responsavel_trabalha && projeto_id && projeto_nome && segundo_responsavel_trabalha && tipo_contato1 && tipo_contato2 && uf) {
             let model = await service.
                 inserir(cep, cidade, complemento, contato1, contato2, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, tipo_contato1, tipo_contato2, uf);
             json.result = {

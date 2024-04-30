@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (entidade_nome, nome_projeto, codigo, programa_nome, status) => {
+    inserir: (entidade_nome, status) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_entidades (entidade_nome, nome_projeto, codigo, programa_nome, status) VALUES (?,?,?,?,?)',
-                [entidade_nome, nome_projeto, codigo, programa_nome, status],
+            db.query('INSERT INTO gta_entidades (entidade_nome, status) VALUES (?,?)',
+                [entidade_nome, status],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, entidade_nome, status) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_entidades SET entidade_nome = ?, status = ? WHERE id = ?',
+                [entidade_nome, status, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 

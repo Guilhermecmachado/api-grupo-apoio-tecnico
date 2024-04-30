@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, entidade_nome, nome_projeto, codigo, programa_nome, status) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_projetos SET entidade_nome = ?, nome_projeto = ?, codigo = ? ,programa_nome = ?,  status = ? WHERE id = ?',
+                [entidade_nome, nome_projeto, codigo, programa_nome, status, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 
