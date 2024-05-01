@@ -18,7 +18,7 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
         let status = req.body.status
 
-        if (cadastro_id && cadastro_nome && data_criacao && numero_cadastro && primeiro_responsavel && projeto_codigo && projeto_id && projeto_nome && status) {
+        if (cadastro_id && cadastro_nome && data_criacao && numero_cadastro && projeto_codigo && projeto_id && projeto_nome && status) {
             let model = await service.
                 inserir(cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status);
             json.result = {
@@ -36,8 +36,10 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                numero_cadastro: model[i].numero_cadastro,
+                cadastrador_nome: model[i].cadastrador_nome,
+                data_criacao: model[i].data_criacao,
+                primeiro_responsavel: model[i].primeiro_responsavel
 
             });
         }
@@ -76,8 +78,9 @@ module.exports = {
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
-        let id = req.params.id; //para pegar o parametro
-        let result = await service.buscarUm(id);
+        let id = req.params.id;
+        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
+        let result = await service.buscarUm(id, numero_cadastro);
         res.json(result);
 
 

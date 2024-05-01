@@ -18,7 +18,7 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_cadastros t order by t.cadastro_nome', (error, results) => {
+            db.query('select * from gta_cadastros', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -38,10 +38,10 @@ module.exports = {
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastros WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_cadastros WHERE projeto_id = ?', [id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
-                    aceito(results[0]);
+                    aceito(results);
                 } else {
                     aceito(false);
                 }

@@ -9,7 +9,7 @@ require('dotenv/config')
 
 router.post('/', controller.inserir)
 router.get('/', controller.buscarTodos)
-router.get('/:id', controller.buscarUm)
+router.get('/:id/:numero_cadastro', controller.buscarUm)
 // router.post('/:id', controller.atualizar)
 
 
