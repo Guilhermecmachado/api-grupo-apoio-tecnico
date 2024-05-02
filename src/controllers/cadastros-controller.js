@@ -75,12 +75,36 @@ module.exports = {
     //     res.json(json);
     // },
 
-    buscarUm: async (req, res) => {
+    buscarUmCadastro: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
         let id = req.params.id;
         let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
-        let result = await service.buscarUm(id, numero_cadastro);
+        let result = await service.buscarUmCadastro(id, numero_cadastro);
+        res.json(result);
+
+
+    },
+
+    buscarUm: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let id_number = parseInt(id)
+        //para pegar o parametro
+        let result = await service.buscarUm(id_number);
+        res.json(result);
+
+
+    },
+
+    buscarUmForm: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let id_number = parseInt(id)
+        //para pegar o parametro
+        let result = await service.buscarUmForm(id_number);
         res.json(result);
 
 

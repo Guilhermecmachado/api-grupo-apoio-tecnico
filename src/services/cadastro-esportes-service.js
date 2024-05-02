@@ -35,10 +35,10 @@ module.exports = {
     //         );
     //     });
     // },
-    buscarUm: (id) => {
+    buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastro_esporte_organizacao_comunitaria  WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_cadastro_esporte_organizacao_comunitaria  WHERE projeto_id = ? AND numero_cadastro=?', [id, numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);

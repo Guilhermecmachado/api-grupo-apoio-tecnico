@@ -6,7 +6,7 @@ module.exports = {
     inserir: (agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_tipo_ocupacao (agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao,data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+            db.query('INSERT INTO gta_cadastro_tipo_ocupacao_moradia (agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao,data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
                 [agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome],
                 (error, results) => {
                     if (error) { reject(error); return; }
@@ -18,7 +18,7 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_cadastro_tipo_ocupacao  t order by t.cadastro_nome', (error, results) => {
+            db.query('select * from gta_cadastro_tipo_ocupacao_moradia  t order by t.cadastro_nome', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -35,10 +35,10 @@ module.exports = {
     //         );
     //     });
     // },
-    buscarUm: (id) => {
+    buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastro_tipo_ocupacao  WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_cadastro_tipo_ocupacao_moradia  WHERE projeto_id = ? AND numero_cadastro', [id, numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);

@@ -35,10 +35,10 @@ module.exports = {
     //         );
     //     });
     // },
-    buscarUm: (id) => {
+    buscarUm: (id, numero_cadastro, tipo_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastro_responsaveis  WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_cadastro_responsaveis WHERE projeto_id = ? AND numero_cadastro = ? AND tipo_cadastro  = ?', [id, numero_cadastro, tipo_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);
