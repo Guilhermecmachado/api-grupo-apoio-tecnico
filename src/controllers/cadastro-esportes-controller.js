@@ -5,26 +5,80 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
+        let valor_bairro
+        let valor_entidade_recriativa
+        let valor_entidade_religiosa
+        let valor_movimento_luta
+        let valor_outros
+        let valor_partido_politico
+        let valor_sindicato
+        let day = objectDate.getDate();
 
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let associado_bairro = req.body.associado_bairro
-        let data_criacao = req.body.data_criacao
+        let associado_bairro = req.body.dados_comunitario.associacao_bairro
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let data_alteracao = req.body.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
-        let entidade_recriativas = req.body.entidade_recriativas
-        let entidades_religiosas = req.body.entidades_religiosas
-        let especifique = req.body.especifique
-        let movimento_luta_moradia = req.body.movimento_luta_moradia
-        let outros = req.body.outros
-        let partidos_politicos = req.body.partidos_politicos
-        let sindicatos = req.body.sindicatos
+        let entidade_recriativas = req.body.dados_comunitario.entidade_recreativas
+        let entidades_religiosas = req.body.dados_comunitario.entidades_religiosas
+        let especifique = req.body.dados_comunitario.especifique
+        let movimento_luta_moradia = req.body.dados_comunitario.movimento_luta_moradia
+        let outros = req.body.dados_comunitario.outros
+        let partidos_politicos = req.body.dados_comunitario.partidos_politicos
+        let sindicatos = req.body.dados_comunitario.sindicatos
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
-        if (associado_bairro && data_criacao && data_alteracao && entidade_recriativas && entidades_religiosas && especifique && movimento_luta_moradia && outros && partidos_politicos && sindicatos && numero_cadastro && projeto_id && projeto_nome) {
+        if (associado_bairro == true) {
+            valor_bairro = 1
+        } else {
+            valor_bairro = 0
+        }
+        if (entidade_recriativas == true) {
+            valor_entidade_recriativa = 1
+        } else {
+            valor_entidade_recriativa = 0
+        }
+        if (entidades_religiosas == true) {
+            valor_entidade_religiosa = 1
+        } else {
+            valor_entidade_religiosa = 0
+        }
+        if (movimento_luta_moradia == true) {
+            valor_movimento_luta = 1
+        } else {
+            valor_movimento_luta = 0
+        }
+        if (outros == true) {
+            valor_outros = 1
+        } else {
+            valor_outros = 0
+        }
+        if (partidos_politicos == true) {
+            valor_partido_politico = 1
+        } else {
+            valor_partido_politico = 0
+        }
+        if (sindicatos == true) {
+            valor_sindicato = 1
+        } else {
+            valor_sindicato = 0
+        }
+
+
+
+
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(associado_bairro, data_criacao, data_alteracao, entidade_recriativas, entidades_religiosas, especifique, movimento_luta_moradia, outros, partidos_politicos, sindicatos, numero_cadastro, projeto_id, projeto_nome);
+                inserir(valor_bairro, data_criacao, data_alteracao, valor_entidade_recriativa, valor_entidade_religiosa, especifique, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, numero_cadastro, projeto_id, projeto_nome);
             json.result = {
                 id: model,
             };

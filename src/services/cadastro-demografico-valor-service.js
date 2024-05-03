@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome) => {
+    inserir: (despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, data_alteracao) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_sustentabilidade (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome],
+            db.query('INSERT INTO gta_cadastro_demografico_valores (despesa_agua, despesa_alimentacao, despesa_aluguel, numero_cadastro, despesa_gas, projeto_id, projeto_nome, despesa_luz, despesa_saude, despesa_transporte, valor_aluguel_social, data_criacao, data_alteracao) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                [despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, data_alteracao],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -18,7 +18,7 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_cadastro_sustentabilidade  t order by t.cadastro_nome', (error, results) => {
+            db.query('select * from gta_cadastro_demografico_valores ', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -35,10 +35,10 @@ module.exports = {
     //         );
     //     });
     // },
-    buscarUm: (id) => {
+    buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastro_sustentabilidade  WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_cadastro_demografico_valores  WHERE projeto_id = ? AND numero_cadastro =?', [id, numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);

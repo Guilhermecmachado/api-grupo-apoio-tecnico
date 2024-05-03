@@ -41,7 +41,7 @@ module.exports = {
             db.query('SELECT * FROM gta_projetos WHERE id = ?', [id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
-                    aceito(results);
+                    aceito(results[0]);
                 } else {
                     aceito(false);
                 }

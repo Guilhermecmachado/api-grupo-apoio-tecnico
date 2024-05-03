@@ -4,29 +4,30 @@ module.exports = {
     inserir: async (req, res) => {
 
         let json = { error: '', result: {} };
+
         console.log('insert')
-        let cep = req.body.cep
-        let cidade = req.body.cidade
-        let complemento = req.body.complemento
-        let contato1 = req.body.contato1
-        let contato2 = req.body.contato2
-        let data_alteracao = req.body.data_alteracao
-        let data_criacao = req.body.data_criacao
-        let endereco = req.body.endereco
-        let entrevistado = req.body.entrevistado
-        let numero = req.body.numero
+        let cep = req.body.dados_controle.cep
+        let cidade = req.body.dados_controle.cidade
+        let complemento = req.body.dados_controle.complemento
+        let contato1 = req.body.dados_controle.contato1
+        let contato2 = req.body.dados_controle.contato2
+        let data_alteracao = req.body.dados_controle.data_alteracao
+        let data_criacao = req.body.dados_controle.data_criacao
+        let endereco = req.body.dados_controle.endereco
+        let entrevistado = req.body.dados_controle.entrevistado
+        let numero = req.body.dados_controle.numero
         let numero_cadastro = req.body.numero_cadastro
-        let observacoes_contato = req.body.observacoes_contato
-        let primeiro_responsavel_trabalha = req.body.primeiro_responsavel_trabalha
+        let observacoes_contato = req.body.dados_controle.observacoes_contato
+        let primeiro_responsavel_trabalha = req.body.dados_controle.primeiro_responsavel_trabalha
         let projeto_nome = req.body.projeto_nome
         let projeto_id = req.body.projeto_id
-        let segundo_responsavel_trabalha = req.body.segundo_responsavel_trabalha
-        let tipo_contato1 = req.body.tipo_contato1
-        let tipo_contato2 = req.body.tipo_contato2
-        let uf = req.body.uf
+        let segundo_responsavel_trabalha = req.body.dados_controle.segundo_responsavel_trabalha
+        let tipo_contato1 = req.body.dados_controle.tipo_contato1
+        let tipo_contato2 = req.body.dados_controle.tipo_contato2
+        let uf = req.body.dados_controle.uf
 
 
-        if (cep && cidade && complemento && contato1 && contato2 && data_criacao && endereco && entrevistado && numero && numero_cadastro && primeiro_responsavel_trabalha && projeto_id && projeto_nome && segundo_responsavel_trabalha && tipo_contato1 && tipo_contato2 && uf) {
+        if (cep && cidade && contato1 && contato2 && data_criacao && endereco && entrevistado && numero && numero_cadastro && primeiro_responsavel_trabalha && projeto_id && projeto_nome && segundo_responsavel_trabalha && tipo_contato1 && tipo_contato2 && uf) {
             let model = await service.
                 inserir(cep, cidade, complemento, contato1, contato2, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, tipo_contato1, tipo_contato2, uf);
             json.result = {
@@ -84,8 +85,9 @@ module.exports = {
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
-        let id = req.params.id; //para pegar o parametro
-        let result = await service.buscarUm(id);
+        let id = req.params.id;
+        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
+        let result = await service.buscarUm(id, numero_cadastro);
         res.json(result);
 
 

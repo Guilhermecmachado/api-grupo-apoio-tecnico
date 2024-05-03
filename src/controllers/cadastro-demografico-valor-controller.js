@@ -5,20 +5,36 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let forma_coleta = req.body.forma_coleta
-        let data_criacao = req.body.data_criacao
+        let despesas_agua = req.body.dados_despesas.despesa_agua
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let data_alteracao = req.body.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
-        let separacao_material_reciclavel = req.body.separacao_material_reciclavel
+        let despesas_alimentacao = req.body.dados_despesas.despesa_alimentacao
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
+        let despesas_aluguel = req.body.dados_despesas.despesa_aluguel
+        let despesas_gas = req.body.dados_despesas.despesa_gas
+        let despesas_luz = req.body.dados_despesas.despesa_luz
+        let despesas_saude = req.body.dados_despesas.despesa_saude
+        let despesas_transporte = req.body.dados_despesas.despesa_transporte
+        let valor_aluguel_social = req.body.dados_despesas.valor_alugue_social
 
-        if (forma_coleta && data_criacao && data_alteracao && numero_cadastro && separacao_material_reciclavel && projeto_id && projeto_nome) {
+        if (despesas_agua && despesas_alimentacao && despesas_aluguel && numero_cadastro && despesas_gas && projeto_id && projeto_nome && despesas_luz && despesas_saude && despesas_transporte && valor_aluguel_social) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome);
+                inserir(despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, data_alteracao);
             json.result = {
                 id: model,
             };
@@ -74,8 +90,9 @@ module.exports = {
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
-        let id = req.params.id; //para pegar o parametro
-        let result = await service.buscarUm(id);
+        let id = req.params.id;
+        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
+        let result = await service.buscarUm(id, numero_cadastro);
         res.json(result);
 
 

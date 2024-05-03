@@ -5,21 +5,31 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let atividade = req.body.atividade
-        let data_criacao = req.body.data_criacao
+        let atividade = req.body.dados_lazer.atividade
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let data_alteracao = req.body.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
-        let tipo_atividade = req.body.tipo_atividade
-        let tipo_atividade2 = req.body.tipo_atividade2
-        let tipo_atividade3 = req.body.tipo_atividade3
-        let tipo_atividade4 = req.body.tipo_atividade4
+        let tipo_atividade = req.body.dados_lazer.tipo_atividade
+        let tipo_atividade2 = req.body.dados_lazer.tipo_atividade2
+        let tipo_atividade3 = req.body.dados_lazer.tipo_atividade3
+        let tipo_atividade4 = req.body.dados_lazer.tipo_atividade4
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
-        if (atividade && data_alteracao && data_criacao && numero_cadastro && tipo_atividade && tipo_atividade2 && tipo_atividade4 && tipo_atividade3 && projeto_id && projeto_nome) {
+        if (atividade && data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome);
             json.result = {
