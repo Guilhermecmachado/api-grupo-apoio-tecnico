@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, id) => {
+    inserir: (animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_animal_moradia (animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, id) VALUES (?,?,?,?,?,?,?)',
-                [animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, id],
+            db.query('INSERT INTO gta_cadastro_animal_moradia (animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?)',
+                [animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId

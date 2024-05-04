@@ -5,18 +5,28 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let forma_coleta = req.body.forma_coleta
-        let data_criacao = req.body.data_criacao
-        let data_alteracao = req.body.data_alteracao
+        let forma_coleta = req.body.dados_sustentabilidade.forma_coleta
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let data_alteracao = req.body.dados_sustentabilidade.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
-        let separacao_material_reciclavel = req.body.separacao_material_reciclavel
+        let separacao_material_reciclavel = req.body.dados_sustentabilidade.separacao_material_reciclavel
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
-        if (forma_coleta && data_criacao && data_alteracao && numero_cadastro && separacao_material_reciclavel && projeto_id && projeto_nome) {
+        if (forma_coleta && data_criacao && numero_cadastro && separacao_material_reciclavel && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome);
             json.result = {

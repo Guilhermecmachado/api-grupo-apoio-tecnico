@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome) => {
+    inserir: (maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_mobilidade_urbana (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhonete_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome],
+            db.query('INSERT INTO gta_cadastro_violencia_maria (maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?)',
+                [maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -18,7 +18,7 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_cadastro_mobilidade_urbana  t order by t.cadastro_nome', (error, results) => {
+            db.query('select * from gta_cadastro_violencia_maria  t order by t.cadastro_nome', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -38,7 +38,7 @@ module.exports = {
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastro_mobilidade_urbana  WHERE projeto_id = ? AND numero_cadastro =?', [id, numero_cadastro], (error, results) => {
+            db.query('SELECT * FROM gta_cadastro_violencia_maria  WHERE projeto_id = ? AND numero_cadastro =?', [id, numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);

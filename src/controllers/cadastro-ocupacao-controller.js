@@ -5,23 +5,33 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let agricultura_residencia = req.body.forma_coleta
-        let agricultura_residencia_obs = req.body.data_criacao
-        let aluguel_social = req.body.data_alteracao
-        let atividade_economica = req.body.numero_cadastro
-        let atividade_economica_obs = req.body.separacao_material_reciclavel
-        let data_criacao = req.body.data_criacao
-        let data_alteracao = req.body.data_alteracao
+        let agricultura_residencia = req.body.dados_moradia.agricultura_residencia
+        let agricultura_residencia_obs = req.body.dados_moradia.agricultura_residencia_obs
+        let aluguel_social = req.body.dados_moradia.aluguel_social
+        let atividade_economica = req.body.dados_moradia.atividade_economica
+        let atividade_economica_obs = req.body.dados_moradia.atividade_economica_obs
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let data_alteracao = req.body.dados_moradia.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
-        let situacao = req.body.situacao
-        let tipo_moradia = req.body.tipo_moradia
+        let situacao = req.body.dados_moradia.situacao
+        let tipo_moradia = req.body.dados_moradia.tipo_moradia
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
-        if (agricultura_residencia && agricultura_residencia_obs && aluguel_social && atividade_economica && atividade_economica_obs && data_alteracao && numero_cadastro && situacao && tipo_moradia && projeto_id && projeto_nome) {
+        if (agricultura_residencia && agricultura_residencia_obs && aluguel_social && atividade_economica && atividade_economica_obs && numero_cadastro && situacao && tipo_moradia && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome);
             json.result = {

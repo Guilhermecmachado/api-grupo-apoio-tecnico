@@ -5,21 +5,31 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let animal_moradia = req.body.animal_moradia
-        let data_alteracao = req.body.data_alteracao
-        let data_criacao = req.body.data_criacao
+        let animal_moradia = req.body.dados_animais.animal_moradia
+        let data_alteracao = req.body.dados_animais.data_alteracao
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let numero_cadastro = req.body.numero_cadastro
-        let id = req.body.id
+
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
 
-        if (animal_moradia && data_alteracao && data_criacao && numero_cadastro && id && projeto_id && projeto_nome) {
+        if (animal_moradia && data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, id);
+                inserir(animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome);
             json.result = {
                 id: model,
             };

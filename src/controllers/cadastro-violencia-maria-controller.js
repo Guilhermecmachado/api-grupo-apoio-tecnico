@@ -1,4 +1,5 @@
-const service = require('../services/cadastro-mobilidade-service');
+
+const service = require('../services/cadastro-violencia-maria-service');
 module.exports = {
 
 
@@ -18,49 +19,18 @@ module.exports = {
         if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let forma_transporte = req.body.dados_mobilidade.forma_transporte
-        let forma_transporte_outro = req.body.dados_mobilidade.forma_transporte_outro
-        let possui_veiculo_carro = req.body.dados_mobilidade.possui_veiculo_carro
-        let possui_veiculo_moto = req.body.dados_mobilidade.possui_veiculo_moto
-        let possui_veiculo_caminhao = req.body.dados_mobilidade.possui_veiculo_caminhao
-        let possui_veiculo_caminhao_suv = req.body.dados_mobilidade.possui_veiculo_caminhonete_suv
-        let regiao_trabalho = req.body.dados_mobilidade.regiao_trabalho
+
         let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
-        let data_alteracao = req.body.dados_mobilidade.data_alteracao
+        let data_alteracao = req.body.dados_maria.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
+        let maria_penha = req.body.dados_maria.maria_penha
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
-        let valor_carro
-        let valor_moto
-        let valor_caminhao
-        let valor_caminhao_suv
 
 
-        if (possui_veiculo_carro == true) {
-            valor_carro = 1
-        } else {
-            valor_carro = 0
-        }
-        if (possui_veiculo_moto == true) {
-            valor_moto = 1
-        } else {
-            valor_moto = 0
-        }
-        if (possui_veiculo_caminhao == true) {
-            valor_caminhao = 1
-        } else {
-            valor_caminhao = 0
-        }
-        if (possui_veiculo_caminhao_suv == true) {
-            valor_caminhao_suv = 1
-        } else {
-            valor_caminhao_suv = 0
-        }
-
-
-        if (data_criacao && forma_transporte && numero_cadastro && regiao_trabalho && projeto_id && projeto_nome) {
+        if (maria_penha && data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, valor_caminhao, valor_caminhao_suv, valor_carro, valor_moto, regiao_trabalho, projeto_id, projeto_nome);
+                inserir(maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome);
             json.result = {
                 id: model,
             };
@@ -116,9 +86,8 @@ module.exports = {
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
-        let id = req.params.id;
-        let numero_cadastro = req.params.numero_cadastro//para pegar o parametro
-        let result = await service.buscarUm(id, numero_cadastro);
+        let id = req.params.id; //para pegar o parametro
+        let result = await service.buscarUm(id);
         res.json(result);
 
 
