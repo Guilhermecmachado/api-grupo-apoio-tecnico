@@ -86,8 +86,9 @@ module.exports = {
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
-        let id = req.params.id; //para pegar o parametro
-        let result = await service.buscarUm(id);
+        let id = req.params.id;
+        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
+        let result = await service.buscarUm(id, numero_cadastro);
         res.json(result);
 
 
