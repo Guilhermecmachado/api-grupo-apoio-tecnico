@@ -31,7 +31,7 @@ module.exports = {
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
-        if (agricultura_residencia && agricultura_residencia_obs && aluguel_social && atividade_economica && atividade_economica_obs && numero_cadastro && situacao && tipo_moradia && projeto_id && projeto_nome) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome);
             json.result = {
@@ -45,6 +45,7 @@ module.exports = {
 
     buscarTodos: async (req, res) => {
         let json = { error: '', result: [] };
+
         let model = await service.buscarTodos();
         for (let i in model) {
             json.result.push({
@@ -57,34 +58,46 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let agricultura_residencia = req.body.dados_moradia.agricultura_residencia
+        let agricultura_residencia_obs = req.body.dados_moradia.agricultura_residencia_obs
+        let aluguel_social = req.body.dados_moradia.aluguel_social
+        let atividade_economica = req.body.dados_moradia.atividade_economica
+        let atividade_economica_obs = req.body.dados_moradia.atividade_economica_obs
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let situacao = req.body.dados_moradia.situacao
+        let tipo_moradia = req.body.dados_moradia.tipo_moradia
+
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, data_alteracao);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

@@ -29,7 +29,7 @@ module.exports = {
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
-        if (atividade && data_criacao && numero_cadastro && projeto_id && projeto_nome) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome);
             json.result = {
@@ -55,34 +55,44 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        console.log('atualiza')
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let atividade = req.body.dados_lazer.atividade
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let tipo_atividade = req.body.dados_lazer.tipo_atividade
+        let tipo_atividade2 = req.body.dados_lazer.tipo_atividade2
+        let tipo_atividade3 = req.body.dados_lazer.tipo_atividade3
+        let tipo_atividade4 = req.body.dados_lazer.tipo_atividade4
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, data_alteracao);
+            json.result = {
+                id,
+
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

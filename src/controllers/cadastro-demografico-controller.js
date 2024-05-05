@@ -35,7 +35,7 @@ module.exports = {
 
 
 
-        if (beneficios && beneficios_valor && curso_frequenta && data_alteracao && data_criacao && estado_civil && estudou_ate && frequenta_escola && genero && grupo_etnico && idade && nome_completo && outra_fonte_renda && outra_fonte_renda_valor && pne && posicao_familiar && profissao && projeto_id && projeto_nome && renda_principal && renda_principal_valor && situacao_ocupacional && uuid && numero_cadastro) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro);
             json.result = {

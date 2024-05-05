@@ -28,7 +28,7 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
 
 
-        if (maria_penha && data_criacao && numero_cadastro && projeto_id && projeto_nome) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome);
             json.result = {
@@ -54,34 +54,40 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let maria_penha = req.body.dados_maria.maria_penha
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, maria_penha, data_alteracao);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

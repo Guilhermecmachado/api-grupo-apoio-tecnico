@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_alteracao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastro_demografico_valores SET despesa_agua=?, despesa_alimentacao=?, despesa_aluguel=?, despesa_gas=?, despesa_luz=?, despesa_saude=?, despesa_transporte=?, valor_aluguel_social=?, data_alteracao=? WHERE id = ?',
+                [despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_alteracao, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

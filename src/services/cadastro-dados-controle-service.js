@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, cep, cidade, complemento, contato1, contato2, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, tipo_contato1, tipo_contato2, uf, data_criacao, data_alteracao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastros_dados_controle SET cep=?, cidade=?, complemento=?, contato1=?, contato2=?, endereco=?, entrevistado=?, numero=?, observacoes_contato=?, primeiro_responsavel_trabalha=?, segundo_responsavel_trabalha=?, tipo_contato1=?, tipo_contato2=?, uf=?,data_criacao=?, data_alteracao=? WHERE id = ?',
+                [cep, cidade, complemento, contato1, contato2, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, tipo_contato1, tipo_contato2, uf, data_criacao, data_alteracao, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

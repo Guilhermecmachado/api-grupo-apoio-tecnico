@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, maria_penha, data_alteracao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastro_violencia_maria SET  maria_penha=?, data_alteracao=? WHERE id = ?',
+                [maria_penha, data_alteracao, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

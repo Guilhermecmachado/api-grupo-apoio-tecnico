@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, forma_coleta, separacao_material_reciclavel, data_alteracao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastro_sustentabilidade SET forma_coleta =?, separacao_material_reciclavel=?, data_alteracao=? WHERE id = ?',
+                [forma_coleta, separacao_material_reciclavel, data_alteracao, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

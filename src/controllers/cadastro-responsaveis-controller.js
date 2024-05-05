@@ -36,7 +36,7 @@ module.exports = {
         let tipo_cadastro = req.body.dados_responsavel.tipo_cadastro
         let uf = req.body.dados_responsavel.uf
 
-        if (cadastro_cohab && cpf && data_criacao && data_nascimento && naturalidade && nis && nome_completo && numero_cadastro && pais && projeto_id && projeto_nome && rg && rg_data_expedicao && rg_uf && tipo_cadastro && uf) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf);
             json.result = {
@@ -62,34 +62,54 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let cadastro_cohab = req.body.dados_responsavel.cadastro_cohab
+        let cpf = req.body.dados_responsavel.cpf
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let data_nascimento = req.body.dados_responsavel.data_nascimento
+        let naturalidade = req.body.dados_responsavel.naturalidade
+        let nis = req.body.dados_responsavel.nis
+        let nome_completo = req.body.dados_responsavel.nome_completo
+        let pais = req.body.dados_responsavel.pais
+        let rg = req.body.dados_responsavel.rg
+        let rg_data_expedicao = req.body.dados_responsavel.rg_data_expedicao
+        let rg_uf = req.body.dados_responsavel.rg_uf
+        let status_cadastro = req.body.dados_responsavel.status_cadastro
+        let tipo_cadastro = req.body.dados_responsavel.tipo_cadastro
+        let uf = req.body.dados_responsavel.uf
+
+
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, data_alteracao);
+            json.result = {
+                id,
+
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

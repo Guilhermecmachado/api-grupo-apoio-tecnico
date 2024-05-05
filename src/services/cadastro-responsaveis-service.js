@@ -24,17 +24,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, data_alteracao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastro_responsaveis SET cadastro_cohab=?, cpf=?, data_nascimento=?, naturalidade=?, nis=?, nome_completo=?, pais=?, rg=?, rg_data_expedicao=?, rg_uf=?, status_cadastro=?, tipo_cadastro=?, uf=?, data_alteracao=? WHERE id = ?',
+                [cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, data_alteracao, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id, numero_cadastro, tipo_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

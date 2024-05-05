@@ -30,9 +30,9 @@ module.exports = {
         let despesas_luz = req.body.dados_despesas.despesa_luz
         let despesas_saude = req.body.dados_despesas.despesa_saude
         let despesas_transporte = req.body.dados_despesas.despesa_transporte
-        let valor_aluguel_social = req.body.dados_despesas.valor_alugue_social
+        let valor_aluguel_social = req.body.dados_despesas.valor_aluguel_social
 
-        if (despesas_agua && despesas_alimentacao && despesas_aluguel && numero_cadastro && despesas_gas && projeto_id && projeto_nome && despesas_luz && despesas_saude && despesas_transporte && valor_aluguel_social) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, data_alteracao);
             json.result = {
@@ -58,34 +58,48 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let despesas_agua = req.body.dados_despesas.despesa_agua
+        let despesas_alimentacao = req.body.dados_despesas.despesa_alimentacao
+        let despesas_aluguel = req.body.dados_despesas.despesa_aluguel
+        let despesas_gas = req.body.dados_despesas.despesa_gas
+        let despesas_luz = req.body.dados_despesas.despesa_luz
+        let despesas_saude = req.body.dados_despesas.despesa_saude
+        let despesas_transporte = req.body.dados_despesas.despesa_transporte
+        let valor_aluguel_social = req.body.dados_despesas.valor_aluguel_social
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_alteracao);
+            json.result = {
+                id,
+
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

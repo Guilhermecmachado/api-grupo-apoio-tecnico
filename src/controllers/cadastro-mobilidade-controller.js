@@ -58,7 +58,7 @@ module.exports = {
         }
 
 
-        if (data_criacao && forma_transporte && numero_cadastro && regiao_trabalho && projeto_id && projeto_nome) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, valor_caminhao, valor_caminhao_suv, valor_carro, valor_moto, regiao_trabalho, projeto_id, projeto_nome);
             json.result = {
@@ -84,34 +84,71 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let forma_transporte = req.body.dados_mobilidade.forma_transporte
+        let forma_transporte_outro = req.body.dados_mobilidade.forma_transporte_outro
+        let possui_veiculo_carro = req.body.dados_mobilidade.possui_veiculo_carro
+        let possui_veiculo_moto = req.body.dados_mobilidade.possui_veiculo_moto
+        let possui_veiculo_caminhao = req.body.dados_mobilidade.possui_veiculo_caminhao
+        let possui_veiculo_caminhao_suv = req.body.dados_mobilidade.possui_veiculo_caminhonete_suv
+        let regiao_trabalho = req.body.dados_mobilidade.regiao_trabalho
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let valor_carro
+        let valor_moto
+        let valor_caminhao
+        let valor_caminhao_suv
+
+
+        if (possui_veiculo_carro == true) {
+            valor_carro = 1
+        } else {
+            valor_carro = 0
+        }
+        if (possui_veiculo_moto == true) {
+            valor_moto = 1
+        } else {
+            valor_moto = 0
+        }
+        if (possui_veiculo_caminhao == true) {
+            valor_caminhao = 1
+        } else {
+            valor_caminhao = 0
+        }
+        if (possui_veiculo_caminhao_suv == true) {
+            valor_caminhao_suv = 1
+        } else {
+            valor_caminhao_suv = 0
+        }
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, data_alteracao);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };

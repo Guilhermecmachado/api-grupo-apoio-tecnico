@@ -21,7 +21,7 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
 
 
-        if (ano && motivo && motivo_outros && idade && data_criacao && data_alteracao && numero_cadastro && uuid && hora && projeto_id && projeto_nome) {
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(ano, motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome);
             json.result = {
