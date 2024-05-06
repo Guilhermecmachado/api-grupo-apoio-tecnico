@@ -9,8 +9,7 @@ module.exports = {
         let cep = req.body.dados_controle.cep
         let cidade = req.body.dados_controle.cidade
         let complemento = req.body.dados_controle.complemento
-        let contato1 = req.body.dados_controle.contato1
-        let contato2 = req.body.dados_controle.contato2
+
         let data_alteracao = req.body.dados_controle.data_alteracao
         let data_criacao = req.body.dados_controle.data_criacao
         let endereco = req.body.dados_controle.endereco
@@ -22,14 +21,13 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
         let projeto_id = req.body.projeto_id
         let segundo_responsavel_trabalha = req.body.dados_controle.segundo_responsavel_trabalha
-        let tipo_contato1 = req.body.dados_controle.tipo_contato1
-        let tipo_contato2 = req.body.dados_controle.tipo_contato2
+
         let uf = req.body.dados_controle.uf
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cep, cidade, complemento, contato1, contato2, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, tipo_contato1, tipo_contato2, uf);
+                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf);
             json.result = {
                 id: model,
             };
@@ -94,7 +92,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cep, cidade, complemento, contato1, contato2, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, tipo_contato1, tipo_contato2, uf, data_criacao, data_alteracao);
+            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, data_alteracao);
             json.result = {
                 id,
 

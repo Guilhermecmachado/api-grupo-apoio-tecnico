@@ -3,10 +3,10 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf) => {
+    inserir: (cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_responsaveis (cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            db.query('INSERT INTO gta_cadastro_responsaveis (cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf,contato1,contato2,tipo_contato1,tipo_contato2) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                 [cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf],
                 (error, results) => {
                     if (error) { reject(error); return; }
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, data_alteracao) => {
+    atualizar: (id, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_responsaveis SET cadastro_cohab=?, cpf=?, data_nascimento=?, naturalidade=?, nis=?, nome_completo=?, pais=?, rg=?, rg_data_expedicao=?, rg_uf=?, status_cadastro=?, tipo_cadastro=?, uf=?, data_alteracao=? WHERE id = ?',
-                [cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, data_alteracao, id],
+            db.query('UPDATE gta_cadastro_responsaveis SET cadastro_cohab=?, cpf=?, data_nascimento=?, naturalidade=?, nis=?, nome_completo=?, pais=?, rg=?, rg_data_expedicao=?, rg_uf=?, status_cadastro=?, tipo_cadastro=?, uf=?,contato1=?,contato2=?,tipo_contato1=?,tipo_contato2=?, data_alteracao=? WHERE id = ?',
+                [cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

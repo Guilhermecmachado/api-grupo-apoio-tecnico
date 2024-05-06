@@ -35,10 +35,13 @@ module.exports = {
         let status_cadastro = req.body.dados_responsavel.status_cadastro
         let tipo_cadastro = req.body.dados_responsavel.tipo_cadastro
         let uf = req.body.dados_responsavel.uf
-
+        let contato1 = req.body.dados_responsavel.contato1
+        let contato2 = req.body.dados_responsavel.contato2
+        let tipo_contato1 = req.body.dados_responsavel.tipo_contato1
+        let tipo_contato2 = req.body.dados_responsavel.tipo_contato2
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf);
+                inserir(cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2);
             json.result = {
                 id: model,
             };
@@ -92,14 +95,15 @@ module.exports = {
         let status_cadastro = req.body.dados_responsavel.status_cadastro
         let tipo_cadastro = req.body.dados_responsavel.tipo_cadastro
         let uf = req.body.dados_responsavel.uf
-
-
-
+        let contato1 = req.body.dados_responsavel.contato1
+        let contato2 = req.body.dados_responsavel.contato2
+        let tipo_contato1 = req.body.dados_responsavel.tipo_contato1
+        let tipo_contato2 = req.body.dados_responsavel.tipo_contato2
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, data_alteracao);
+            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, data_alteracao);
             json.result = {
                 id,
 
