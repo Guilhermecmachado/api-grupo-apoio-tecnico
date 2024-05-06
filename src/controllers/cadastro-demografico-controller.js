@@ -5,14 +5,24 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
         let beneficios = req.body.beneficios
         let beneficios_valor = req.body.beneficios_valor
         let curso_frequenta = req.body.curso_frequenta
         let data_alteracao = req.body.data_alteracao
-        let data_criacao = req.body.data_criacao
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let estado_civil = req.body.estado_civil
         let estudou_ate = req.body.estudou_ate
         let frequenta_escola = req.body.frequenta_escola
@@ -24,7 +34,7 @@ module.exports = {
         let outra_fonte_renda = req.body.outra_fonte_renda
         let outra_fonte_renda_valor = req.body.outra_fonte_renda_valor
         let pne = req.body.pne
-        let posicao_familiar = req.body.posicao_familiar
+        let posicao_familiar = req.body.posicao_familia
         let profissao = req.body.profissao
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
@@ -32,7 +42,6 @@ module.exports = {
         let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
         let uuid = req.body.uuid
-
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
@@ -61,40 +70,75 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let beneficios = req.body.beneficios
+        let beneficios_valor = req.body.beneficios_valor
+        let curso_frequenta = req.body.curso_frequenta
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let estado_civil = req.body.estado_civil
+        let estudou_ate = req.body.estudou_ate
+        let frequenta_escola = req.body.frequenta_escola
+        let genero = req.body.genero
+        let grupo_etnico = req.body.grupo_etnico
+        let idade = req.body.idade
+        let nome_completo = req.body.nome_completo
+        let outra_fonte_renda = req.body.outra_fonte_renda
+        let outra_fonte_renda_valor = req.body.outra_fonte_renda_valor
+        let pne = req.body.pne
+        let posicao_familiar = req.body.posicao_familia
+        let profissao = req.body.profissao
+        let renda_principal = req.body.renda_principal
+        let renda_principal_valor = req.body.renda_principal_valor
+        let situacao_ocupacional = req.body.situacao_ocupacional
+
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, data_alteracao);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
-        let id = req.params.id; //para pegar o parametro
-        let result = await service.buscarUm(id);
+        let id = req.params.id;
+        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
+        let result = await service.buscarUm(id, numero_cadastro);
+        res.json(result);
+
+
+    },
+
+    buscarUmForm: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
+        let result = await service.buscarUmForm(id, numero_cadastro);
         res.json(result);
 
 
