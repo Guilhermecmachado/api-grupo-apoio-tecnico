@@ -91,8 +91,9 @@ module.exports = {
         //  console.log('buscam um')
         let id = req.params.id;
         let id_number = parseInt(id)
+        let codigo = req.params.id
         //para pegar o parametro
-        let result = await service.buscarUm(id_number);
+        let result = await service.buscarUm(codigo);
         res.json(result);
 
 

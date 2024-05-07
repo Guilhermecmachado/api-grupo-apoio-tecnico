@@ -38,7 +38,7 @@ module.exports = {
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastros WHERE id = ?', [id], (error, results) => {
+            db.query('SELECT * FROM gta_cadastros WHERE projeto_codigo = ?', [id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results);

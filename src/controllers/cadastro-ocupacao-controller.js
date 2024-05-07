@@ -30,10 +30,14 @@ module.exports = {
         let tipo_moradia = req.body.dados_moradia.tipo_moradia
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
-
+        let material_parede = req.body.dados_moradia.material_parede
+        let revestimento = req.body.dados_moradia.revestimento
+        let laje = req.body.dados_moradia.laje
+        let cobertura = req.body.dados_moradia.cobertura
+        let adequacao_imovel = req.body.dados_moradia.adequacao_imovel
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel);
             json.result = {
                 id: model,
             };
@@ -82,13 +86,17 @@ module.exports = {
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let situacao = req.body.dados_moradia.situacao
         let tipo_moradia = req.body.dados_moradia.tipo_moradia
-
+        let material_parede = req.body.dados_moradia.material_parede
+        let revestimento = req.body.dados_moradia.revestimento
+        let laje = req.body.dados_moradia.laje
+        let cobertura = req.body.dados_moradia.cobertura
+        let adequacao_imovel = req.body.dados_moradia.adequacao_imovel
 
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, data_alteracao);
             json.result = {
                 id,
 

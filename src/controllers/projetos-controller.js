@@ -8,10 +8,10 @@ module.exports = {
 
         let json = { error: '', result: {} };
         console.log('insert')
-        let entidade_nome = req.body.entidade_nome
-        let nome_projeto = req.body.nome_projeto
+        let entidade_nome = req.body.entidadeNome
+        let nome_projeto = req.body.nomeProjeto
         let codigo = req.body.codigo
-        let programa_nome = req.body.programa_nome
+        let programa_nome = req.body.programaNome
         let status = req.body.status
 
 

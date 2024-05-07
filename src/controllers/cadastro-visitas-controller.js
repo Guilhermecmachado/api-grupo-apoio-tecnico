@@ -1,9 +1,6 @@
 const service = require('../services/cadastro-visitas-service');
 module.exports = {
 
-
-
-
     inserir: async (req, res) => {
         let objectDate = new Date();
 
@@ -108,8 +105,7 @@ module.exports = {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
         let id = req.params.id;
-        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
-        let result = await service.buscarUmForm(id, numero_cadastro);
+        let result = await service.buscarUmForm(id);
         res.json(result);
 
 

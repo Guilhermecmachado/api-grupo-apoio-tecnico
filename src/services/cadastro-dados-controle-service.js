@@ -6,7 +6,7 @@ module.exports = {
     inserir: (cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastros_dados_controle (cep, cidade, complemento,  data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,)',
+            db.query('INSERT INTO gta_cadastros_dados_controle (cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                 [cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf],
                 (error, results) => {
                     if (error) { reject(error); return; }

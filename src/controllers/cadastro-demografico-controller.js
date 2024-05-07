@@ -42,11 +42,12 @@ module.exports = {
         let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
         let uuid = req.body.uuid
+        let cid = req.body.cid
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro);
+                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid);
             json.result = {
                 id: model,
             };
@@ -105,13 +106,13 @@ module.exports = {
         let renda_principal = req.body.renda_principal
         let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
-
+        let cid = req.body.cid
 
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, data_alteracao);
+            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, data_alteracao);
             json.result = {
                 id,
 
@@ -137,8 +138,7 @@ module.exports = {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
         let id = req.params.id;
-        let numero_cadastro = req.params.numero_cadastro //para pegar o parametro
-        let result = await service.buscarUmForm(id, numero_cadastro);
+        let result = await service.buscarUmForm(id);
         res.json(result);
 
 

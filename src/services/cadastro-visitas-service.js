@@ -49,10 +49,10 @@ module.exports = {
         });
     },
 
-    buscarUmForm: (id, numero_cadastro) => {
+    buscarUmForm: (id) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM gta_cadastro_visitas  WHERE projeto_id = ? AND numero_cadastro=?', [id, numero_cadastro], (error, results) => {
+            db.query('SELECT * FROM gta_cadastro_visitas  WHERE id = ?', [id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);

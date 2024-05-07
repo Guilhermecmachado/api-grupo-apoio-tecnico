@@ -39,9 +39,22 @@ module.exports = {
         let contato2 = req.body.dados_responsavel.contato2
         let tipo_contato1 = req.body.dados_responsavel.tipo_contato1
         let tipo_contato2 = req.body.dados_responsavel.tipo_contato2
+        let cpf_cnpj_fonte_pegadora = req.body.dados_responsavel.cpf_cnpj_fonte_pegadora
+        let data_admissao = req.body.dados_responsavel.data_admissao
+        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta
+        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida
+        let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda
+        let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada
+        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida
+        let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada
+        let beneficio_prestacao = req.body.dados_responsavel.beneficio_prestacao
+        let programa_bolsa_familia = req.body.dados_responsavel.programa_bolsa_familia
+        let menor_18 = req.body.dados_responsavel.menor_18
+        let nome_tutor = req.body.dados_responsavel.nome_tutor
+        let cpf_tutor = req.body.dados_responsavel.cpf_tutor
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2);
+                inserir(cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor);
             json.result = {
                 id: model,
             };
@@ -99,11 +112,23 @@ module.exports = {
         let contato2 = req.body.dados_responsavel.contato2
         let tipo_contato1 = req.body.dados_responsavel.tipo_contato1
         let tipo_contato2 = req.body.dados_responsavel.tipo_contato2
-
+        let cpf_cnpj_fonte_pegadora = req.body.dados_responsavel.cpf_cnpj_fonte_pegadora
+        let data_admissao = req.body.dados_responsavel.data_admissao
+        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta
+        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida
+        let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda
+        let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada
+        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida
+        let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada
+        let beneficio_prestacao = req.body.dados_responsavel.beneficio_prestacao
+        let programa_bolsa_familia = req.body.dados_responsavel.programa_bolsa_familia
+        let menor_18 = req.body.dados_responsavel.menor_18
+        let nome_tutor = req.body.dados_responsavel.nome_tutor
+        let cpf_tutor = req.body.dados_responsavel.cpf_tutor
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, data_alteracao);
+            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, data_alteracao);
             json.result = {
                 id,
 
