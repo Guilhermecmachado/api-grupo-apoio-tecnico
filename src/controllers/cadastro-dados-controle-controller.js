@@ -83,8 +83,7 @@ module.exports = {
         let primeiro_responsavel_trabalha = req.body.dados_controle.primeiro_responsavel_trabalha
 
         let segundo_responsavel_trabalha = req.body.dados_controle.segundo_responsavel_trabalha
-        let tipo_contato1 = req.body.dados_controle.tipo_contato1
-        let tipo_contato2 = req.body.dados_controle.tipo_contato2
+
         let uf = req.body.dados_controle.uf
 
 

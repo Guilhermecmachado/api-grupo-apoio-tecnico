@@ -56,6 +56,7 @@ app.use('/cadastro-lazer', routes.cadastroLazer)
 app.use('/cadastro-animal', routes.cadastroAnimal)
 app.use('/cadastro-programa', routes.cadastroPrograma)
 app.use('/cadastro-entidades', routes.cadastroEntidades)
+app.use('/cadastra-documento', routes.cadastroDocumento)
 
 
 
