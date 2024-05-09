@@ -7,7 +7,7 @@ module.exports = {
         let json = { error: '', result: {} };
 
         let email = req.body.email
-        let senha = req.body.password
+        let senha = req.body.senha
 
 
 
