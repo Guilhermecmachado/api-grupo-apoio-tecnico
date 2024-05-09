@@ -56,7 +56,7 @@ module.exports = {
             db.query('SELECT * FROM gta_usuarios WHERE email = ? AND password =?', [email, senha], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
-                    aceito(results[0]);
+                    aceito(results);
                 } else {
 
 
