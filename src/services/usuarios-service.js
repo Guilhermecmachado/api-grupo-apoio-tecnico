@@ -83,6 +83,19 @@ module.exports = {
             );
         });
     },
+    buscarUmUsuario: (id) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM gta_usuarios WHERE id =?', [id], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results[0]);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
 
     buscarUmUsuarioPermissao: (id) => {
         return new Promise((aceito, rejeitado) => {

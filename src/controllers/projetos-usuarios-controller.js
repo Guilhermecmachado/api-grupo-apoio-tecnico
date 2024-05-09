@@ -1,4 +1,4 @@
-const service = require('../services/projetos-service');
+const service = require('../services/projetos-usuarios-service');
 module.exports = {
 
 
@@ -8,17 +8,16 @@ module.exports = {
 
         let json = { error: '', result: {} };
         console.log('insert')
-        let entidade_nome = req.body.entidade_nome
-        let nome_projeto = req.body.nome_projeto
-        let codigo = req.body.codigo
-        let programa_nome = req.body.programa_nome
-        let status = req.body.status
+        let projeto_codigo = req.body.nome_projeto
+        let usuario_id = req.body.codigo
+        let projeto_id = req.body.programa_nome
+        let projeto_nome = req.body.status
 
 
 
-        if (entidade_nome && nome_projeto && codigo && programa_nome && status) {
+        if (projeto_codigo && usuario_id && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(entidade_nome, nome_projeto, codigo, programa_nome, status);
+                inserir(projeto_codigo, projeto_nome, usuario_id, projeto_id);
             json.result = {
                 id: model,
             };
@@ -30,56 +29,55 @@ module.exports = {
 
     buscarTodos: async (req, res) => {
         let json = { error: '', result: [] };
-        let model = await service.buscarTodos();
+        let id = req.params.id
+        let model = await service.buscarTodos(id);
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                projeto_nome: model[i].projeto_nome,
+                projeto_codigo: model[i].projeto_codigo,
+                usuario_id: model[i].usuario_id,
+                projeto_id: model[i].projeto_id
 
             });
         }
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
-
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
-
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
-
-    //     db_codigo = parseInt(id)
-
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
-
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
-
-    buscarUm: async (req, res) => {
+    atualizar: async (req, res) => {
+        console.log('atualiza')
         let json = { error: '', result: {} };
-        //  console.log('buscam um')
-        let id = req.params.id; //para pegar o parametro
-        let result = await service.buscarUm(id);
-        res.json(result);
 
+        let id = req.params.id;
+        let projeto_codigo = req.body.nome_projeto
+        let usuario_id = req.body.codigo
+        let projeto_id = req.body.programa_nome
+        let projeto_nome = req.body.status
 
+        db_codigo = parseInt(id)
+
+        if (id && nome_regional && status_regional) {
+            await service.atualizar(db_codigo, projeto_codigo, projeto_nome, usuario_id, projeto_id);
+            json.result = {
+                id,
+                nome_regional,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
     },
+
+    // buscarUm: async (req, res) => {
+    //     let json = { error: '', result: {} };
+    //     //  console.log('buscam um')
+    //     let id = req.params.id; //para pegar o parametro
+    //     let result = await service.buscarUm(id);
+    //     res.json(result);
+
+
+    // },
 
 
 }
