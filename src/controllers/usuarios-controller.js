@@ -1,4 +1,5 @@
 const service = require('../services/usuarios-service');
+const serviceper = require('../services/usuarios-permissoes-service')
 module.exports = {
 
 
@@ -32,6 +33,31 @@ module.exports = {
         res.json(json);
     },
 
+
+    inserirPermissaoUsuario: async (req, res) => {
+
+        let json = { error: '', result: {} };
+        console.log('insert')
+        let menu_id = req.body.menu_id
+        let rota = req.body.rota
+        let usuario_id = req.body.usuario_id
+        let permissao = req.body.permissao
+
+
+
+
+        if (menu_id && rota && usuario_id && permissao) {
+            let model = await service.
+                inserirPermissaoUsuario(menu_id, rota, usuario_id, permissao);
+            json.result = {
+                id: model,
+            };
+        } else {
+            json.error = 'Campos não enviados';
+        }
+        res.json(json);
+    },
+
     buscarTodos: async (req, res) => {
         let json = { error: '', result: [] };
         let model = await service.buscarTodosUsuario();
@@ -40,6 +66,20 @@ module.exports = {
                 id: model[i].id,
                 nome: model[i].nome,
                 email: model[i].email,
+
+            });
+        }
+        res.json(json);
+    },
+
+    buscarTodosPermissao: async (req, res) => {
+        let json = { error: '', result: [] };
+        let model = await service.buscarTodosPermissao();
+        for (let i in model) {
+            json.result.push({
+                id: model[i].id,
+                label: model[i].label,
+                rota: model[i].rota,
 
             });
         }
@@ -78,11 +118,55 @@ module.exports = {
         res.json(json);
     },
 
+    atualizarPermissao: async (req, res) => {
+        console.log('atualiza')
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let permissao = req.body.permissao
+
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizarPermissao(db_codigo, permissao);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
+
     buscarUm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
         let id = req.params.id; //para pegar o parametro
         let result = await service.buscarUmUsuario(id);
+        res.json(result);
+
+
+    },
+
+    buscarUmUsuarioPermissao: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let rota_id = req.params.rota_id //para pegar o parametro
+        let result = await service.buscarUmUsuarioPermissao(id, rota_id);
+        res.json(result);
+
+
+    },
+
+    buscarUsuarioPermissao: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let result = await serviceper.buscarPermissaoUsario(id);
         res.json(result);
 
 

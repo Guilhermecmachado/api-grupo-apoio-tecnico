@@ -27,6 +27,19 @@ module.exports = {
         });
     },
 
+    atualizarPermissao: (id, permissao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_usuarios_permissao SET permissao=? WHERE id = ?',
+                [permissao, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
+
+
     inserir: (agencia, nome, email, banco, conta_corrente, cpf, password, perfil, pix) => {
         return new Promise((accept, reject) => {
 
@@ -49,10 +62,47 @@ module.exports = {
         });
     },
 
-    atualizarUsuario: (id, nome, cpf, senha, status_servico, email) => {
+    buscarTodosPermissao: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE tb_usuarios SET nome = ?, cpf = ? , senha = ? ,status = ?, email =?  WHERE id = ?',
-                [nome, cpf, senha, status_servico, email, id],
+            db.query('select * from gta_itens_menu t order by t.label', (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+
+    inserirPermissaoUsuario: (menu_id, rota, usuario_id, permissao) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('INSERT INTO  gta_usuarios_permissao  (menu_id, rota, usuario_id, permissao) VALUES (?,?,?,?)',
+                [menu_id, rota, usuario_id, permissao],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results.insertId);
+                }
+            );
+        });
+    },
+
+    buscarUmUsuarioPermissao: (id) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM gta_usuarios_permissao WHERE menu_id = ? AND usuario_id =?', [id], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results[0]);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
+
+
+    atualizarPermissaoUsuario: (id, menu_id, permissao, rota, usuario_id) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_usuarios_permissao SET menu_id=?, permissao=?, rota=?, usuario_id=? WHERE id = ?',
+                [menu_id, permissao, rota, usuario_id, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
@@ -60,6 +110,7 @@ module.exports = {
             );
         });
     },
+
     buscarUmUsuario: (id) => {
         return new Promise((aceito, rejeitado) => {
 
@@ -89,33 +140,33 @@ module.exports = {
     },
 
 
-    verificaSeExiste: (email, senha) => {
-        return new Promise((aceito, rejeitado) => {
+    // verificaSeExiste: (email, senha) => {
+    //     return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM tb_usuarios WHERE email = ? AND senha =?', [email, senha], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results[0]);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
+    //         db.query('SELECT * FROM tb_usuarios WHERE email = ? AND senha =?', [email, senha], (error, results) => {
+    //             if (error) { rejeitado(error); return; }
+    //             if (results.length > 0) {
+    //                 aceito(results[0]);
+    //             } else {
+    //                 aceito(false);
+    //             }
+    //         });
+    //     });
+    // },
 
-    verificaSeExisteApp: (email, senha) => {
-        return new Promise((aceito, rejeitado) => {
+    // verificaSeExisteApp: (email, senha) => {
+    //     return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM tb_tecnicos WHERE email = ? AND senha =?', [email, senha], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results[0]);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
+    //         db.query('SELECT * FROM tb_tecnicos WHERE email = ? AND senha =?', [email, senha], (error, results) => {
+    //             if (error) { rejeitado(error); return; }
+    //             if (results.length > 0) {
+    //                 aceito(results[0]);
+    //             } else {
+    //                 aceito(false);
+    //             }
+    //         });
+    //     });
+    // },
 
     inserirUsuarioPermissao: (rota_id, permissao, usuario_id, nome_rota) => {
         return new Promise((accept, reject) => {
@@ -168,93 +219,7 @@ module.exports = {
     buscarUmUsuarioPermissao: (id_usuario, id_rota) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM tb_usuarios_permissao WHERE usuario_id = ? AND rota_id =?', [id_usuario, id_rota], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
-
-    buscarUmUsuarioPermissaoRota: (id_usuario, id_rota) => {
-        return new Promise((aceito, rejeitado) => {
-
-            db.query('SELECT * FROM tb_usuarios_permissao WHERE usuario_id = ? AND rota_id =? AND permissao =1', [id_usuario, id_rota], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
-
-    buscarUmUsuarioPermissaoUsuario: (id_usuario) => {
-        return new Promise((aceito, rejeitado) => {
-
-            db.query('SELECT * FROM `tb_usuarios_permissao` WHERE usuario_id = ? AND rota_id = 11 AND criar =1 AND editar = 1', [id_usuario], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
-
-
-
-    buscarUmUsuarioPermissaoCria: (id_usuario, id_rota) => {
-        return new Promise((aceito, rejeitado) => {
-
-            db.query('SELECT * FROM tb_usuarios_permissao WHERE usuario_id = ? AND rota_id =? AND criar = 1', [id_usuario, id_rota], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
-
-    verificaUsuarioPermissaoCria: (id_usuario, id_rota) => {
-        return new Promise((aceito, rejeitado) => {
-
-            db.query('SELECT * FROM tb_usuarios_permissao WHERE usuario_id = ? AND rota_id =?', [id_usuario, id_rota], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
-
-    verificaUsuarioPermissaoEdita: (id_usuario, id_rota) => {
-        return new Promise((aceito, rejeitado) => {
-
-            db.query('SELECT * FROM tb_usuarios_permissao WHERE usuario_id = ? AND rota_id =?', [id_usuario, id_rota], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                if (results.length > 0) {
-                    aceito(results);
-                } else {
-                    aceito(false);
-                }
-            });
-        });
-    },
-
-    buscarUmUsuarioPermissaoEdita: (id_usuario, id_rota) => {
-        return new Promise((aceito, rejeitado) => {
-
-            db.query('SELECT * FROM tb_usuarios_permissao WHERE usuario_id = ? AND rota_id =? AND editar = 1', [id_usuario, id_rota], (error, results) => {
+            db.query('SELECT * FROM gta_usuarios_permissao WHERE usuario_id = ? AND menu_id =?', [id_usuario, id_rota], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results);
@@ -268,40 +233,13 @@ module.exports = {
 
 
 
-    atualizarUsuarioPermissao: (id, permissao) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE tb_usuarios_permissao SET permissao = ? WHERE id = ?',
-                [permissao, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
-        });
-    },
-
-    atualizarUsuarioPermissaoCriar: (id, criar) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE tb_usuarios_permissao SET criar = ? WHERE id = ?',
-                [criar, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
-        });
-    },
 
 
-    atualizarUsuarioPermissaoEditar: (id, editar) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE tb_usuarios_permissao SET editar = ? WHERE id = ?',
-                [editar, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
-        });
-    },
+
+
+
+
+
+
+
 }
