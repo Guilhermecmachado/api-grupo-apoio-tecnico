@@ -13,7 +13,6 @@ module.exports = {
 
         let result = await usuarioService.buscarUmEmail(email, senha);
         res.json(result);
-        res.json(json);
     },
 
 

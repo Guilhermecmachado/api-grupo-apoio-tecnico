@@ -53,7 +53,7 @@ module.exports = {
     buscarUmEmail: (email, senha) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM tb_usuarios WHERE email = ?,password =?', [email, senha], (error, results) => {
+            db.query('SELECT * FROM tb_usuarios WHERE email = ? AND password =?', [email, senha], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results[0]);
