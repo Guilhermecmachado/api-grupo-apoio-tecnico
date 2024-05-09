@@ -50,6 +50,20 @@ module.exports = {
         });
     },
 
+    buscarUmEmail: (email, senha) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM tb_usuarios WHERE email = ?,senha =?', [email, senha], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results[0]);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
+
     buscarUsuariosPermissoes: () => {
         return new Promise((aceito, rejeitado) => {
 

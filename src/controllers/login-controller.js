@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 require('dotenv/config')
 
 module.exports = {
-    login: async (req, res) => {
+    buscarUmEmail: async (req, res) => {
         let json = { error: '', result: {} };
 
         let email = req.body.email
@@ -11,27 +11,8 @@ module.exports = {
 
 
 
-        if (email && senha) {
-
-            let result = await usuarioService.verificaSeExiste(email, senha);
-            if (result != false) {
-                const token = jwt.sign({ userId: result.id }, 'token-instalacao')
-                // console.log(token)
-                json.result = {
-                    'token': token,
-                    'user_id': result.id,
-                    'email': email
-                }
-                process.env.SECRET_TOKEN_KEY = token
-            } else {
-                json.result = {
-                    'token': false
-                }
-            }
-
-        } else {
-            json.error = 'Campos não enviados';
-        }
+        let result = await usuarioService.buscarUmEmail(email, senha);
+        res.json(result);
         res.json(json);
     },
 

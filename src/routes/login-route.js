@@ -5,7 +5,7 @@ const router = express.Router()
 
 const controller = require('../controllers/login-controller')
 
-router.post('/', controller.login)
+router.post('/', controller.buscarUmEmail)
 
 
 module.exports = router
