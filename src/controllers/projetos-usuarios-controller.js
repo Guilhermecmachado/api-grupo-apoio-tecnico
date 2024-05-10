@@ -8,10 +8,10 @@ module.exports = {
 
         let json = { error: '', result: {} };
         console.log('insert')
-        let projeto_codigo = req.body.nome_projeto
-        let usuario_id = req.body.codigo
-        let projeto_id = req.body.programa_nome
-        let projeto_nome = req.body.status
+        let projeto_codigo = req.body.projeto_codigo
+        let usuario_id = req.body.usuario_id
+        let projeto_id = req.body.projeto_id
+        let projeto_nome = req.body.projeto_nome
 
 
 
@@ -69,15 +69,37 @@ module.exports = {
         res.json(json);
     },
 
-    // buscarUm: async (req, res) => {
-    //     let json = { error: '', result: {} };
-    //     //  console.log('buscam um')
-    //     let id = req.params.id; //para pegar o parametro
-    //     let result = await service.buscarUm(id);
-    //     res.json(result);
+    buscarUm: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let projeto_id = req.params.projeto_id //para pegar o parametro
+        let result = await service.buscarUm(id, projeto_id);
+        res.json(result);
 
 
-    // },
+    },
+
+    delete: async (req, res) => {
+        console.log('delete')
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.delete(db_codigo);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
 
 }

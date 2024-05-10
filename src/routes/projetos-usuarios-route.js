@@ -9,8 +9,9 @@ require('dotenv/config')
 
 router.post('/', controller.inserir)
 router.get('/:id', controller.buscarTodos)
-// router.get('/:id', controller.buscarUm)
+router.get('/:id/:projeto_id', controller.buscarUm)
 router.post('/:id', controller.atualizar)
+router.post('/delete/:id', controller.delete)
 
 
 module.exports = router
