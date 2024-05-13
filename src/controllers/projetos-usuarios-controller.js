@@ -27,6 +27,8 @@ module.exports = {
         res.json(json);
     },
 
+
+
     buscarTodos: async (req, res) => {
         let json = { error: '', result: [] };
         let id = req.params.id

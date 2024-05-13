@@ -64,7 +64,17 @@ module.exports = {
 
     buscarTodosPermissao: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_itens_menu t order by t.label', (error, results) => {
+            db.query('select * from gta_usuarios_permissao', (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+
+    buscarTodosPermissaoUsuario: (usuario_id) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('select * from gta_usuarios_permissao', [usuario_id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });

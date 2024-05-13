@@ -86,6 +86,24 @@ module.exports = {
         res.json(json);
     },
 
+    buscarTodosPermissaoUsuario: async (req, res) => {
+        let json = { error: '', result: [] };
+        let usuario_id = req.params.usuario_id
+        let model = await service.buscarTodosPermissaoUsuario(usuario_id);
+        for (let i in model) {
+            json.result.push({
+                id: model[i].id,
+                label: model[i].label,
+                rota: model[i].rota,
+                usuario_id: model[i].usuario_id,
+                permissao: model[i].permissao,
+                usuario_nome: model[i].usuario_nome
+            });
+        }
+        res.json(json);
+    },
+
+
     atualizar: async (req, res) => {
         console.log('atualiza')
         let json = { error: '', result: {} };
