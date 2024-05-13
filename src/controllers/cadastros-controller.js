@@ -41,6 +41,7 @@ module.exports = {
                 data_criacao: model[i].data_criacao,
                 primeiro_responsavel: model[i].primeiro_responsavel
 
+
             });
         }
         res.json(json);
