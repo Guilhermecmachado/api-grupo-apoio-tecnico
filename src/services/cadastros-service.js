@@ -49,6 +49,21 @@ module.exports = {
         });
     },
 
+    buscarUmApp: (numero_cadastro) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM gta_cadastros WHERE numero_cadastro = ?', [numero_cadastro], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
+
+
     buscarUmForm: (id) => {
         return new Promise((aceito, rejeitado) => {
 

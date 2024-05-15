@@ -100,6 +100,19 @@ module.exports = {
 
     },
 
+    buscarUmApp: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let numero_cadastro = req.params.numero_cadastro;
+        let id_number = parseInt(id)
+        let codigo = req.params.id
+        //para pegar o parametro
+        let result = await service.buscarUmApp(numero_cadastro);
+        res.json(result);
+
+
+    },
+
     buscarUmForm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
