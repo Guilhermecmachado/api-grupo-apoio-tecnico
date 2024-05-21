@@ -35,9 +35,16 @@ module.exports = {
         let laje = req.body.dados_moradia.laje
         let cobertura = req.body.dados_moradia.cobertura
         let adequacao_imovel = req.body.dados_moradia.adequacao_imovel
+        let id_moradia = req.body.dados_moradia.id_moradia
+        let id_situacao = req.body.dados_moradia.id_situacao
+        let id_aluguel = req.body.dados_moradia.id_aluguel
+        let id_parede = req.body.dados_moradia.id_parede
+        let id_revestimento = req.body.dados_moradia.id_revestimento
+        let id_laje = req.body.dados_moradia.id_laje
+        let id_cobertura = req.body.dados_moradia.id_cobertura
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, id_moradia, id_situacao, id_aluguel, id_parede, id_revestimento, id_laje, id_cobertura);
             json.result = {
                 id: model,
             };
@@ -91,12 +98,18 @@ module.exports = {
         let laje = req.body.dados_moradia.laje
         let cobertura = req.body.dados_moradia.cobertura
         let adequacao_imovel = req.body.dados_moradia.adequacao_imovel
-
+        let id_moradia = req.body.dados_moradia.id_moradia
+        let id_situacao = req.body.dados_moradia.id_situacao
+        let id_aluguel = req.body.dados_moradia.id_aluguel
+        let id_parede = req.body.dados_moradia.id_parede
+        let id_revestimento = req.body.dados_moradia.id_revestimento
+        let id_laje = req.body.dados_moradia.id_laje
+        let id_cobertura = req.body.dados_moradia.id_cobertura
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, id_moradia, id_situacao, id_aluguel, id_parede, id_revestimento, id_laje, id_cobertura, data_alteracao);
             json.result = {
                 id,
 

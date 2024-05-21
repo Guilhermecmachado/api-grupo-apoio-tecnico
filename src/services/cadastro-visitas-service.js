@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status) => {
+    inserir: (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, id_visita) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_visitas (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status) VALUES (?,?,?,?,?,?,?,?,?,?)',
-                [cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status],
+            db.query('INSERT INTO gta_cadastro_visitas (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status,id_visita) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
+                [cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, id_visita],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, cadastrador, data, hora, status, data_alteraca) => {
+    atualizar: (id, cadastrador, data, hora, status, id_visita, data_alteraca) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_visitas SET cadastrador = ?,data=? ,hora=?,status=?,data_alteracao = ? WHERE id = ?',
-                [cadastrador, data, hora, status, data_alteraca, id],
+            db.query('UPDATE gta_cadastro_visitas SET cadastrador = ?,data=? ,hora=?,status=?,id_visita=?,data_alteracao = ? WHERE id = ?',
+                [cadastrador, data, hora, status, id_visita, data_alteraca, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

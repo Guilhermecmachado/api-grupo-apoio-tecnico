@@ -25,10 +25,10 @@ module.exports = {
         let separacao_material_reciclavel = req.body.dados_sustentabilidade.separacao_material_reciclavel
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
-
+        let id_sustentabilidade = req.body.id_sustentabilidade
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome);
+                inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, id_sustentabilidade);
             json.result = {
                 id: model,
             };

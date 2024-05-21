@@ -9,7 +9,9 @@ module.exports = {
         let cep = req.body.dados_controle.cep
         let cidade = req.body.dados_controle.cidade
         let complemento = req.body.dados_controle.complemento
-
+        let id_entrevistado = req.body.dados_controle.id_entrevistado
+        let id_primeiro = req.body.dados_controle.id_primeiro
+        let id_segundo = req.body.dados_controle.id_segundo
         let data_alteracao = req.body.dados_controle.data_alteracao
         let data_criacao = req.body.dados_controle.data_criacao
         let endereco = req.body.dados_controle.endereco
@@ -27,7 +29,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf);
+                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf, id_entrevistado, id_primeiro, id_segundo);
             json.result = {
                 id: model,
             };
@@ -74,7 +76,9 @@ module.exports = {
         let contato2 = req.body.dados_controle.contato2
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let data_criacao = req.body.dados_controle.data_criacao
-
+        let id_entrevistado = req.body.dados_controle.id_entrevistado
+        let id_primeiro = req.body.dados_controle.id_primeiro
+        let id_segundo = req.body.dados_controle.id_segundo
         let endereco = req.body.dados_controle.endereco
         let entrevistado = req.body.dados_controle.entrevistado
         let numero = req.body.dados_controle.numero
@@ -91,7 +95,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, data_alteracao);
+            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, id_entrevistado, id_primeiro, id_segundo, data_alteracao);
             json.result = {
                 id,
 

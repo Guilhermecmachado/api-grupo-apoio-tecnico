@@ -43,11 +43,18 @@ module.exports = {
         let situacao_ocupacional = req.body.situacao_ocupacional
         let uuid = req.body.uuid
         let cid = req.body.cid
+        let id_genero = req.body.id_genero
+        let id_posicao = req.body.id_posicao
+        let id_situacao = req.body.id_situacao
+        let id_estado_civil = req.body.id_estado_civil
+        let id_grupo = req.body.id_grupo
+        let id_pne = req.body.pne
+        let id_curso = req.body.id_curso
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid);
+                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid, id_genero, id_posicao, id_situacao, id_estado_civil, id_grupo, id_pne, id_curso);
             json.result = {
                 id: model,
             };
@@ -107,12 +114,20 @@ module.exports = {
         let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
         let cid = req.body.cid
+        let id_genero = req.body.id_genero
+        let id_posicao = req.body.id_posicao
+        let id_situacao = req.body.id_situacao
+        let id_estado_civil = req.body.id_estado_civil
+        let id_grupo = req.body.id_grupo
+        let id_pne = req.body.pne
+        let id_curso = req.body.id_curso
+
 
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, data_alteracao);
+            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, id_genero, id_posicao, id_situacao, id_estado_civil, id_grupo, id_pne, id_curso, data_alteracao);
             json.result = {
                 id,
 

@@ -25,10 +25,11 @@ module.exports = {
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
         let status = req.body.status
+        let id_visita = req.body.id_visita
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status);
+                inserir(cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, id_visita);
             json.result = {
                 id: model,
             };
@@ -73,14 +74,14 @@ module.exports = {
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let hora = req.body.hora
         let status = req.body.status
-
+        let id_visita = req.body.id_visita
 
 
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cadastrador, data, hora, status, data_alteracao);
+            await service.atualizar(db_codigo, cadastrador, data, hora, status, id_visita, data_alteracao);
             json.result = {
                 id,
 
