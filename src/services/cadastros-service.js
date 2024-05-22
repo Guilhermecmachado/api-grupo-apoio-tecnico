@@ -18,7 +18,10 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_cadastros', (error, results) => {
+
+            var table = 'gta_cadastros'
+
+            db.query('select * from ' + table, (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
