@@ -39,7 +39,9 @@ module.exports = {
                 numero_cadastro: model[i].numero_cadastro,
                 cadastrador_nome: model[i].cadastrador_nome,
                 data_criacao: model[i].data_criacao,
-                primeiro_responsavel: model[i].primeiro_responsavel
+                primeiro_responsavel: model[i].primeiro_responsavel,
+                cadastrador_nome: model[i].cadastrador_nome,
+                cadastrador_id: model[i].cadastrador_id,
 
 
             });
