@@ -12,7 +12,8 @@ router.get('/', controller.buscarTodos)
 router.get('/:id', controller.buscarUm)
 router.get('/numero_cadastro/:numero_cadastro', controller.buscarUmApp)
 router.get('/form/:id', controller.buscarUmForm)
-router.get('/:id/:numero_cadastro', controller.buscarUmCadastro)
+router.get('/:id/:numero_cadastro', controller.buscarCadastros)
+router.get('/cadastros/:numero_cadastro/:nome_tabela', controller.buscarCadastrosResponsavel)
 // router.post('/:id', controller.atualizar)
 
 
