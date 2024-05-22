@@ -43,7 +43,8 @@ module.exports = {
                 cadastrador_nome: model[i].cadastrador_nome,
                 cadastrador_id: model[i].cadastrador_id,
                 primeiro_responsavel: model[i].primeiro_responsavel,
-                projeto_codigo: model[i].projeto_codigo
+                projeto_codigo: model[i].projeto_codigo,
+                projeto_id: model[i].projeto_id
 
 
             });
