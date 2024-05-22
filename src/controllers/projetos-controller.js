@@ -36,7 +36,10 @@ module.exports = {
                 id: model[i].id,
                 nome_projeto: model[i].nome_projeto,
                 status: model[i].status,
-                codigo: model[i].codigo
+                codigo: model[i].codigo,
+                entidade_nome: model[i].entidade_nome,
+                programa_nome: model[i].programa_nome,
+
 
             });
         }
