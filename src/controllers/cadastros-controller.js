@@ -45,7 +45,8 @@ module.exports = {
                 primeiro_responsavel: model[i].primeiro_responsavel,
                 projeto_codigo: model[i].projeto_codigo,
                 projeto_id: model[i].projeto_id,
-                projeto_nome: model[i].projeto_nome
+                projeto_nome: model[i].projeto_nome,
+                status: model[i].status
 
 
             });
