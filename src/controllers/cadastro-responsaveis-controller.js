@@ -70,11 +70,45 @@ module.exports = {
     buscarTodos: async (req, res) => {
         let json = { error: '', result: [] };
         let model = await service.buscarTodos();
+
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                cadastro_cohab: model[i].cadastro_cohab,
+                cpf: model[i].cpf,
+                data_criacao: model[i].data_criacao,
+                data_alteracao: model[i].data_alteracao,
+                data_nascimento: model[i].data_nascimento,
+                naturalidade: model[i].naturalidade,
+                nis: model[i].nis,
+                nome_completo: model[i].nome_completo,
+                numero_cadastro: model[i].numero_cadastro,
+                pais: model[i].pais,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                rg: model[i].rg,
+                rg_data_expedicao: model[i].rg_data_expedicao,
+                rg_uf: model[i].rg_uf,
+                status_cadastro: model[i].status_cadastro,
+                tipo_cadastro: model[i].tipo_cadastro,
+                uf: model[i].uf,
+                contato1: model[i].contato1,
+                contato2: model[i].contato2,
+                tipo_contato1: model[i].tipo_contato1,
+                tipo_contato2: model[i].tipo_contato2,
+                cpf_cnpj_fonte_pegadora: model[i].cpf_cnpj_fonte_pegadora,
+                data_admissao: model[i].data_admissao,
+                valor_renda_bruta: model[i].valor_renda_bruta,
+                valor_renda_liquida: model[i].valor_renda_liquida,
+                mes_referencia_renda: model[i].mes_referencia_renda,
+                data_inicio_renda_declarada: model[i].data_inicio_renda_declarada,
+                valor_renda_declarada_liquida: model[i].valor_renda_declarada_liquida,
+                mes_referencia_renda_declarada: model[i].mes_referencia_renda_declarada,
+                beneficio_prestacao: model[i].beneficio_prestacao,
+                programa_bolsa_familia: model[i].programa_bolsa_familia,
+                menor_18: model[i].menor_18,
+                nome_tutor: model[i].menor_18,
+                cpf_tutor: model[i].cpf_tutor
 
             });
         }
