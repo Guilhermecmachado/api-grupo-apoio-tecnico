@@ -8,6 +8,7 @@ require('dotenv/config')
 
 
 router.post('/', controller.inserir)
+router.post('/import', controller.inserirImport)
 router.get('/', controller.buscarTodos)
 router.get('/:id/:numero_cadastro/:tipo_cadastro', controller.buscarUm)
 router.post('/:id', controller.atualizar)

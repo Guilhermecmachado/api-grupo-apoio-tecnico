@@ -16,6 +16,19 @@ module.exports = {
         });
     },
 
+    inserirImport: (projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao) => {
+        return new Promise((accept, reject) => {
+
+            db.query('INSERT INTO gta_cadastro_responsaveis (projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao) values (?,?,?,?,?,?,?,?)',
+                [projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao],
+                (error, results) => {
+                    if (error) { reject(error); return; }
+                    accept(results.insertId); //insertId
+                }
+            );
+        });
+    },
+
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
             db.query('select * from gta_cadastro_responsaveis', (error, results) => {

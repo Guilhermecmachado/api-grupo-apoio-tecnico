@@ -67,6 +67,42 @@ module.exports = {
         res.json(json);
     },
 
+    inserirImport: async (req, res) => {
+        let objectDate = new Date();
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        console.log('insert')
+
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+
+        let projeto_id = req.body.dados_responsavel.projeto_id
+        let projeto_nome = req.body.dados_responsavel.projeto_nome
+        let tipo_cadastro = req.body.dados_responsavel.tipo_cadastro
+        let nis = req.body.dados_responsavel.nis
+        let numero_cadastro = req.body.dados_responsavel.numero_cadastro
+
+        if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
+            let model = await service.
+                inserir(projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao);
+            json.result = {
+                id: model,
+            };
+        } else {
+            json.error = 'Campos não enviados';
+        }
+        res.json(json);
+    },
+
     buscarTodos: async (req, res) => {
         let json = { error: '', result: [] };
         let model = await service.buscarTodos();
