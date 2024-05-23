@@ -5,12 +5,22 @@ module.exports = {
 
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
 
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
         let cadastro_id = req.body.cadastrador_id
         let cadastro_nome = req.body.cadastrador_nome
-        let data_criacao = req.body.data_criacao
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let numero_cadastro = req.body.numero_cadastro
         let primeiro_responsavel = req.body.primeiro_responsavel
         let projeto_codigo = req.body.projeto_codigo
