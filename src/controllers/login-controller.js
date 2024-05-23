@@ -17,7 +17,7 @@ module.exports = {
             'id': result.id,
             'nome': result.nome
         }
-        res.json(json);
+        res.json(result);
     },
 
 

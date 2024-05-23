@@ -58,8 +58,6 @@ module.exports = {
                 if (results.length > 0) {
                     aceito(results[0]);
                 } else {
-
-
                     aceito(false);
                 }
             });
