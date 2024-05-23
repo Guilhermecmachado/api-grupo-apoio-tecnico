@@ -36,7 +36,8 @@ module.exports = {
                 nome: model[i].nome,
                 status: model[i].status,
                 codigo: model[i].codigo,
-                grupo: model[i].grupo
+                grupo: model[i].grupo,
+                id_grupo: model[i].id_grupo,
 
             });
         }
