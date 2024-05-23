@@ -27,17 +27,17 @@ module.exports = {
             });
         });
     },
-    // atualizar: (id, nome_regional, status_regional) => {
-    //     return new Promise((aceito, rejeitado) => {
-    //         db.query('UPDATE tb_regionais SET nome_regional = ?, status_regional = ? WHERE id = ?',
-    //             [nome_regional, status_regional, id],
-    //             (error, results) => {
-    //                 if (error) { rejeitado(error); return; }
-    //                 aceito(results);
-    //             }
-    //         );
-    //     });
-    // },
+    atualizar: (id, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastros SET cadastro_id=?, cadastro_nome=?, data_alteracao=?, numero_cadastro=?, primeiro_responsavel=?, projeto_codigo=?, projeto_id=?, projeto_nome=?, status=? WHERE id = ?',
+                [cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 

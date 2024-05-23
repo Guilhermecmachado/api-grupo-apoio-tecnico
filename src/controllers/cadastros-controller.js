@@ -94,7 +94,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await regionalInstalacaoService.atualizar(db_codigo, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status);
+            await service.atualizar(db_codigo, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status);
             json.result = {
                 id,
 
