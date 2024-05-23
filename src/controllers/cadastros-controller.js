@@ -28,7 +28,7 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
         let status = req.body.status
 
-        if (cadastro_id && data_criacao && numero_cadastro && projeto_codigo && projeto_id && projeto_nome && status) {
+        if (numero_cadastro && projeto_codigo && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status);
             json.result = {
