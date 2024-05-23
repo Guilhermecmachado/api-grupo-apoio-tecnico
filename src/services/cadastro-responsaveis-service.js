@@ -19,6 +19,17 @@ module.exports = {
     inserirImport: (projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao) => {
         return new Promise((accept, reject) => {
 
+            //se for resp - cria cadastro
+            if (tipo_cadastro == 'primeiroResponsavel') {
+                db.query('INSERT INTO gta_cadastros (cadastrador_id, cadastrador_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) VALUES (?,?,?,?,?,?,?,?,?)',
+                    [2, 'GTA IMPORTAÇÃO', data_criacao, numero_cadastro, nome_completo, 'CPGB', projeto_id, projeto_nome, true],
+                    (error, results) => {
+                        if (error) { reject(error); return; }
+                        accept(results.insertId); //insertId
+                    }
+                );
+            }
+
             db.query('INSERT INTO gta_cadastro_responsaveis (projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao) values (?,?,?,?,?,?,?,?)',
                 [projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao],
                 (error, results) => {
