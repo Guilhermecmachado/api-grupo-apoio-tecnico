@@ -29,7 +29,7 @@ module.exports = {
     },
     atualizar: (id, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastros SET cadastro_id=?, cadastro_nome=?, data_alteracao=?, numero_cadastro=?, primeiro_responsavel=?, projeto_codigo=?, projeto_id=?, projeto_nome=?, status=? WHERE id = ?',
+            db.query('UPDATE gta_cadastros SET cadastrador_id=?, cadastrador_nome=?, data_alteracao=?, numero_cadastro=?, primeiro_responsavel=?, projeto_codigo=?, projeto_id=?, projeto_nome=?, status=? WHERE id = ?',
                 [cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
