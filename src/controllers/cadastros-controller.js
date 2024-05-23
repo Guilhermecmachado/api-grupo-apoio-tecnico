@@ -54,34 +54,46 @@ module.exports = {
         res.json(json);
     },
 
-    // atualizar: async (req, res) => {
-    //     console.log('atualiza')
-    //     let json = { error: '', result: {} };
+    atualizar: async (req, res) => {
+        console.log('atualiza')
+        let objectDate = new Date();
 
-    //     let id = req.params.id;
-    //     let nome_regional = req.body.nome_regional;
-    //     let status_regional = req.body.status_regional;
 
-    //     let db_status = 0
-    //     if (status_regional == '0')
-    //         db_status = 0
-    //     else
-    //         db_status = 1
+        let day = objectDate.getDate();
 
-    //     db_codigo = parseInt(id)
+        let month = objectDate.getMonth() + 1;
 
-    //     if (id && nome_regional && status_regional) {
-    //         await regionalInstalacaoService.atualizar(db_codigo, nome_regional, db_status);
-    //         json.result = {
-    //             id,
-    //             nome_regional,
+        let year = objectDate.getFullYear();
 
-    //         };
-    //     } else {
-    //         json.error = 'Os campos não foram enviados';
-    //     }
-    //     res.json(json);
-    // },
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let cadastro_id = req.body.cadastrador_id
+        let cadastro_nome = req.body.cadastrador_nome
+        let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let numero_cadastro = req.body.numero_cadastro
+        let primeiro_responsavel = req.body.primeiro_responsavel
+        let projeto_codigo = req.body.projeto_codigo
+        let projeto_id = req.body.projeto_id
+        let projeto_nome = req.body.projeto_nome
+        let status = req.body.status
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await regionalInstalacaoService.atualizar(db_codigo, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     buscarUmCadastro: async (req, res) => {
         let json = { error: '', result: {} };
@@ -113,7 +125,7 @@ module.exports = {
         let numero_cadastro = req.params.numero_cadastro
         let tipo_cadastro = req.params.tipo_cadastro
         //para pegar o parametro
-        let result = await service.buscarCadastros(nome_tabela, numero_cadastro, tipo_cadastro);
+        let result = await service.buscarCadastrosResponsavel(nome_tabela, numero_cadastro, tipo_cadastro);
         res.json(result);
 
 

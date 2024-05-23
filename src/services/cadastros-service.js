@@ -19,9 +19,9 @@ module.exports = {
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
 
-            var table = 'gta_cadastros'
 
-            db.query('select * from ' + table, (error, results) => {
+
+            db.query('select * from gta_cadastros', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
@@ -98,7 +98,7 @@ module.exports = {
     buscarCadastros: (nome_tabela, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM  WHERE projeto_id = ? AND numero_cadastro=?', [id, numero_cadastro], (error, results) => {
+            db.query('SELECT * FROM ' + nome_tabela + ' WHERE  numero_cadastro=?', [numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results);
@@ -108,6 +108,21 @@ module.exports = {
             });
         });
     },
+
+    buscarCadastrosResponsavel: (nome_tabela, numero_cadastro, tipo_cadastro) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM ' + nome_tabela + ' WHERE  numero_cadastro=? AND tipo_cadastro=?', [numero_cadastro, tipo_cadastro], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
+
 
 
 
