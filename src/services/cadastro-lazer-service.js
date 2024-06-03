@@ -18,7 +18,7 @@ module.exports = {
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_cadastro_lazer  t order by t.cadastro_nome', (error, results) => {
+            db.query('select * from gta_cadastro_lazer ', (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
