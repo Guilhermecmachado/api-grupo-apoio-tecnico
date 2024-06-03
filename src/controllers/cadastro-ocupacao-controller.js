@@ -61,8 +61,23 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                agricultura_residencia: model[i].agricultura_residencia,
+                agricultura_residencia_obs: model[i].agricultura_residencia_obs,
+                aluguel_social: model[i].aluguel_social,
+                atividade_economica: req.body.dados_moradia.atividade_economica,
+                atividade_economica_obs: model[i].atividade_economica_obs,
+                data_criacao: model[i].data_criacao,
+                data_alteracao: model[i].data_alteracao,
+                numero_cadastro: model[i].numero_cadastro,
+                situacao: model[i].situacao,
+                tipo_moradia: model[i].tipo_moradia,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                material_parede: model[i].material_parede,
+                revestimento: model[i].revestimento,
+                laje: model[i].laje,
+                cobertura: model[i].cobertura,
+                adequacao_imovel: model[i].adequacao_imovel,
 
             });
         }

@@ -122,8 +122,21 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                documento1: model[i].documento1,
+                documento2: model[i].documento2,
+                documento3: model[i].documento3,
+                documento4: model[i].documento4,
+                documento5: model[i].documento5,
+                documento6: model[i].documento6,
+                documento7: model[i].documento7,
+                documento8: model[i].documento8,
+                documento9: model[i].documento9,
+                documento10: model[i].documento10,
+                documento11: model[i].documento11,
+                numero_cadastro: model[i].numero_cadastro,
+                documento1: model[i].observacoes_contato,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
 
             });
         }

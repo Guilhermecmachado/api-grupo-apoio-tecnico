@@ -70,8 +70,41 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                numero_cadastro: model[i].numero_cadastro,
+                beneficios: model[i].beneficios,
+                beneficios_valor: model[i].beneficios_valor,
+                curso_frequenta: model[i].curso_frequenta,
+                data_alteracao: model[i].data_alteracao,
+                data_criacao: model[i].data_criacao,
+                estado_civil: model[i].estado_civil,
+                estudou_ate: model[i].estudou_ate,
+                frequenta_escola: model[i].frequenta_escola,
+                genero: model[i].genero,
+                grupo_etnico: model[i].grupo_etnico,
+                idade: model[i].idade,
+                numero_cadastro: model[i].numero_cadastro,
+                nome_completo: model[i].nome_completo,
+                outra_fonte_renda: model[i].outra_fonte_renda,
+                outra_fonte_renda_valor: model[i].outra_fonte_renda_valor,
+                pne: model[i].pne,
+                posicao_familiar: model[i].posicao_familia,
+                profissao: model[i].profissao,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                renda_principal: model[i].renda_principal,
+                renda_principal_valor: model[i].renda_principal_valor,
+                situacao_ocupacional: model[i].situacao_ocupacional,
+                uuid: model[i].uuid,
+                cid: model[i].cid,
+                // let id_genero = model[i].id_genero
+                // let id_posicao = req.body.id_posicao
+                // let id_situacao = req.body.id_situacao
+                // let id_estado_civil = req.body.id_estado_civil
+                // let id_grupo = req.body.id_grupo
+                // let id_pne = req.body.pne
+                // let id_curso = req.body.id_curso
 
             });
         }

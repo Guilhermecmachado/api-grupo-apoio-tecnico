@@ -94,8 +94,20 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                data_criacao: model[i].data_criacao,
+                data_alteracao: model[i].data_alteracao,
+                numero_cadastro: req.body.numero_cadastro,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                associado_bairro: model[i].associacao_bairro,
+                entidade_recriativas: model[i].entidade_recreativas,
+                entidades_religiosas: model[i].entidade_relegiosa,
+                especifique: model[i].especifique,
+                movimento_luta_moradia: model[i].movimento_luta_moradia,
+                outros: model[i].outros,
+                partidos_politicos: model[i].partidos_politicos,
+                sindicatos: model[i].sindicatos,
+
 
             });
         }

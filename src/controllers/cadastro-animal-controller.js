@@ -45,8 +45,10 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                animal_moradia: model[i].animal_moradia,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                numero_cadastro: model[i].numero_cadastro
 
             });
         }

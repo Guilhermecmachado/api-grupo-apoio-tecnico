@@ -47,8 +47,17 @@ module.exports = {
         for (let i in model) {
             json.result.push({
                 id: model[i].id,
-                // nome_regional: model[i].nome_regional,
-                // status_regional: model[i].status_regional,
+                data_criacao: model[i].data_criacao,
+                data_alteracao: model[i].data_alteracao,
+                numero_cadastro: req.body.numero_cadastro,
+                projeto_id: model[i].projeto_id,
+                projeto_nome: model[i].projeto_nome,
+                atividade: model[i].atividade,
+                tipo_atividade: model[i].tipo_atividade,
+                tipo_atividade2: model[i].tipo_atividade2,
+                tipo_atividade3: model[i].tipo_atividade3,
+                tipo_atividade4: model[i].tipo_atividade4,
+
 
             });
         }
