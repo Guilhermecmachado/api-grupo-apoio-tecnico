@@ -54,15 +54,15 @@ module.exports = {
                 data_criacao: model[i].data_criacao,
                 data_alteracao: model[i].data_alteracao,
                 numero_cadastro: req.body.numero_cadastro,
-                despesas_alimentacao: model[i].dados_despesas.despesa_alimentacao,
+                despesas_alimentacao: model[i].despesa_alimentacao,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
-                despesas_aluguel: model[i].dados_despesas.despesa_aluguel,
-                despesas_gas: model[i].dados_despesas.despesa_gas,
-                despesas_luz: model[i].dados_despesas.despesa_luz,
-                despesas_saude: model[i].dados_despesas.despesa_saude,
-                despesas_transporte: model[i].dados_despesas.despesa_transporte,
-                valor_aluguel_social: model[i].dados_despesas.valor_aluguel_social,
+                despesas_aluguel: model[i].despesa_aluguel,
+                despesas_gas: model[i].despesa_gas,
+                despesas_luz: model[i].despesa_luz,
+                despesas_saude: model[i].despesa_saude,
+                despesas_transporte: model[i].despesa_transporte,
+                valor_aluguel_social: model[i].valor_aluguel_social,
 
             });
         }
