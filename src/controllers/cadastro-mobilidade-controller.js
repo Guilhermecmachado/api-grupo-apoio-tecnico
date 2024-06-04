@@ -80,7 +80,7 @@ module.exports = {
                 id: model[i].id,
                 data_criacao: model[i].data_criacao,
                 data_alteracao: model[i].data_alteracao,
-                numero_cadastro: req.body.numero_cadastro,
+                numero_cadastro: model[i].numero_cadastro,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
                 forma_transporte: model[i].forma_transporte,
