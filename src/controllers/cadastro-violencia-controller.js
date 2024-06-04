@@ -53,7 +53,7 @@ module.exports = {
                 idade: model[i].idade,
                 data_criacao: model[i].data_criacao,
                 data_alteracao: model[i].data_alteracao,
-                numero_cadastro: model[i].nmero_cadastro,
+                numero_cadastro: model[i].numero_cadastro,
                 ano: model[i].ano,
                 uuid: model[i].uuid,
                 projeto_id: model[i].projeto_id,
