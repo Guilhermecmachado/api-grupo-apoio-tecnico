@@ -57,7 +57,7 @@ module.exports = {
                 ano: model[i].ano,
                 uuid: model[i].uuid,
                 projeto_id: model[i].projeto_id,
-                projeto_nome: projeto_nome,
+                projeto_nome: model[i].projeto_nome,
 
 
             });
