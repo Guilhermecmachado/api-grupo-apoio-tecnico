@@ -21,15 +21,12 @@ module.exports = {
 
 
 
-        if (nome && email && cpf && password && perfil) {
-            let model = await service.
-                inserir(agencia, nome, email, banco, conta_corrente, cpf, password, perfil, pix);
-            json.result = {
-                id: model,
-            };
-        } else {
-            json.error = 'Campos não enviados';
-        }
+        let model = await service.
+            inserir(agencia, nome, email, banco, conta_corrente, cpf, password, perfil, pix);
+        json.result = {
+            id: model,
+        };
+
         res.json(json);
     },
 
