@@ -64,7 +64,7 @@ module.exports = {
                 agricultura_residencia: model[i].agricultura_residencia,
                 agricultura_residencia_obs: model[i].agricultura_residencia_obs,
                 aluguel_social: model[i].aluguel_social,
-                atividade_economica: req.body.dados_moradia.atividade_economica,
+                atividade_economica: model[i].atividade_economica,
                 atividade_economica_obs: model[i].atividade_economica_obs,
                 data_criacao: model[i].data_criacao,
                 data_alteracao: model[i].data_alteracao,
