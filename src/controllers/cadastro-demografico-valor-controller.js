@@ -53,7 +53,7 @@ module.exports = {
                 despesas_agua: model[i].despesa_agua,
                 data_criacao: model[i].data_criacao,
                 data_alteracao: model[i].data_alteracao,
-                numero_cadastro: req.body.numero_cadastro,
+                numero_cadastro: model[i].numero_cadastro,
                 despesas_alimentacao: model[i].despesa_alimentacao,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
