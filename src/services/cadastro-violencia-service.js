@@ -24,6 +24,21 @@ module.exports = {
             });
         });
     },
+
+    buscarUmUiid: (uuid) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM gta_cadastro_violencia  WHERE uuid = ? ', [uuid], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
+
     atualizar: (id, motivo, motivo_outros, idade, ano, id_motivo, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
             db.query('UPDATE gta_cadastro_violencia SET motivo = ?,motivo_outros=?,idade=?,ano=?,id_motivo=?, data_alteracao = ? WHERE id = ?',

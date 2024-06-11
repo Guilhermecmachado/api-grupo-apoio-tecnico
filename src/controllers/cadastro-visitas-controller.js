@@ -112,6 +112,16 @@ module.exports = {
 
 
     },
+    buscarUmUiid: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let uuid = req.params.uuid;
+        let result = await service.buscarUmUiid(uuid);
+        res.json(result);
+
+
+    },
+
     buscarUmForm: async (req, res) => {
         let json = { error: '', result: {} };
         //  console.log('buscam um')
