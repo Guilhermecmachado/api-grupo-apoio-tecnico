@@ -39,10 +39,10 @@ module.exports = {
         });
     },
 
-    atualizar: (id, motivo, motivo_outros, idade, ano, id_motivo, data_alteracao) => {
+    atualizar: (id, motivo, motivo_outros, idade, ano, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_violencia SET motivo = ?,motivo_outros=?,idade=?,ano=?,id_motivo=?, data_alteracao = ? WHERE id = ?',
-                [motivo, motivo_outros, idade, ano, id_motivo, data_alteracao, id],
+            db.query('UPDATE gta_cadastro_violencia SET motivo = ?,motivo_outros=?,idade=?,ano=?, data_alteracao = ? WHERE id = ?',
+                [motivo, motivo_outros, idade, ano, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
