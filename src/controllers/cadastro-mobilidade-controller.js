@@ -151,7 +151,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, id_transporte, id_regiao, data_alteracao);
+            await service.atualizar(db_codigo, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, data_alteracao);
             json.result = {
                 id,
 
