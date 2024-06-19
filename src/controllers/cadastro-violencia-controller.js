@@ -66,6 +66,17 @@ module.exports = {
     },
 
     atualizar: async (req, res) => {
+        let objectDate = new Date();
+
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
         console.log('atualiza')
         let json = { error: '', result: {} };
 
