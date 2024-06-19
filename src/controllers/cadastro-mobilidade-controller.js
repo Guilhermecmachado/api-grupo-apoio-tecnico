@@ -62,7 +62,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, valor_caminhao, valor_caminhao_suv, valor_carro, valor_moto, regiao_trabalho, projeto_id, projeto_nome, id_transporte, id_regiao);
+                inserir(data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, valor_caminhao, valor_caminhao_suv, valor_carro, valor_moto, regiao_trabalho, projeto_id, projeto_nome);
             json.result = {
                 id: model,
             };
