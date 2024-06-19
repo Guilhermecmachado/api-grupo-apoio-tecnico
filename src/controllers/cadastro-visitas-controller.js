@@ -96,6 +96,7 @@ module.exports = {
                 id,
 
             };
+            console.log(json.result)
         } else {
             json.error = 'Os campos não foram enviados';
         }
