@@ -44,7 +44,7 @@ module.exports = {
         let id_cobertura = req.body.dados_moradia.id_cobertura
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, id_moradia, id_situacao, id_aluguel, id_parede, id_revestimento, id_laje, id_cobertura);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel);
             json.result = {
                 id: model,
             };
@@ -124,7 +124,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, id_moradia, id_situacao, id_aluguel, id_parede, id_revestimento, id_laje, id_cobertura, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, data_alteracao);
             json.result = {
                 id,
 
