@@ -91,7 +91,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, motivo, motivo_outros, idade, ano, id_motivo, data_alteracao);
+            await service.atualizar(db_codigo, motivo, motivo_outros, idade, ano, data_alteracao);
             json.result = {
                 id,
 
