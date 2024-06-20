@@ -29,7 +29,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf, id_entrevistado, id_primeiro, id_segundo);
+                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf);
             json.result = {
                 id: model,
             };
@@ -109,7 +109,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, id_entrevistado, id_primeiro, id_segundo, data_alteracao);
+            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, data_alteracao);
             json.result = {
                 id,
 
