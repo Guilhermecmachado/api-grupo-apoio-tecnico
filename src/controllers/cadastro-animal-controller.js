@@ -33,6 +33,7 @@ module.exports = {
             json.result = {
                 id: model,
             };
+            console.log(json.result, 'insert')
         } else {
             json.error = 'Campos não enviados';
         }
@@ -83,6 +84,7 @@ module.exports = {
 
 
             };
+            console.log(json.result, 'update')
         } else {
             json.error = 'Os campos não foram enviados';
         }
