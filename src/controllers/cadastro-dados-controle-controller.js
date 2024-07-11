@@ -2,6 +2,17 @@ const service = require('../services/cadastro-dados-controle-service');
 module.exports = {
 
     inserir: async (req, res) => {
+        let objectDate = new Date();
+
+
+        let day = objectDate.getDate();
+
+        let month = objectDate.getMonth() + 1;
+
+        let year = objectDate.getFullYear();
+
+        if (day < 10) day = '0' + day;
+        if (month < 10) month = '0' + month;
 
         let json = { error: '', result: {} };
 
@@ -13,7 +24,7 @@ module.exports = {
         let id_primeiro = req.body.dados_controle.id_primeiro
         let id_segundo = req.body.dados_controle.id_segundo
         let data_alteracao = req.body.dados_controle.data_alteracao
-        let data_criacao = req.body.dados_controle.data_criacao
+        let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let endereco = req.body.dados_controle.endereco
         let entrevistado = req.body.dados_controle.entrevistado
         let numero = req.body.dados_controle.numero
