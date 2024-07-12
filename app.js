@@ -4,7 +4,7 @@ const cors = require('cors')
 const debug = require('debug')('apiwa:server')
 const app = express()
 const jwt = require('jsonwebtoken')
-const port = normalizePort(process.env.PORT || '8002')
+const port = normalizePort(process.env.PORT || '8003')
 app.set('port', port)
 
 //server
