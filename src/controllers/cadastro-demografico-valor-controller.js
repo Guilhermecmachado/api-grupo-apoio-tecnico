@@ -31,10 +31,10 @@ module.exports = {
         let despesas_saude = req.body.dados_despesas.despesa_saude
         let despesas_transporte = req.body.dados_despesas.despesa_transporte
         let valor_aluguel_social = req.body.dados_despesas.valor_aluguel_social
-
+        let cadastrador_id = req.body.dados_despesas.cadastrador_id
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, data_alteracao);
+                inserir(despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, data_alteracao, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -93,6 +93,7 @@ module.exports = {
         let despesas_saude = req.body.dados_despesas.despesa_saude
         let despesas_transporte = req.body.dados_despesas.despesa_transporte
         let valor_aluguel_social = req.body.dados_despesas.valor_aluguel_social
+        let cadastrador_id = req.body.dados_despesas.cadastrador_id
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
 
 
@@ -100,7 +101,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_alteracao);
+            await service.atualizar(db_codigo, despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 

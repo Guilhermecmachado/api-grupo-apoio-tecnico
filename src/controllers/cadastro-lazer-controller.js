@@ -28,10 +28,11 @@ module.exports = {
         let tipo_atividade4 = req.body.dados_lazer.tipo_atividade4
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
+        let cadastrador_id = req.body.dados_lazer.cadastrador_id
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome);
+                inserir(atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -86,12 +87,12 @@ module.exports = {
         let tipo_atividade2 = req.body.dados_lazer.tipo_atividade2
         let tipo_atividade3 = req.body.dados_lazer.tipo_atividade3
         let tipo_atividade4 = req.body.dados_lazer.tipo_atividade4
-
+        let cadastrador_id = req.body.dados_lazer.cadastrador_id
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, data_alteracao);
+            await service.atualizar(db_codigo, atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 

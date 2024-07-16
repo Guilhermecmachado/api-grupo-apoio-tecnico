@@ -22,14 +22,14 @@ module.exports = {
         let data_alteracao = req.body.dados_animais.data_alteracao
         let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let numero_cadastro = req.body.numero_cadastro
-
+        let cadastrador_id = req.body.dados_animais.cadastrador_id
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome);
+                inserir(animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -74,11 +74,11 @@ module.exports = {
         let id = req.params.id;
         let animal_moradia = req.body.dados_animais.animal_moradia
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
-
+        let cadastrador_id = req.body.dados_animais.cadastrador_id
         db_codigo = parseInt(id)
 
         if (id && animal_moradia && data_alteracao) {
-            await service.atualizar(db_codigo, animal_moradia, data_alteracao);
+            await service.atualizar(db_codigo, animal_moradia, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 

@@ -34,13 +34,13 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
         let projeto_id = req.body.projeto_id
         let segundo_responsavel_trabalha = req.body.dados_controle.segundo_responsavel_trabalha
-
+        let cadastrador_id = req.body.dados_controle.cadastrador_id
         let uf = req.body.dados_controle.uf
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf);
+                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -107,7 +107,7 @@ module.exports = {
         let endereco = req.body.dados_controle.endereco
         let entrevistado = req.body.dados_controle.entrevistado
         let numero = req.body.dados_controle.numero
-
+        let cadastrador_id = req.body.dados_controle.cadastrador_id
         let observacoes_contato = req.body.dados_controle.observacoes_contato
         let primeiro_responsavel_trabalha = req.body.dados_controle.primeiro_responsavel_trabalha
 
@@ -120,7 +120,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, data_alteracao);
+            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 

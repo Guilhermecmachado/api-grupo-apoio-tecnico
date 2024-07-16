@@ -50,11 +50,12 @@ module.exports = {
         let id_grupo = req.body.id_grupo
         let id_pne = req.body.pne
         let id_curso = req.body.id_curso
+        let cadastrador_id = req.body.cadastrador_id
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid);
+                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -147,6 +148,7 @@ module.exports = {
         let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
         let cid = req.body.cid
+        let cadastrador_id = req.body.cadastrador_id
         let id_genero = req.body.id_genero
         let id_posicao = req.body.id_posicao
         let id_situacao = req.body.id_situacao
@@ -160,7 +162,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, data_alteracao);
+            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 

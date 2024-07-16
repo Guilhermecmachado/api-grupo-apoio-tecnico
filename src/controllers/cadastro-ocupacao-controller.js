@@ -42,9 +42,11 @@ module.exports = {
         let id_revestimento = req.body.dados_moradia.id_revestimento
         let id_laje = req.body.dados_moradia.id_laje
         let id_cobertura = req.body.dados_moradia.id_cobertura
+        let cadastrador_id = req.body.dados_moradia.cadastrador_id
+
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -120,11 +122,11 @@ module.exports = {
         let id_revestimento = req.body.dados_moradia.id_revestimento
         let id_laje = req.body.dados_moradia.id_laje
         let id_cobertura = req.body.dados_moradia.id_cobertura
-
+        let cadastrador_id = req.body.dados_moradia.cadastrador_id
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 

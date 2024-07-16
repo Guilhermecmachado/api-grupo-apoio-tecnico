@@ -126,6 +126,18 @@ module.exports = {
 
     },
 
+    buscarCadastrosCadastrador: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let nome_tabela = req.params.nome_tabela;
+        let numero_cadastro = req.params.numero_cadastro
+        //para pegar o parametro
+        let result = await service.buscarCadastrosCadastrador(nome_tabela, numero_cadastro);
+        res.json(result);
+
+
+    },
+
     buscarCadastrosResponsavel: async (req, res) => {
         let json = { error: '', result: {} };
         // console.log('buscam um')

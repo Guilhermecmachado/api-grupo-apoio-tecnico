@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome) => {
+    inserir: (maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_violencia_maria (maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?)',
-                [maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome],
+            db.query('INSERT INTO gta_cadastro_violencia_maria (maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?)',
+                [maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, maria_penha, data_alteracao) => {
+    atualizar: (id, maria_penha, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_violencia_maria SET  maria_penha=?, data_alteracao=? WHERE id = ?',
-                [maria_penha, data_alteracao, id],
+            db.query('UPDATE gta_cadastro_violencia_maria SET  maria_penha=?, cadastrador_id,data_alteracao=? WHERE id = ?',
+                [maria_penha, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

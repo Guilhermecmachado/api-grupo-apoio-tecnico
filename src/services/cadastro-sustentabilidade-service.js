@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome) => {
+    inserir: (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_sustentabilidade (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome) VALUES (?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome],
+            db.query('INSERT INTO gta_cadastro_sustentabilidade (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?)',
+                [data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, forma_coleta, separacao_material_reciclavel, id_sustentabilidade, data_alteracao) => {
+    atualizar: (id, forma_coleta, separacao_material_reciclavel, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_sustentabilidade SET forma_coleta =?, separacao_material_reciclavel=?,id_sustentabilidade=?, data_alteracao=? WHERE id = ?',
-                [forma_coleta, separacao_material_reciclavel, data_alteracao, id_sustentabilidade, id],
+            db.query('UPDATE gta_cadastro_sustentabilidade SET forma_coleta =?, separacao_material_reciclavel=?,cadastrador_id=?, data_alteracao=? WHERE id = ?',
+                [forma_coleta, separacao_material_reciclavel, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

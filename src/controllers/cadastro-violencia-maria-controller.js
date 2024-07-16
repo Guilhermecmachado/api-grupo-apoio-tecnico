@@ -26,11 +26,12 @@ module.exports = {
         let maria_penha = req.body.dados_maria.maria_penha
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
+        let cadastrador_id = req.body.dados_maria.cadastrador_id
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome);
+                inserir(maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -77,12 +78,12 @@ module.exports = {
 
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let maria_penha = req.body.dados_maria.maria_penha
-
+        let cadastrador_id = req.body.dados_maria.cadastrador_id
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, maria_penha, data_alteracao);
+            await service.atualizar(db_codigo, maria_penha, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 
