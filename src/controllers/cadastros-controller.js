@@ -189,5 +189,36 @@ module.exports = {
 
     },
 
+    atualizarTabelas: async (req, res) => {
+        console.log('atualiza')
+
+
+
+
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+        let cadastrador_id = req.body.cadastrador_id
+        let nome_tabela = req.body.nome_tabela
+        let status_online = 'OK'
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizarTabelas(db_codigo, nome_tabela, cadastrador_id, status_online);
+            json.result = {
+                id,
+
+            };
+
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
+
+
+
 
 }

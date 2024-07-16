@@ -98,7 +98,7 @@ module.exports = {
     buscarCadastros: (nome_tabela, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM ' + nome_tabela + ' WHERE  numero_cadastro=?', [numero_cadastro], (error, results) => {
+            db.query('SELECT * FROM ' + nome_tabela + ' WHERE  numero_cadastro=? AND status_online = ' + null + '', [numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results);
@@ -108,6 +108,7 @@ module.exports = {
             });
         });
     },
+
 
     buscarCadastrosCadastrador: (nome_tabela, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
@@ -137,7 +138,17 @@ module.exports = {
         });
     },
 
-
+    atualizarTabelas: (id, nome_tabela, cadastrador_id, status_online) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE ' + nome_tabela + 'SET cadastrador_id=?, status_online=? WHERE id = ?',
+                [cadastrador_id, status_online, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    },
 
 
 }
