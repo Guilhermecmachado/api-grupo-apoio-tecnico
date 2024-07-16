@@ -6,7 +6,7 @@ module.exports = {
     inserir: (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_sustentabilidade (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?)',
+            db.query('INSERT INTO gta_cadastro_sustentabilidade (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?,?)',
                 [data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id],
                 (error, results) => {
                     if (error) { reject(error); return; }
