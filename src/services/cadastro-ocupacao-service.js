@@ -26,7 +26,7 @@ module.exports = {
     },
     atualizar: (id, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_tipo_ocupacao_moradia SET agricultura_residencia=?, agricultura_residencia_obs=?, aluguel_social=?, atividade_economica=?, atividade_economica_obs=?, situacao=?, tipo_moradia=?,material_parede=?, revestimento=?, laje=?, cobertura=?, adequacao_imovel=?, cadastrador=?,data_alteracao=? WHERE id = ?',
+            db.query('UPDATE gta_cadastro_tipo_ocupacao_moradia SET agricultura_residencia=?, agricultura_residencia_obs=?, aluguel_social=?, atividade_economica=?, atividade_economica_obs=?, situacao=?, tipo_moradia=?,material_parede=?, revestimento=?, laje=?, cobertura=?, adequacao_imovel=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
                 [agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
