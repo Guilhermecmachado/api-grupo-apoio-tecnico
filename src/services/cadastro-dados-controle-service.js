@@ -26,8 +26,8 @@ module.exports = {
     },
     atualizar: (id, cep, cidade, complemento, endereco, entrevistado, numero, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastros_dados_controle SET cep=?, cidade=?, complemento=?, endereco=?, entrevistado=?, numero=?, observacoes_contato=?, primeiro_responsavel_trabalha=?, segundo_responsavel_trabalha=?, uf=?,data_criacao=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
-                [cep, cidade, complemento, endereco, entrevistado, numero, observacoes_contato, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, cadastrador_id, data_alteracao, id],
+            db.query('UPDATE gta_cadastros_dados_controle SET cep=?, cidade=?, complemento=?, endereco=?, entrevistado=?, numero=?, primeiro_responsavel_trabalha=?, segundo_responsavel_trabalha=?, uf=?,data_criacao=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
+                [cep, cidade, complemento, endereco, entrevistado, numero, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
