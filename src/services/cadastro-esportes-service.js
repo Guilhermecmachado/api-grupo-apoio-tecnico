@@ -6,7 +6,7 @@ module.exports = {
     inserir: (associado_bairro, data_criacao, data_alteracao, entidade_recriativas, entidades_religiosas, especifique, movimento_luta_moradia, outros, partidos_politicos, sindicatos, numero_cadastro, projeto_id, projeto_nome, cadastrador_id) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_esporte_organizacao_comunitaria (associacao_bairro, data_criacao, data_alteracao, entidade_recreativas, entidade_relegiosa, especifique, movimento_luta_moradia, outros, partidos_politica, sindicatos, numero_cadastro, projeto_id, projeto_nome,cadastros_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+            db.query('INSERT INTO gta_cadastro_esporte_organizacao_comunitaria (associacao_bairro, data_criacao, data_alteracao, entidade_recreativas, entidade_relegiosa, especifique, movimento_luta_moradia, outros, partidos_politica, sindicatos, numero_cadastro, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
                 [associado_bairro, data_criacao, data_alteracao, entidade_recriativas, entidades_religiosas, especifique, movimento_luta_moradia, outros, partidos_politicos, sindicatos, numero_cadastro, projeto_id, projeto_nome, cadastrador_id],
                 (error, results) => {
                     if (error) { reject(error); return; }
