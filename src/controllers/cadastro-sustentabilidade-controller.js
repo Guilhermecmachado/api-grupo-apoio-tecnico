@@ -26,7 +26,7 @@ module.exports = {
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
         let id_sustentabilidade = req.body.id_sustentabilidade
-        let cadastrador_id = req.body.cadastrador_id
+        let cadastrador_id = req.body.dados_sustentabilidade.cadastrador_id
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id);
