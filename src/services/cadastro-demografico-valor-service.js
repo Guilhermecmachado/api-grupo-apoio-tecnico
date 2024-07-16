@@ -26,7 +26,7 @@ module.exports = {
     },
     atualizar: (id, despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_demografico_valores SET despesa_agua=?, despesa_alimentacao=?, despesa_aluguel=?, despesa_gas=?, despesa_luz=?, despesa_saude=?, despesa_transporte=?, valor_aluguel_social=?, cadastrador_id,data_alteracao=? WHERE id = ?',
+            db.query('UPDATE gta_cadastro_demografico_valores SET despesa_agua=?, despesa_alimentacao=?, despesa_aluguel=?, despesa_gas=?, despesa_luz=?, despesa_saude=?, despesa_transporte=?, valor_aluguel_social=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
                 [despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
