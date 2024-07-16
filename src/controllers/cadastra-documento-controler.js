@@ -135,7 +135,6 @@ module.exports = {
                 documento10: model[i].documento10,
                 documento11: model[i].documento11,
                 numero_cadastro: model[i].numero_cadastro,
-                documento1: model[i].observacoes_contato,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
 

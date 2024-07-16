@@ -29,7 +29,7 @@ module.exports = {
         let entrevistado = req.body.dados_controle.entrevistado
         let numero = req.body.dados_controle.numero
         let numero_cadastro = req.body.numero_cadastro
-        let observacoes_contato = req.body.dados_controle.observacoes_contato
+        let observacoes_contato = ''
         let primeiro_responsavel_trabalha = req.body.dados_controle.primeiro_responsavel_trabalha
         let projeto_nome = req.body.projeto_nome
         let projeto_id = req.body.projeto_id
@@ -108,7 +108,7 @@ module.exports = {
         let entrevistado = req.body.dados_controle.entrevistado
         let numero = req.body.dados_controle.numero
         let cadastrador_id = req.body.dados_controle.cadastrador_id
-        let observacoes_contato = req.body.dados_controle.observacoes_contato
+        let observacoes_contato = ''
         let primeiro_responsavel_trabalha = req.body.dados_controle.primeiro_responsavel_trabalha
 
         let segundo_responsavel_trabalha = req.body.dados_controle.segundo_responsavel_trabalha
