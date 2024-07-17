@@ -113,7 +113,7 @@ module.exports = {
     buscarCadastrosCadastrador: (nome_tabela, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
-            db.query('SELECT * FROM ' + nome_tabela + ' WHERE  numero_cadastro=? AND cadastrador_id=?', [numero_cadastro, null], (error, results) => {
+            db.query('SELECT * FROM ' + nome_tabela + ' WHERE  numero_cadastro=?', [numero_cadastro], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 if (results.length > 0) {
                     aceito(results);
