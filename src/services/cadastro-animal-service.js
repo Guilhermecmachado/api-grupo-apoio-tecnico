@@ -26,7 +26,7 @@ module.exports = {
     },
     atualizar: (id, animal_moradia, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_animal_moradia SET animal_moradia = ?, cadastrador_id=?,data_alteracao = ? WHERE id = ?',
+            db.query('UPDATE gta_cadastro_animal_moradia SET animal_moradia = ?, cadastrador_id = ?,data_alteracao = ? WHERE id = ?',
                 [animal_moradia, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
