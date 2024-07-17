@@ -26,7 +26,7 @@ module.exports = {
     },
     atualizar: (id, maria_penha, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_violencia_maria SET  maria_penha=?, cadastrador_id,data_alteracao=? WHERE id = ?',
+            db.query('UPDATE gta_cadastro_violencia_maria SET  maria_penha=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
                 [maria_penha, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }

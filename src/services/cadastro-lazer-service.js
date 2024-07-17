@@ -26,7 +26,7 @@ module.exports = {
     },
     atualizar: (id, atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_lazer SET  atividade =?, tipo_atividade=?, tipo_atividade2=?, tipo_atividade3=?, tipo_atividade4=?, cadastrador_id,data_alteracao=? WHERE id = ?',
+            db.query('UPDATE gta_cadastro_lazer SET  atividade =?, tipo_atividade=?, tipo_atividade2=?, tipo_atividade3=?, tipo_atividade4=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
                 [atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }

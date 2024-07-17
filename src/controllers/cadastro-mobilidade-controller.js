@@ -121,6 +121,7 @@ module.exports = {
         let possui_veiculo_caminhao_suv = req.body.dados_mobilidade.possui_veiculo_caminhonete_suv
         let regiao_trabalho = req.body.dados_mobilidade.regiao_trabalho
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
+        let cadastrador_id = req.body.dados_mobilidade.cadastrador_id
         let valor_carro
         let valor_moto
         let valor_caminhao
