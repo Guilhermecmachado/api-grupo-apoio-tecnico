@@ -62,4 +62,19 @@ module.exports = {
             });
         });
     },
+
+
+    buscarUmUiid: (uuid) => {
+        return new Promise((aceito, rejeitado) => {
+
+            db.query('SELECT * FROM gta_cadastro_demografico_socio_economico  WHERE uuid = ? ', [uuid], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                if (results.length > 0) {
+                    aceito(results);
+                } else {
+                    aceito(false);
+                }
+            });
+        });
+    },
 }
