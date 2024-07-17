@@ -70,7 +70,7 @@ module.exports = {
         if (day < 10) day = '0' + day;
         if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
-
+        console.log('diga-me oq aconteceeeeeeeeee')
         let id = req.params.id;
         let animal_moradia = req.body.dados_animais.animal_moradia
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
@@ -84,7 +84,7 @@ module.exports = {
 
 
             };
-            console.log(json.result, 'update')
+            console.log(json.result, 'diga-me oq aconteceeeeeeeeeee')
         } else {
             json.error = 'Os campos não foram enviados';
         }
