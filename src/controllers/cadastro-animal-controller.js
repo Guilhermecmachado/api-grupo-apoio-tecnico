@@ -77,7 +77,7 @@ module.exports = {
         let cadastrador_id = req.body.dados_animais.cadastrador_id
         db_codigo = parseInt(id)
 
-        if (id && animal_moradia && data_alteracao) {
+        if (id) {
             await service.atualizar(db_codigo, animal_moradia, cadastrador_id, data_alteracao);
             json.result = {
                 id,
