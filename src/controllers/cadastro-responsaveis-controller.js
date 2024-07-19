@@ -144,7 +144,7 @@ module.exports = {
                 beneficio_prestacao: model[i].beneficio_prestacao,
                 programa_bolsa_familia: model[i].programa_bolsa_familia,
                 menor_18: model[i].menor_18,
-                nome_tutor: model[i].menor_18,
+                nome_tutor: model[i].nome_tutor,
                 cpf_tutor: model[i].cpf_tutor
 
             });
