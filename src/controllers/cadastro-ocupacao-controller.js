@@ -45,9 +45,21 @@ module.exports = {
         let id_cobertura = req.body.dados_moradia.id_cobertura
         let cadastrador_id = req.body.dados_moradia.cadastrador_id
 
+        let calamidade = req.body.dados_moradia.calamidade
+        let coabitacao = req.body.dados_moradia.coabitacao
+        let comunidade = req.body.dados_moradia.comunidade
+        let comunidadeQuilombola = req.body.dados_moradia.comunidadeQuilombola
+        let especificar2 = req.body.dados_moradia.especificar2
+        let especicar = req.body.dados_moradia.especicar
+        let familiaOriunda = req.body.dados_moradia.familiaOriunda
+        let familiaPreviniente = req.body.dados_moradia.familiaPreviniente
+        let moradiaRisco = req.body.dados_moradia.moradiaRisco
+        let ocorrencia = req.body.dados_moradia.ocorrencia
+        let voluntario = req.body.dados_moradia.voluntario
+
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especicar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -81,7 +93,18 @@ module.exports = {
                 laje: model[i].laje,
                 cobertura: model[i].cobertura,
                 adequacao_imovel: model[i].adequacao_imovel,
-                qual: model[i].qual
+                qual: model[i].qual,
+                calamidade: model[i].calamidade,
+                coabitacao: model[i].coabitacao,
+                comunidade: model[i].comunidade,
+                comunidadeQuilombola: model[i].comunidadeQuilombola,
+                especificar2: model[i].especificar2,
+                especicar: model[i].especicar,
+                familiaOriunda: model[i].familiaOriunda,
+                familiaPreviniente: model[i].familiaPreviniente,
+                moradiaRisco: model[i].moradiaRisco,
+                ocorrencia: model[i].ocorrencia,
+                voluntario: model[i].voluntario,
 
             });
         }
@@ -127,6 +150,17 @@ module.exports = {
         let id_laje = req.body.dados_moradia.id_laje
         let id_cobertura = req.body.dados_moradia.id_cobertura
         let cadastrador_id = req.body.dados_moradia.cadastrador_id
+        let calamidade = req.body.dados_moradia.calamidade
+        let coabitacao = req.body.dados_moradia.coabitacao
+        let comunidade = req.body.dados_moradia.comunidade
+        let comunidadeQuilombola = req.body.dados_moradia.comunidadeQuilombola
+        let especificar2 = req.body.dados_moradia.especificar2
+        let especicar = req.body.dados_moradia.especicar
+        let familiaOriunda = req.body.dados_moradia.familiaOriunda
+        let familiaPreviniente = req.body.dados_moradia.familiaPreviniente
+        let moradiaRisco = req.body.dados_moradia.moradiaRisco
+        let ocorrencia = req.body.dados_moradia.ocorrencia
+        let voluntario = req.body.dados_moradia.voluntario
         db_codigo = parseInt(id)
 
         if (id) {
