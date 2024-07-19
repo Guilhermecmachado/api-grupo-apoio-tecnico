@@ -21,6 +21,7 @@ module.exports = {
         let agricultura_residencia = req.body.dados_moradia.agricultura_residencia
         let agricultura_residencia_obs = req.body.dados_moradia.agricultura_residencia_obs
         let aluguel_social = req.body.dados_moradia.aluguel_social
+        let qual = req.body.dados_moradia.qual
         let atividade_economica = req.body.dados_moradia.atividade_economica
         let atividade_economica_obs = req.body.dados_moradia.atividade_economica_obs
         let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
@@ -46,7 +47,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -80,6 +81,7 @@ module.exports = {
                 laje: model[i].laje,
                 cobertura: model[i].cobertura,
                 adequacao_imovel: model[i].adequacao_imovel,
+                qual: model[i].qual
 
             });
         }
@@ -105,6 +107,7 @@ module.exports = {
         let agricultura_residencia = req.body.dados_moradia.agricultura_residencia
         let agricultura_residencia_obs = req.body.dados_moradia.agricultura_residencia_obs
         let aluguel_social = req.body.dados_moradia.aluguel_social
+        let qual = req.body.dados_moradia.qual
         let atividade_economica = req.body.dados_moradia.atividade_economica
         let atividade_economica_obs = req.body.dados_moradia.atividade_economica_obs
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
@@ -115,6 +118,7 @@ module.exports = {
         let laje = req.body.dados_moradia.laje
         let cobertura = req.body.dados_moradia.cobertura
         let adequacao_imovel = req.body.dados_moradia.adequacao_imovel
+
         let id_moradia = req.body.dados_moradia.id_moradia
         let id_situacao = req.body.dados_moradia.id_situacao
         let id_aluguel = req.body.dados_moradia.id_aluguel
