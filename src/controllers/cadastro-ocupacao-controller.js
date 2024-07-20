@@ -164,7 +164,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 
