@@ -56,10 +56,10 @@ module.exports = {
         let moradiaRisco = req.body.dados_moradia.moradia_risco
         let ocorrencia = req.body.dados_moradia.ocorrencia
         let voluntario = req.body.dados_moradia.voluntario
-
+        let deficiente = req.body.dados_moradia.deficiente
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, cadastrador_id);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, deficiente, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -105,6 +105,7 @@ module.exports = {
                 moradia_risco: model[i].moradia_risco,
                 ocorrencia: model[i].ocorrencia,
                 voluntario: model[i].voluntario,
+                deficiente: model[i].deficiente
 
             });
         }
@@ -161,10 +162,11 @@ module.exports = {
         let moradiaRisco = req.body.dados_moradia.moradia_risco
         let ocorrencia = req.body.dados_moradia.ocorrencia
         let voluntario = req.body.dados_moradia.voluntario
+        let deficiente = req.body.dados_moradia.deficiente
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, deficiente, cadastrador_id, data_alteracao);
             json.result = {
                 id,
 
