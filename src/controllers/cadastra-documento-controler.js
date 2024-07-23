@@ -35,6 +35,7 @@ module.exports = {
         let documento10 = req.body.dados_caixa.documento10
         let documento11 = req.body.dados_caixa.documento11
         let cadastrador_id = req.body.dados_caixa.cadastrador_id
+        let status_online = req.body.dados_caixa.status_online
         let valor_documento1
         let valor_documento2
         let valor_documento3
@@ -107,7 +108,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11, projeto_id, projeto_nome, numero_cadastro, cadastrador_id);
+                inserir(data_criacao, data_alteracao, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11, projeto_id, projeto_nome, numero_cadastro, status_online, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -137,6 +138,7 @@ module.exports = {
                 numero_cadastro: model[i].numero_cadastro,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
+                status_online: model[i].status_online
 
             });
         }
@@ -173,6 +175,7 @@ module.exports = {
         let documento10 = req.body.dados_caixa.documento10
         let documento11 = req.body.dados_caixa.documento11
         let cadastrador_id = req.body.dados_caixa.cadastrador_id
+        let status_online = req.body.dados_caixa.status_online
         let valor_documento1
         let valor_documento2
         let valor_documento3
@@ -249,7 +252,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 

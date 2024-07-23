@@ -27,11 +27,13 @@ module.exports = {
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
         let cadastrador_id = req.body.dados_maria.cadastrador_id
+        let status_online = req.body.dados_maria.status_online
+
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id);
+                inserir(maria_penha, data_criacao, data_alteracao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id, status_online);
             json.result = {
                 id: model,
             };
@@ -53,6 +55,7 @@ module.exports = {
                 maria: model[i].maria_penha,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
+                status_online: model[i].status_online
 
             });
         }

@@ -54,11 +54,10 @@ module.exports = {
         let cancer = req.body.cancer
         let autismo = req.body.autismo
         let gestante = req.body.gestante
-
-
+        let status_online = req.body.status_online
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid, cancer, autismo, gestante, cadastrador_id);
+                inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid, cancer, autismo, gestante, status_online, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -105,6 +104,7 @@ module.exports = {
                 cancer: model[i].cancer,
                 autismo: model[i].autismo,
                 gestante: model[i].gestante,
+                status_online: model[i].status_online
                 // let id_genero = model[i].id_genero
                 // let id_posicao = req.body.id_posicao
                 // let id_situacao = req.body.id_situacao
@@ -158,6 +158,7 @@ module.exports = {
         let autismo = req.body.autismo
         let gestante = req.body.gestante
         let cadastrador_id = req.body.cadastrador_id
+        let status_online = req.body.status_online
         let id_genero = req.body.id_genero
         let id_posicao = req.body.id_posicao
         let id_situacao = req.body.id_situacao
@@ -171,7 +172,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, cancer, autismo, gestante, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, beneficios, beneficios_valor, curso_frequenta, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, renda_principal, renda_principal_valor, situacao_ocupacional, cid, cancer, autismo, gestante, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 

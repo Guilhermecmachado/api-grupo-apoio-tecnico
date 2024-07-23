@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome, cadastrador_id) => {
+    inserir: (atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome, cadastrador_id, status_online) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_lazer (atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                [atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome, cadastrador_id],
+            db.query('INSERT INTO gta_cadastro_lazer (atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                [atividade, data_alteracao, data_criacao, numero_cadastro, tipo_atividade, tipo_atividade2, tipo_atividade4, tipo_atividade3, projeto_id, projeto_nome, cadastrador_id, status_online],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, data_alteracao) => {
+    atualizar: (id, atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, status_online, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_lazer SET  atividade =?, tipo_atividade=?, tipo_atividade2=?, tipo_atividade3=?, tipo_atividade4=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
-                [atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, data_alteracao, id],
+            db.query('UPDATE gta_cadastro_lazer SET  atividade =?, tipo_atividade=?, tipo_atividade2=?, tipo_atividade3=?, tipo_atividade4=?, cadastrador_id=?,status_online=?,data_alteracao=? WHERE id = ?',
+                [atividade, tipo_atividade, tipo_atividade2, tipo_atividade3, tipo_atividade4, cadastrador_id, status_online, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

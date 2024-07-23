@@ -3,11 +3,11 @@ const db = require('../../db');
 //CADASTRO ESTÁ OK
 
 module.exports = {
-    inserir: (cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) => {
+    inserir: (cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, status_online) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastros (cadastrador_id, cadastrador_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) VALUES (?,?,?,?,?,?,?,?,?)',
-                [cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status],
+            db.query('INSERT INTO gta_cadastros (cadastrador_id, cadastrador_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status,status_online) VALUES (?,?,?,?,?,?,?,?,?,?)',
+                [cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, status_online],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -27,10 +27,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status) => {
+    atualizar: (id, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, status_online) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastros SET cadastrador_id=?, cadastrador_nome=?, data_alteracao=?, numero_cadastro=?, primeiro_responsavel=?, projeto_codigo=?, projeto_id=?, projeto_nome=?, status=? WHERE id = ?',
-                [cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, id],
+            db.query('UPDATE gta_cadastros SET cadastrador_id=?, cadastrador_nome=?, data_alteracao=?, numero_cadastro=?, primeiro_responsavel=?, projeto_codigo=?, projeto_id=?, projeto_nome=?, status=?,status_online=? WHERE id = ?',
+                [cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, status_online, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

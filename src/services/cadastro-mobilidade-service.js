@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id) => {
+    inserir: (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id, status_online) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_mobilidade_urbana (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhonete_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id],
+            db.query('INSERT INTO gta_cadastro_mobilidade_urbana (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhonete_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
+                [data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id, status_online],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, data_alteracao) => {
+    atualizar: (id, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, status_online, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_mobilidade_urbana SET possui_veiculo_carro=?, possui_veiculo_caminhao=?, possui_veiculo_caminhonete_suv=?, possui_veiculo_moto=?,forma_transporte=?, forma_transporte_outro=?, regiao_trabalho=?, cadastrador_id=?,data_alteracao=? WHERE id = ?',
-                [valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, data_alteracao, id],
+            db.query('UPDATE gta_cadastro_mobilidade_urbana SET possui_veiculo_carro=?, possui_veiculo_caminhao=?, possui_veiculo_caminhonete_suv=?, possui_veiculo_moto=?,forma_transporte=?, forma_transporte_outro=?, regiao_trabalho=?, cadastrador_id=?,status_online=?,data_alteracao=? WHERE id = ?',
+                [valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, data_alteracao, status_online, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

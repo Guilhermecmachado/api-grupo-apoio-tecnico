@@ -37,6 +37,7 @@ module.exports = {
         let id_transporte = req.body.dados_mobilidade.id_transporte
         let id_regiao = req.body.dados_mobilidade.id_regiao
         let cadastrador_id = req.body.dados_mobilidade.cadastrador_id
+        let status_online = req.body.dados_mobilidade.status_online
 
 
         if (possui_veiculo_carro == true) {
@@ -63,7 +64,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, valor_caminhao, valor_caminhao_suv, valor_carro, valor_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id);
+                inserir(data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, valor_caminhao, valor_caminhao_suv, valor_carro, valor_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id, status_online);
             json.result = {
                 id: model,
             };
@@ -91,6 +92,7 @@ module.exports = {
                 possui_veiculo_caminhao: model[i].possui_veiculo_caminhao,
                 possui_veiculo_caminhao_suv: model[i].possui_veiculo_caminhonete_suv,
                 regiao_trabalho: model[i].regiao_trabalho,
+                status_online: model[i].status_online
 
             });
         }
@@ -122,6 +124,8 @@ module.exports = {
         let regiao_trabalho = req.body.dados_mobilidade.regiao_trabalho
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let cadastrador_id = req.body.dados_mobilidade.cadastrador_id
+        let status_online = req.body.dados_mobilidade.status_online
+
         let valor_carro
         let valor_moto
         let valor_caminhao
@@ -153,7 +157,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, valor_carro, valor_caminhao, valor_caminhao_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 

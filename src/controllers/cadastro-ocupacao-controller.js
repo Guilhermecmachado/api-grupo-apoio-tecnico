@@ -36,6 +36,8 @@ module.exports = {
         let laje = req.body.dados_moradia.laje
         let cobertura = req.body.dados_moradia.cobertura
         let adequacao_imovel = req.body.dados_moradia.adequacao_imovel
+        let status_online = req.body.dados_moradia.status_online
+
         let id_moradia = req.body.dados_moradia.id_moradia
         let id_situacao = req.body.dados_moradia.id_situacao
         let id_aluguel = req.body.dados_moradia.id_aluguel
@@ -59,7 +61,7 @@ module.exports = {
         let deficiente = req.body.dados_moradia.deficiente
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, deficiente, cadastrador_id);
+                inserir(agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, data_criacao, data_alteracao, numero_cadastro, situacao, tipo_moradia, projeto_id, projeto_nome, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, deficiente, cadastrador_id, status_online);
             json.result = {
                 id: model,
             };
@@ -105,7 +107,8 @@ module.exports = {
                 moradia_risco: model[i].moradia_risco,
                 ocorrencia: model[i].ocorrencia,
                 voluntario: model[i].voluntario,
-                deficiente: model[i].deficiente
+                deficiente: model[i].deficiente,
+                status_online: model[i].status_online
 
             });
         }
@@ -163,10 +166,12 @@ module.exports = {
         let ocorrencia = req.body.dados_moradia.ocorrencia
         let voluntario = req.body.dados_moradia.voluntario
         let deficiente = req.body.dados_moradia.deficiente
+        let status_online = req.body.dados_moradia.status_online
+
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, deficiente, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, agricultura_residencia, agricultura_residencia_obs, aluguel_social, qual, atividade_economica, atividade_economica_obs, situacao, tipo_moradia, material_parede, revestimento, laje, cobertura, adequacao_imovel, calamidade, coabitacao, comunidade, comunidadeQuilombola, especificar2, especificar, familiaOriunda, familiaPreviniente, moradiaRisco, ocorrencia, voluntario, deficiente, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 

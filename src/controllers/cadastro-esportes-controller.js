@@ -37,6 +37,8 @@ module.exports = {
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
         let cadastrador_id = req.body.dados_comunitario.cadastrador_id
+        let status_online = req.body.dados_comunitario.status_online
+
         if (associado_bairro == true) {
             valor_bairro = 1
         } else {
@@ -78,7 +80,7 @@ module.exports = {
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(valor_bairro, data_criacao, data_alteracao, valor_entidade_recriativa, valor_entidade_religiosa, especifique, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, numero_cadastro, projeto_id, projeto_nome, cadastrador_id);
+                inserir(valor_bairro, data_criacao, data_alteracao, valor_entidade_recriativa, valor_entidade_religiosa, especifique, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, numero_cadastro, projeto_id, projeto_nome, cadastrador_id, status_online);
             json.result = {
                 id: model,
             };
@@ -107,6 +109,7 @@ module.exports = {
                 outros: model[i].outros,
                 partidos_politicos: model[i].partidos_politicos,
                 sindicatos: model[i].sindicatos,
+                status_online: model[i].status_online
 
 
             });
@@ -146,6 +149,8 @@ module.exports = {
         let partidos_politicos = req.body.dados_comunitario.partidos_politica
         let sindicatos = req.body.dados_comunitario.sindicatos
         let cadastrador_id = req.body.dados_comunitario.cadastrador_id
+        let status_online = req.body.dados_comunitario.status_online
+
 
         if (associado_bairro == true) {
             valor_bairro = 1
@@ -189,7 +194,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, valor_bairro, valor_entidade_recriativa, valor_entidade_religiosa, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, especifique, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, valor_bairro, valor_entidade_recriativa, valor_entidade_religiosa, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, especifique, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 

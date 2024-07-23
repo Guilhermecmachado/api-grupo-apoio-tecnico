@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, cadastrador_id) => {
+    inserir: (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, cadastrador_id, status_online) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_visitas (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status,cadastrador_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                [cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, cadastrador_id],
+            db.query('INSERT INTO gta_cadastro_visitas (cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                [cadastrador, data_criacao, data, data_alteracao, numero_cadastro, uuid, hora, projeto_id, projeto_nome, status, cadastrador_id, status_online],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -24,10 +24,10 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, cadastrador, data, hora, status, id_visita, cadastrador_id, data_alteraca) => {
+    atualizar: (id, cadastrador, data, hora, status, id_visita, cadastrador_id, status_online, data_alteraca) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_visitas SET cadastrador = ?,data=? ,hora=?,status=?,id_visita=?,cadastrador_id=?,data_alteracao = ? WHERE id = ?',
-                [cadastrador, data, hora, status, id_visita, cadastrador_id, data_alteraca, id],
+            db.query('UPDATE gta_cadastro_visitas SET cadastrador = ?,data=? ,hora=?,status=?,id_visita=?,cadastrador_id=?,status_online=?,data_alteracao = ? WHERE id = ?',
+                [cadastrador, data, hora, status, id_visita, cadastrador_id, status_online, data_alteraca, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

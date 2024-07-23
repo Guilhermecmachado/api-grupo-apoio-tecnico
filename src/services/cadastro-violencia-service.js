@@ -3,11 +3,11 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, ano, projeto_id, projeto_nome, cadastrador_id) => {
+    inserir: (motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, ano, projeto_id, projeto_nome, cadastrador_id, status_online) => {
         return new Promise((accept, reject) => {
 
-            db.query('INSERT INTO gta_cadastro_violencia (motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, ano, projeto_id, projeto_nome,cadastrador_id) VALUES (?,?,?,?,?,?,?,?,?,?,?)',
-                [motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, ano, projeto_id, projeto_nome, cadastrador_id],
+            db.query('INSERT INTO gta_cadastro_violencia (motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, ano, projeto_id, projeto_nome,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)',
+                [motivo, motivo_outros, idade, data_criacao, data_alteracao, numero_cadastro, uuid, ano, projeto_id, projeto_nome, cadastrador_id, status_online],
                 (error, results) => {
                     if (error) { reject(error); return; }
                     accept(results.insertId); //insertId
@@ -39,10 +39,10 @@ module.exports = {
         });
     },
 
-    atualizar: (id, motivo, motivo_outros, idade, ano, cadastrador_id, data_alteracao) => {
+    atualizar: (id, motivo, motivo_outros, idade, ano, cadastrador_id, status_online, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_violencia SET motivo = ?,motivo_outros=?,idade=?,ano=?, cadastrador_id=?,data_alteracao = ? WHERE id = ?',
-                [motivo, motivo_outros, idade, ano, cadastrador_id, data_alteracao, id],
+            db.query('UPDATE gta_cadastro_violencia SET motivo = ?,motivo_outros=?,idade=?,ano=?, cadastrador_id=?,status_online=?,data_alteracao = ? WHERE id = ?',
+                [motivo, motivo_outros, idade, ano, cadastrador_id, status_online, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);

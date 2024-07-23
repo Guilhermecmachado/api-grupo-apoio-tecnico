@@ -27,9 +27,11 @@ module.exports = {
         let projeto_nome = req.body.projeto_nome
         let id_sustentabilidade = req.body.id_sustentabilidade
         let cadastrador_id = req.body.dados_sustentabilidade.cadastrador_id
+        let status_online = req.body.dados_sustentabilidade.status_online
+
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id);
+                inserir(data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id, status_online);
             json.result = {
                 id: model,
             };
@@ -53,6 +55,7 @@ module.exports = {
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
                 id_sustentabilidade: model[i].id_sustentabilidade,
+                status_online: model[i].status_online
             });
         }
         res.json(json);
@@ -78,13 +81,14 @@ module.exports = {
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let separacao_material_reciclavel = req.body.dados_sustentabilidade.separacao_material_reciclavel
         let cadastrador_id = req.body.dados_sustentabilidade.cadastrador_id
+        let status_online = req.body.dados_sustentabilidade.status_online
 
 
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, forma_coleta, separacao_material_reciclavel, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, forma_coleta, separacao_material_reciclavel, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 

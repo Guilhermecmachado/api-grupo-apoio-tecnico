@@ -25,11 +25,12 @@ module.exports = {
         let cadastrador_id = req.body.dados_animais.cadastrador_id
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
+        let status_online = req.body.dados_animais.status_online
 
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, cadastrador_id);
+                inserir(animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, status_online, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -49,7 +50,8 @@ module.exports = {
                 animal_moradia: model[i].animal_moradia,
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
-                numero_cadastro: model[i].numero_cadastro
+                numero_cadastro: model[i].numero_cadastro,
+                status_online: model[i].status_online
 
             });
         }
@@ -75,10 +77,11 @@ module.exports = {
         let animal_moradia = req.body.dados_animais.animal_moradia
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let cadastrador_id = req.body.dados_animais.cadastrador_id
+        let status_online = req.body.dados_animais.status_online
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, animal_moradia, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, animal_moradia, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 
