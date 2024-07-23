@@ -82,11 +82,12 @@ module.exports = {
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let maria_penha = req.body.dados_maria.maria_penha
         let cadastrador_id = req.body.dados_maria.cadastrador_id
+        let status_online = req.body.dados_maria.status_online
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, maria_penha, cadastrador_id, data_alteracao);
+            await service.atualizar(db_codigo, maria_penha, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 
