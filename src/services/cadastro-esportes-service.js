@@ -27,7 +27,7 @@ module.exports = {
     },
     atualizar: (id, valor_bairro, valor_entidade_recriativa, valor_entidade_religiosa, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, especifique, cadastrador_id, status_online, data_alteracao) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_esporte_organizacao_comunitaria SET associacao_bairro=?,  entidade_recreativas=?, entidade_relegiosa=?, movimento_luta_moradia=?, outros=?, partidos_politica=?, sindicatos=?, especifique=?, cadastrador_id=?,status_online,data_alteracao=? WHERE id = ?',
+            db.query('UPDATE gta_cadastro_esporte_organizacao_comunitaria SET associacao_bairro=?,  entidade_recreativas=?, entidade_relegiosa=?, movimento_luta_moradia=?, outros=?, partidos_politica=?, sindicatos=?, especifique=?, cadastrador_id=?,status_online=?,data_alteracao=? WHERE id = ?',
                 [valor_bairro, valor_entidade_recriativa, valor_entidade_religiosa, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, especifique, cadastrador_id, status_online, data_alteracao, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }

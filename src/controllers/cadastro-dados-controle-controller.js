@@ -115,7 +115,7 @@ module.exports = {
         let segundo_responsavel_trabalha = req.body.dados_controle.segundo_responsavel_trabalha
 
         let uf = req.body.dados_controle.uf
-        let status_online = req.body.dados_caixa.status_online
+        let status_online = req.body.dados_controle.status_online
 
 
         db_codigo = parseInt(id)

@@ -90,7 +90,7 @@ module.exports = {
         let tipo_atividade3 = req.body.dados_lazer.tipo_atividade3
         let tipo_atividade4 = req.body.dados_lazer.tipo_atividade4
         let cadastrador_id = req.body.dados_lazer.cadastrador_id
-        let status_online = req.body.dados_despesas.status_online
+        let status_online = req.body.dados_lazer.status_online
 
 
         db_codigo = parseInt(id)
