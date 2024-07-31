@@ -35,47 +35,47 @@ module.exports = {
         let status_online = req.body.dados_despesas.status_online
 
 
-        if (!despesas_agua.includes(',') || !despesas_agua.includes('.')) {
+        if (despesas_agua.includes(',') || !despesas_agua.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_agua = despesas_agua.replace(',', '.');
             parseFloat(despesas_agua);
         }
-        if (!despesas_alimentacao.includes(',') || !despesas_alimentacao.includes('.')) {
+        if (despesas_alimentacao.includes(',') || !despesas_alimentacao.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_agua = despesas_alimentacao.replace(',', '.');
             parseFloat(despesas_agua);
         }
 
-        if (!despesas_aluguel.includes(',') || !despesas_aluguel.includes('.')) {
+        if (despesas_aluguel.includes(',') || !despesas_aluguel.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_aluguel = despesas_aluguel.replace(',', '.');
             parseFloat(despesas_aluguel);
         }
 
-        if (!despesas_gas.includes(',') || !despesas_gas.includes('.')) {
+        if (despesas_gas.includes(',') || !despesas_gas.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_gas = despesas_gas.replace(',', '.');
             parseFloat(despesas_gas);
         }
 
-        if (!despesas_luz.includes(',') || despesas_luz.includes('.')) {
+        if (despesas_luz.includes(',') || despesas_luz.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_luz = despesas_luz.replace(',', '.');
             parseFloat(despesas_luz);
         }
 
-        if (!despesas_saude.includes(',') || !despesas_saude.includes('.')) {
+        if (despesas_saude.includes(',') || !despesas_saude.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_saude = despesas_saude.replace(',', '.');
             parseFloat(despesas_saude);
         }
 
-        if (!despesas_transporte.includes(',') || !despesas_transporte.includes('.')) {
+        if (despesas_transporte.includes(',') || !despesas_transporte.includes('.')) {
             // Substitui a vírgula por ponto
             despesas_transporte = despesas_transporte.replace(',', '.');
             parseFloat(despesas_transporte);
         }
-        if (!valor_aluguel_social.includes(',') || !valor_aluguel_social.includes('.')) {
+        if (valor_aluguel_social.includes(',') || !valor_aluguel_social.includes('.')) {
             // Substitui a vírgula por ponto
             valor_aluguel_social = valor_aluguel_social.replace(',', '.');
             parseFloat(valor_aluguel_social);
