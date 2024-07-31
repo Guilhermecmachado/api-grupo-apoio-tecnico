@@ -55,6 +55,24 @@ module.exports = {
         let autismo = req.body.autismo
         let gestante = req.body.gestante
         let status_online = req.body.status_online
+
+        if (renda_principal_valor.includes(',') || !renda_principal_valor.includes('.')) {
+            // Substitui a vírgula por ponto
+            renda_principal_valor = renda_principal_valor.replace(',', '.');
+            parseFloat(renda_principal_valor);
+        }
+        if (outra_fonte_renda_valor.includes(',') || !outra_fonte_renda_valor.includes('.')) {
+            // Substitui a vírgula por ponto
+            outra_fonte_renda_valor = outra_fonte_renda_valor.replace(',', '.');
+            parseFloat(outra_fonte_renda_valor);
+        }
+
+
+
+
+
+
+
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
                 inserir(beneficios, beneficios_valor, curso_frequenta, data_alteracao, data_criacao, estado_civil, estudou_ate, frequenta_escola, genero, grupo_etnico, idade, nome_completo, outra_fonte_renda, outra_fonte_renda_valor, pne, posicao_familiar, profissao, projeto_id, projeto_nome, renda_principal, renda_principal_valor, situacao_ocupacional, uuid, numero_cadastro, cid, cancer, autismo, gestante, status_online, cadastrador_id);
@@ -167,7 +185,16 @@ module.exports = {
         let id_pne = req.body.pne
         let id_curso = req.body.id_curso
 
-
+        if (renda_principal_valor.includes(',') || !renda_principal_valor.includes('.')) {
+            // Substitui a vírgula por ponto
+            renda_principal_valor = renda_principal_valor.replace(',', '.');
+            parseFloat(renda_principal_valor);
+        }
+        if (outra_fonte_renda_valor.includes(',') || !outra_fonte_renda_valor.includes('.')) {
+            // Substitui a vírgula por ponto
+            outra_fonte_renda_valor = outra_fonte_renda_valor.replace(',', '.');
+            parseFloat(outra_fonte_renda_valor);
+        }
 
         db_codigo = parseInt(id)
 
