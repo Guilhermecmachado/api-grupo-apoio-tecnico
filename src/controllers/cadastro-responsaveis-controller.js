@@ -40,15 +40,15 @@ module.exports = {
         let data_admissao = req.body.dados_responsavel.data_admissao;
     
         // Converte valores vazios para '0' e substitui vírgulas por pontos
-        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta || '0';
+        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta.toString() || '0';
         valor_renda_bruta = valor_renda_bruta.replace(',', '.');
         valor_renda_bruta = parseFloat(valor_renda_bruta);
     
-        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida || '0';
+        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida.toString() || '0';
         valor_renda_liquida = valor_renda_liquida.replace(',', '.');
         valor_renda_liquida = parseFloat(valor_renda_liquida);
     
-        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida || '0';
+        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida.toString() || '0';
         valor_renda_declarada_liquida = valor_renda_declarada_liquida.replace(',', '.');
         valor_renda_declarada_liquida = parseFloat(valor_renda_declarada_liquida);
     
@@ -205,13 +205,13 @@ module.exports = {
         let cpf_cnpj_fonte_pegadora = req.body.dados_responsavel.cpf_cnpj_fonte_pegadora
         let data_admissao = req.body.dados_responsavel.data_admissao
         let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta.toString()
-        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida
-        let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda
-        let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada
-        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida
-        let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada
-        let beneficio_prestacao = req.body.dados_responsavel.beneficio_prestacao
-        let programa_bolsa_familia = req.body.dados_responsavel.programa_bolsa_familia
+        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida.toString()
+        let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda.toString()
+        let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada.toString()
+        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida.toString()
+        let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada.toString()
+        let beneficio_prestacao = req.body.dados_responsavel.beneficio_prestacao.toString()
+        let programa_bolsa_familia = req.body.dados_responsavel.programa_bolsa_familia.toString()
         let menor_18 = req.body.dados_responsavel.menor_18
         let nome_tutor = req.body.dados_responsavel.nome_tutor
         let cpf_tutor = req.body.dados_responsavel.cpf_tutor

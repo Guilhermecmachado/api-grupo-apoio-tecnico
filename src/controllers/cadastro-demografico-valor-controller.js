@@ -18,19 +18,19 @@ module.exports = {
         if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
         console.log('insert')
-        let despesas_agua = req.body.dados_despesas.despesa_agua
+        let despesas_agua = req.body.dados_despesas.despesa_agua.toString()
         let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let data_alteracao = req.body.data_alteracao
         let numero_cadastro = req.body.numero_cadastro
-        let despesas_alimentacao = req.body.dados_despesas.despesa_alimentacao
+        let despesas_alimentacao = req.body.dados_despesas.despesa_alimentacao.toString()
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
-        let despesas_aluguel = req.body.dados_despesas.despesa_aluguel
-        let despesas_gas = req.body.dados_despesas.despesa_gas
-        let despesas_luz = req.body.dados_despesas.despesa_luz
-        let despesas_saude = req.body.dados_despesas.despesa_saude
-        let despesas_transporte = req.body.dados_despesas.despesa_transporte
-        let valor_aluguel_social = req.body.dados_despesas.valor_aluguel_social
+        let despesas_aluguel = req.body.dados_despesas.despesa_aluguel.toString()
+        let despesas_gas = req.body.dados_despesas.despesa_gas.toString()
+        let despesas_luz = req.body.dados_despesas.despesa_luz.toString()
+        let despesas_saude = req.body.dados_despesas.despesa_saude.toString()
+        let despesas_transporte = req.body.dados_despesas.despesa_transporte.toString()
+        let valor_aluguel_social = req.body.dados_despesas.valor_aluguel_social.toString()
         let cadastrador_id = req.body.dados_despesas.cadastrador_id
         let status_online = req.body.dados_despesas.status_online
 
