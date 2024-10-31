@@ -37,10 +37,11 @@ module.exports = {
         let cadastrador_id = req.body.dados_controle.cadastrador_id
         let uf = req.body.dados_controle.uf
         let status_online = req.body.dados_controle.status_online
+        let data_entrevista = req.body.dados_controle.data_entrevista
 
         if (data_criacao && numero_cadastro && projeto_id && projeto_nome) {
             let model = await service.
-                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf, status_online, cadastrador_id);
+                inserir(cep, cidade, complemento, data_alteracao, data_criacao, endereco, entrevistado, numero, numero_cadastro, observacoes_contato, primeiro_responsavel_trabalha, projeto_id, projeto_nome, segundo_responsavel_trabalha, uf,data_entrevista, status_online, cadastrador_id);
             json.result = {
                 id: model,
             };
@@ -116,12 +117,13 @@ module.exports = {
 
         let uf = req.body.dados_controle.uf
         let status_online = req.body.dados_controle.status_online
+        let data_entrevista = req.body.dados_controle.data_entrevista
 
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf, data_criacao, cadastrador_id, status_online, data_alteracao);
+            await service.atualizar(db_codigo, cep, cidade, complemento, endereco, entrevistado, numero, primeiro_responsavel_trabalha, segundo_responsavel_trabalha, uf,data_entrevista, data_criacao, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 
