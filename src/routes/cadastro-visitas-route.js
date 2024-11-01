@@ -13,6 +13,7 @@ router.get('/:id/:numero_cadastro', controller.buscarUm)
 router.get('/:uuid', controller.buscarUmUiid)
 router.get('/form/teste/rota/:id', controller.buscarUmForm)
 router.post('/:id', controller.atualizar)
+router.post('/delete/:id', controller.deletar)
 
 
 module.exports = router

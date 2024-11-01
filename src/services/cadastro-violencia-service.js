@@ -50,6 +50,17 @@ module.exports = {
             );
         });
     },
+
+    deletar: (id) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('DELETE FROM gta_cadastro_violencia WHERE id = ?', [id], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+
+    
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
