@@ -112,6 +112,7 @@ module.exports = {
 
     deletar: async (req, res) => {
         console.log('deleta')  
+        let json = { error: '', result: {} };
 
         let id = req.params.id;
      
