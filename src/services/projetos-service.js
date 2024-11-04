@@ -24,6 +24,15 @@ module.exports = {
             });
         });
     },
+
+    buscarTodosUsuario: (id) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('select * from gta_projetos_usuarios where usuario_id=?',[id], (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
     atualizar: (id, entidade_nome, nome_projeto, codigo, programa_nome, status) => {
         return new Promise((aceito, rejeitado) => {
             db.query('UPDATE gta_projetos SET entidade_nome = ?, nome_projeto = ?, codigo = ? ,programa_nome = ?,  status = ? WHERE id = ?',

@@ -74,7 +74,7 @@ module.exports = {
 
     buscarTodosPermissaoUsuario: (usuario_id) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('select * from gta_usuarios_permissao', [usuario_id], (error, results) => {
+            db.query('select * from gta_usuarios_permissao WHERE usuario_id =?', [usuario_id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });

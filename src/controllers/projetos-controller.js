@@ -46,6 +46,24 @@ module.exports = {
         res.json(json);
     },
 
+    buscarTodosUsuario: async (req, res) => {
+        let json = { error: '', result: [] };
+        let id=req.params.id
+        let model = await service.buscarTodosUsuario(id);
+        for (let i in model) {
+            json.result.push({
+                id: model[i].id,
+                nome_projeto: model[i].projeto_nome,
+                projeto_id: model[i].projeto_id,
+                codigo: model[i].projeto_codigo,
+                usuario_id: model[i].usuario_id,
+
+
+            });
+        }
+        res.json(json);
+    },
+
     atualizar: async (req, res) => {
         console.log('atualiza')
         let json = { error: '', result: {} };

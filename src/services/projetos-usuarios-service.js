@@ -18,7 +18,7 @@ module.exports = {
 
     buscarTodos: (usuario_id) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('SELECT * FROM gta_projetos_usuarios  ', (error, results) => {
+            db.query('SELECT * FROM gta_projetos_usuarios where usuario_id=?',[usuario_id], (error, results) => {
                 if (error) { rejeitado(error); return; }
                 aceito(results);
             });
