@@ -106,6 +106,32 @@ module.exports = {
         }
         res.json(json);
     },
+    atualizarResponsavel: async (req, res) => {
+        console.log('atualiza')
+      
+       
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+     
+        let primeiro_responsavel = req.body.primeiro_responsavel
+       
+
+
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.atualizarResponsavel(db_codigo, primeiro_responsavel);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
+
 
     buscarUmCadastro: async (req, res) => {
         let json = { error: '', result: {} };

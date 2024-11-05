@@ -38,6 +38,19 @@ module.exports = {
             );
         });
     },
+
+    atualizarResponsavel: (id,  primeiro_responsavel) => {
+        return new Promise((aceito, rejeitado) => {
+            db.query('UPDATE gta_cadastros SET  primeiro_responsavel=? WHERE id = ?',
+                [ primeiro_responsavel, id],
+                (error, results) => {
+                    if (error) { rejeitado(error); return; }
+                    aceito(results);
+                }
+            );
+        });
+    }, 
+
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {
 
