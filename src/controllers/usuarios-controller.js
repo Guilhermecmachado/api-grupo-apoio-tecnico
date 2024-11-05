@@ -39,13 +39,14 @@ module.exports = {
         let rota = req.body.rota
         let usuario_id = req.body.usuario_id
         let permissao = req.body.permissao
+        let usuario_nome = req.body.usuario_nome
 
 
 
 
         if (menu_id && rota && usuario_id && permissao) {
             let model = await service.
-                inserirPermissaoUsuario(menu_id, rota, usuario_id, permissao);
+                inserirPermissaoUsuario(menu_id, rota, usuario_id, permissao,usuario_nome);
             json.result = {
                 id: model,
             };

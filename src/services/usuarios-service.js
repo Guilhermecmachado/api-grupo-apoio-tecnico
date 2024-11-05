@@ -82,10 +82,10 @@ module.exports = {
     },
 
 
-    inserirPermissaoUsuario: (menu_id, rota, usuario_id, permissao) => {
+    inserirPermissaoUsuario: (menu_id, rota, usuario_id, permissao,usuario_nome) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('INSERT INTO  gta_usuarios_permissao  (menu_id, rota, usuario_id, permissao) VALUES (?,?,?,?)',
-                [menu_id, rota, usuario_id, permissao],
+            db.query('INSERT INTO  gta_usuarios_permissao  (menu_id, rota, usuario_id, permissao,usuario_nome) VALUES (?,?,?,?,?)',
+                [menu_id, rota, usuario_id, permissao,usuario_nome],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results.insertId);
