@@ -92,7 +92,6 @@ module.exports = {
         let status = req.body.status
         let status_online = req.body.status_online
 
-
         db_codigo = parseInt(id)
 
         if (id) {
@@ -108,20 +107,20 @@ module.exports = {
     },
     atualizarResponsavel: async (req, res) => {
         console.log('atualiza')
-      
-       
+
+
         let json = { error: '', result: {} };
 
         let id = req.params.id;
-     
-        let primeiro_responsavel = req.body.primeiro_responsavel
-       
 
+        let primeiro_responsavel = req.body.primeiro_responsavel
+
+        let cpf = req.params.cpf
 
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizarResponsavel(db_codigo, primeiro_responsavel);
+            await service.atualizarResponsavel(db_codigo, primeiro_responsavel,cpf);
             json.result = {
                 id,
 

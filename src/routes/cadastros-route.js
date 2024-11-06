@@ -19,7 +19,7 @@ router.post('/cadastros_dados/:id/OK', controller.atualizarTabelas)
 router.get('/cadastros_dados/:numero_cadastro/:nome_tabela/:tipo_cadastro', controller.buscarCadastrosResponsavel)
 
 router.post('/:id', controller.atualizar)
-router.post('/updateresponsavel/:id', controller.atualizarResponsavel)
+router.post('/updateresponsavel/:id/:cpf', controller.atualizarResponsavel)
 router.get('/teste/:id', controller.buscarUm)
 
 module.exports = router

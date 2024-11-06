@@ -39,10 +39,10 @@ module.exports = {
         });
     },
 
-    atualizarResponsavel: (id,  primeiro_responsavel) => {
+    atualizarResponsavel: (id,  primeiro_responsavel,cpf) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastros SET  primeiro_responsavel=? WHERE id = ?',
-                [ primeiro_responsavel, id],
+            db.query('UPDATE gta_cadastros SET  primeiro_responsavel=?,cpf=? WHERE id = ?',
+                [ primeiro_responsavel,cpf, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
