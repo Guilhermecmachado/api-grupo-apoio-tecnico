@@ -10,7 +10,7 @@ module.exports = {
         let result = await service.buscarUm(id, tabela);
     
         // Retornando o resultado em formato de array
-        res.json([result]);
+        res.json(result);
     },
     
 
