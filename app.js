@@ -34,6 +34,7 @@ const routes = require('./src/load');
 
 
 app.use('/cadastros', routes.cadastros)
+app.use('/relatorios', routes.relatorio)
 app.use('/usuarios', routes.usuarios)
 app.use('/usuarios-permissoes', routes.usuariosPermissoes)
 app.use('/projetos', routes.projetos)

@@ -1,4 +1,5 @@
 module.exports.cadastros = require('./routes/cadastros-route')
+module.exports.relatorio = require('./routes/relatorio.route')
 module.exports.usuarios = require('./routes/usuarios-route')
 module.exports.usuariosPermissoes = require('./routes/usuarios-permissoes-route')
 module.exports.projetos = require('./routes/projetos-route')

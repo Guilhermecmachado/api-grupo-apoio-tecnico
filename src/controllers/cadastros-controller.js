@@ -1,9 +1,6 @@
 const service = require('../services/cadastros-service');
 module.exports = {
 
-
-
-
     inserir: async (req, res) => {
         let objectDate = new Date();
 
@@ -96,6 +93,28 @@ module.exports = {
 
         if (id) {
             await service.atualizar(db_codigo, cadastro_id, cadastro_nome, data_alteracao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, status_online);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
+
+    deletar: async (req, res) => {
+       
+
+       
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+    
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.deletar(db_codigo);
             json.result = {
                 id,
 

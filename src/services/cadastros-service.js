@@ -39,6 +39,18 @@ module.exports = {
         });
     },
 
+    deletar: (id) => {
+        return new Promise((resolve, reject) => {
+            db.query('DELETE FROM gta_cadastros WHERE id = ?', [id], (error, results) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(results);
+            });
+        });
+    },
+    
     atualizarResponsavel: (id,  primeiro_responsavel,cpf) => {
         return new Promise((aceito, rejeitado) => {
             db.query('UPDATE gta_cadastros SET  primeiro_responsavel=?,cpf=? WHERE id = ?',

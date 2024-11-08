@@ -19,6 +19,8 @@ router.post('/cadastros_dados/:id/OK', controller.atualizarTabelas)
 router.get('/cadastros_dados/:numero_cadastro/:nome_tabela/:tipo_cadastro', controller.buscarCadastrosResponsavel)
 
 router.post('/:id', controller.atualizar)
+router.post('/delete/:id', controller.deletar)
+
 router.post('/updateresponsavel/:id/:cpf', controller.atualizarResponsavel)
 router.get('/teste/:id', controller.buscarUm)
 
