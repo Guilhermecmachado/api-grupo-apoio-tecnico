@@ -124,6 +124,7 @@ module.exports = {
         }
         res.json(json);
     },
+    
     atualizarResponsavel: async (req, res) => {
         console.log('atualiza')
 

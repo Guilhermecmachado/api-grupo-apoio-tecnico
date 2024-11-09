@@ -12,6 +12,7 @@ router.get('/', controller.buscarTodos)
 router.get('/porusuario/:id', controller.buscarTodosUsuario)
 router.get('/:id', controller.buscarUm)
 router.post('/:id', controller.atualizar)
+router.post('/delete/:id', controller.deletar)
 
 
 module.exports = router
