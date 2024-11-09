@@ -17,6 +17,7 @@ router.get('/:id/:rota_id', controller.buscarUmUsuarioPermissao)
 router.get('/permissao-usuario/:id', controller.buscarUsuarioPermissao)
 router.post('/:id', controller.atualizar)
 router.post('/:id/permissao', controller.atualizarPermissao)
+router.post('/delete/:id', controller.deletar)
 
 
 module.exports = router

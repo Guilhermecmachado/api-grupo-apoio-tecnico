@@ -253,16 +253,16 @@ module.exports = {
         });
     },
 
-
-
-
-
-
-
-
-
-
-
-
+    deletar: (id) => {
+        return new Promise((resolve, reject) => {
+            db.query('DELETE FROM gta_usuarios WHERE id = ?', [id], (error, results) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(results);
+            });
+        });
+    },
 
 }

@@ -30,6 +30,27 @@ module.exports = {
         res.json(json);
     },
 
+    deletar: async (req, res) => {
+       
+
+       
+        let json = { error: '', result: {} };
+
+        let id = req.params.id;
+    
+        db_codigo = parseInt(id)
+
+        if (id) {
+            await service.deletar(db_codigo);
+            json.result = {
+                id,
+
+            };
+        } else {
+            json.error = 'Os campos não foram enviados';
+        }
+        res.json(json);
+    },
 
     inserirPermissaoUsuario: async (req, res) => {
 
