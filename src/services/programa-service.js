@@ -1,5 +1,6 @@
 
 const db = require('../../db');
+const { deletar } = require('./usuarios-service');
 
 
 module.exports = {
@@ -38,7 +39,7 @@ module.exports = {
 
     deletar: (id) => {
         return new Promise((resolve, reject) => {
-            db.query('DELETE FROM gta_programa WHERE id = ?', [id], (error, results) => {
+            db.query('UPDATE gta_programa SET status = "INATIVO" WHERE id = ?', [id], (error, results) => {
                 if (error) {
                     reject(error);
                     return;

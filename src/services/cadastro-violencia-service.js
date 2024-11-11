@@ -52,10 +52,13 @@ module.exports = {
     },
 
     deletar: (id) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query('DELETE FROM gta_cadastro_violencia WHERE id = ?', [id], (error, results) => {
-                if (error) { rejeitado(error); return; }
-                aceito(results);
+        return new Promise((resolve, reject) => {
+            db.query('UPDATE gta_cadastro_violencia SET status_db = "INATIVO" WHERE id = ?', [id], (error, results) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(results);
             });
         });
     },
