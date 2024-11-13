@@ -38,7 +38,7 @@ module.exports = {
         let tipo_contato2 = req.body.dados_responsavel.tipo_contato2;
         let cpf_cnpj_fonte_pegadora = req.body.dados_responsavel.cpf_cnpj_fonte_pegadora;
         let data_admissao = req.body.dados_responsavel.data_admissao;
-    
+    let tipo_renda=req.body.dados_responsavel.tipo_renda
         // Converte valores vazios para '0' e substitui vírgulas por pontos
         let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta.toString() || '0';
         valor_renda_bruta = valor_renda_bruta.replace(',', '.');
@@ -70,7 +70,7 @@ module.exports = {
                 cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis,
                 nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf,
                 status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2,
-                cpf_cnpj_fonte_pegadora, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda,
+                cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda,
                 data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada,
                 beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online
             );
@@ -218,6 +218,7 @@ module.exports = {
         let cadastrador_id = req.body.dados_responsavel.cadastrador_id
         db_codigo = parseInt(id)
         let status_online = req.body.dados_responsavel.status_online
+        let tipo_renda=req.body.dados_responsavel.tipo_renda
 
 
 
@@ -237,7 +238,7 @@ module.exports = {
             parseFloat(valor_renda_declarada_liquida);
         }
         if (id) {
-            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online, data_alteracao);
+            await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online, data_alteracao);
             json.result = {
                 id,
 
