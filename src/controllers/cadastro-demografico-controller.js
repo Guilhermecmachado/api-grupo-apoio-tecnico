@@ -19,7 +19,7 @@ module.exports = {
         let json = { error: '', result: {} };
         console.log('insert')
         let beneficios = req.body.beneficios
-        let beneficios_valor = req.body.beneficios_valor.toString()
+        let beneficios_valor = req.body.beneficios_valor
         let curso_frequenta = req.body.curso_frequenta
         let data_alteracao = req.body.data_alteracao
         let data_criacao = day.toString() + '/' + month.toString() + '/' + year.toString()
@@ -32,14 +32,14 @@ module.exports = {
         let numero_cadastro = req.body.numero_cadastro
         let nome_completo = req.body.nome_completo
         let outra_fonte_renda = req.body.outra_fonte_renda
-        let outra_fonte_renda_valor = req.body.outra_fonte_renda_valor.toString()
+        let outra_fonte_renda_valor = req.body.outra_fonte_renda_valor
         let pne = req.body.pne
         let posicao_familiar = req.body.posicao_familia
         let profissao = req.body.profissao
         let projeto_id = req.body.projeto_id
         let projeto_nome = req.body.projeto_nome
         let renda_principal = req.body.renda_principal
-        let renda_principal_valor = req.body.renda_principal_valor.toString()
+        let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
         let uuid = req.body.uuid
         let cid = req.body.cid
@@ -56,21 +56,19 @@ module.exports = {
         let gestante = req.body.gestante
         let status_online = req.body.status_online
 
-        if (renda_principal_valor.includes(',') || !renda_principal_valor.includes('.')) {
-            // Substitui a vírgula por ponto
-            renda_principal_valor = renda_principal_valor.replace(',', '.');
-            parseFloat(renda_principal_valor);
+        function parseCurrency(value) {
+            if (typeof value === 'string') {
+                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
+                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+            }
+            // Converte para float se o valor ainda for uma string
+            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
         }
-        if (outra_fonte_renda_valor.includes(',') || !outra_fonte_renda_valor.includes('.')) {
-            // Substitui a vírgula por ponto
-            outra_fonte_renda_valor = outra_fonte_renda_valor.replace(',', '.');
-            parseFloat(outra_fonte_renda_valor);
-        }
-        if (beneficios_valor.includes(',') || !beneficios_valor.includes('.')) {
-            // Substitui a vírgula por ponto
-            beneficios_valor = beneficios_valor.replace(',', '.');
-            parseFloat(beneficios_valor);
-        }
+        
+        // Aplicando a função de conversão para cada valor
+        outra_fonte_renda_valor = parseCurrency(outra_fonte_renda_valor);
+        renda_principal_valor = parseCurrency(renda_principal_valor);
+        beneficios_valor = parseCurrency(beneficios_valor);
 
 
 
@@ -158,7 +156,7 @@ module.exports = {
 
         let id = req.params.id;
         let beneficios = req.body.beneficios
-        let beneficios_valor = req.body.beneficios_valor.toString()
+        let beneficios_valor = req.body.beneficios_valor
         let curso_frequenta = req.body.curso_frequenta
         let data_alteracao = day.toString() + '/' + month.toString() + '/' + year.toString()
         let estado_civil = req.body.estado_civil
@@ -169,12 +167,12 @@ module.exports = {
         let idade = req.body.idade
         let nome_completo = req.body.nome_completo
         let outra_fonte_renda = req.body.outra_fonte_renda
-        let outra_fonte_renda_valor = req.body.outra_fonte_renda_valor.toString()
+        let outra_fonte_renda_valor = req.body.outra_fonte_renda_valor
         let pne = req.body.pne
         let posicao_familiar = req.body.posicao_familia
         let profissao = req.body.profissao
         let renda_principal = req.body.renda_principal
-        let renda_principal_valor = req.body.renda_principal_valor.toString()
+        let renda_principal_valor = req.body.renda_principal_valor
         let situacao_ocupacional = req.body.situacao_ocupacional
         let cid = req.body.cid
         let cancer = req.body.cancer
@@ -190,22 +188,19 @@ module.exports = {
         let id_pne = req.body.pne
         let id_curso = req.body.id_curso
 
-        if (renda_principal_valor.includes(',') || !renda_principal_valor.includes('.')) {
-            // Substitui a vírgula por ponto
-            renda_principal_valor = renda_principal_valor.replace(',', '.');
-            parseFloat(renda_principal_valor);
+        function parseCurrency(value) {
+            if (typeof value === 'string') {
+                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
+                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+            }
+            // Converte para float se o valor ainda for uma string
+            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
         }
-        if (outra_fonte_renda_valor.includes(',') || !outra_fonte_renda_valor.includes('.')) {
-            // Substitui a vírgula por ponto
-            outra_fonte_renda_valor = outra_fonte_renda_valor.replace(',', '.');
-            parseFloat(outra_fonte_renda_valor);
-        }
-
-        if (beneficios_valor.includes(',') || !beneficios_valor.includes('.')) {
-            // Substitui a vírgula por ponto
-            beneficios_valor = beneficios_valor.replace(',', '.');
-            parseFloat(beneficios_valor);
-        }
+        
+        // Aplicando a função de conversão para cada valor
+        outra_fonte_renda_valor = parseCurrency(outra_fonte_renda_valor);
+        renda_principal_valor = parseCurrency(renda_principal_valor);
+        beneficios_valor = parseCurrency(beneficios_valor);
 
         db_codigo = parseInt(id)
 

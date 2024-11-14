@@ -40,17 +40,19 @@ module.exports = {
         let data_admissao = req.body.dados_responsavel.data_admissao;
     let tipo_renda=req.body.dados_responsavel.tipo_renda
         // Converte valores vazios para '0' e substitui vírgulas por pontos
-        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta.toString() || '0';
-        valor_renda_bruta = valor_renda_bruta.replace(',', '.');
-        valor_renda_bruta = parseFloat(valor_renda_bruta);
-    
-        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida.toString() || '0';
-        valor_renda_liquida = valor_renda_liquida.replace(',', '.');
-        valor_renda_liquida = parseFloat(valor_renda_liquida);
-    
-        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida.toString() || '0';
-        valor_renda_declarada_liquida = valor_renda_declarada_liquida.replace(',', '.');
-        valor_renda_declarada_liquida = parseFloat(valor_renda_declarada_liquida);
+        function parseCurrency(value) {
+            if (typeof value === 'string') {
+                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
+                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+            }
+            // Converte para float se o valor ainda for uma string
+            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
+        }
+        
+        // Aplicando a função de conversão para cada valor
+        valor_renda_liquida = parseCurrency(valor_renda_liquida);
+        valor_renda_bruta = parseCurrency(valor_renda_bruta);
+        valor_renda_declarada_liquida = parseCurrency(valor_renda_declarada_liquida);
     
         let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda;
         let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada;
@@ -183,6 +185,8 @@ module.exports = {
         if (month < 10) month = '0' + month;
         let json = { error: '', result: {} };
 
+
+        
         let id = req.params.id;
         let cadastro_cohab = req.body.dados_responsavel.cadastro_cohab
         let cpf = req.body.dados_responsavel.cpf
@@ -204,12 +208,12 @@ module.exports = {
         let tipo_contato2 = req.body.dados_responsavel.tipo_contato2
         let cpf_cnpj_fonte_pegadora = req.body.dados_responsavel.cpf_cnpj_fonte_pegadora
         let data_admissao = req.body.dados_responsavel.data_admissao
-        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta.toString()
-        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida.toString()
-        let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda.toString()
+        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta
+        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida
+        let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda
         let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada.toString()
-        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida.toString()
-        let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada.toString()
+        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida
+        let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada
         let beneficio_prestacao = req.body.dados_responsavel.beneficio_prestacao.toString()
         let programa_bolsa_familia = req.body.dados_responsavel.programa_bolsa_familia.toString()
         let menor_18 = req.body.dados_responsavel.menor_18
@@ -221,22 +225,22 @@ module.exports = {
         let tipo_renda=req.body.dados_responsavel.tipo_renda
 
 
+        function parseCurrency(value) {
+            if (typeof value === 'string') {
+                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
+                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+            }
+            // Converte para float se o valor ainda for uma string
+            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
+        }
+        
+        // Aplicando a função de conversão para cada valor
+        valor_renda_liquida = parseCurrency(valor_renda_liquida);
+        valor_renda_bruta = parseCurrency(valor_renda_bruta);
+        valor_renda_declarada_liquida = parseCurrency(valor_renda_declarada_liquida);
+       
 
-        if (valor_renda_bruta.includes(',') || !valor_renda_bruta.includes('.')) {
-            // Substitui a vírgula por ponto
-            valor_renda_bruta = valor_renda_bruta.replace(',', '.');
-            parseFloat(valor_renda_bruta);
-        }
-        if (valor_renda_liquida.includes(',') || !valor_renda_liquida.includes('.')) {
-            // Substitui a vírgula por ponto
-            valor_renda_liquida = valor_renda_liquida.replace(',', '.');
-            parseFloat(valor_renda_liquida);
-        }
-        if (valor_renda_declarada_liquida.includes(',') || !valor_renda_declarada_liquida.includes('.')) {
-            // Substitui a vírgula por ponto
-            valor_renda_declarada_liquida = valor_renda_declarada_liquida.replace(',', '.');
-            parseFloat(valor_renda_declarada_liquida);
-        }
+   
         if (id) {
             await service.atualizar(db_codigo, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online, data_alteracao);
             json.result = {
