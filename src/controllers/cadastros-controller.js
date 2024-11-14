@@ -54,8 +54,8 @@ module.exports = {
                 projeto_id: model[i].projeto_id,
                 projeto_nome: model[i].projeto_nome,
                 status: model[i].status,
-                status_online: model[i].status_online
-
+                status_online: model[i].status_online,
+                cpf: model[i].cpf
 
             });
         }
@@ -104,13 +104,13 @@ module.exports = {
     },
 
     deletar: async (req, res) => {
-       
 
-       
+
+
         let json = { error: '', result: {} };
 
         let id = req.params.id;
-    
+
         db_codigo = parseInt(id)
 
         if (id) {
@@ -124,7 +124,7 @@ module.exports = {
         }
         res.json(json);
     },
-    
+
     atualizarResponsavel: async (req, res) => {
         console.log('atualiza')
 
@@ -140,7 +140,7 @@ module.exports = {
         db_codigo = parseInt(id)
 
         if (id) {
-            await service.atualizarResponsavel(db_codigo, primeiro_responsavel,cpf);
+            await service.atualizarResponsavel(db_codigo, primeiro_responsavel, cpf);
             json.result = {
                 id,
 

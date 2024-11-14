@@ -126,7 +126,7 @@ module.exports = {
                 autismo: model[i].autismo,
                 gestante: model[i].gestante,
                 status_online: model[i].status_online,
-                cpf:model[i].cpf
+                cpf: model[i].cpf
                 // let id_genero = model[i].id_genero
                 // let id_posicao = req.body.id_posicao
                 // let id_situacao = req.body.id_situacao
