@@ -57,6 +57,7 @@ module.exports = {
                 projeto_id: model[i].projeto_id,
                 codigo: model[i].projeto_codigo,
                 usuario_id: model[i].usuario_id,
+                status:model[i].status
 
 
             });
