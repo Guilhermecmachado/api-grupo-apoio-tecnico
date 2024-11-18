@@ -19,7 +19,10 @@ module.exports = {
         let data_alteracao = req.body.dados_responsavel.data_alteracao;
         let data_nascimento = req.body.dados_responsavel.data_nascimento;
         let naturalidade = req.body.dados_responsavel.naturalidade;
-    
+        let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta
+        let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida
+        let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida
+
         let nis = req.body.dados_responsavel.nis;
         let nome_completo = req.body.dados_responsavel.nome_completo;
         let numero_cadastro = req.body.numero_cadastro;
@@ -211,7 +214,7 @@ module.exports = {
         let valor_renda_bruta = req.body.dados_responsavel.valor_renda_bruta
         let valor_renda_liquida = req.body.dados_responsavel.valor_renda_liquida
         let mes_referencia_renda = req.body.dados_responsavel.mes_referencia_renda
-        let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada.toString()
+        let data_inicio_renda_declarada = req.body.dados_responsavel.data_inicio_renda_declarada
         let valor_renda_declarada_liquida = req.body.dados_responsavel.valor_renda_declarada_liquida
         let mes_referencia_renda_declarada = req.body.dados_responsavel.mes_referencia_renda_declarada
         let beneficio_prestacao = req.body.dados_responsavel.beneficio_prestacao.toString()
