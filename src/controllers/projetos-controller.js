@@ -1,9 +1,6 @@
 const service = require('../services/projetos-service');
 module.exports = {
 
-
-
-
     inserir: async (req, res) => {
 
         let json = { error: '', result: {} };
@@ -48,7 +45,7 @@ module.exports = {
 
     buscarTodosUsuario: async (req, res) => {
         let json = { error: '', result: [] };
-        let id=req.params.id
+        let id = req.params.id
         let model = await service.buscarTodosUsuario(id);
         for (let i in model) {
             json.result.push({
@@ -93,13 +90,13 @@ module.exports = {
     },
 
     deletar: async (req, res) => {
-       
 
-       
+
+
         let json = { error: '', result: {} };
 
         let id = req.params.id;
-    
+
         db_codigo = parseInt(id)
 
         if (id) {
@@ -120,8 +117,6 @@ module.exports = {
         let id = req.params.id; //para pegar o parametro
         let result = await service.buscarUm(id);
         res.json(result);
-
-
     },
 
 

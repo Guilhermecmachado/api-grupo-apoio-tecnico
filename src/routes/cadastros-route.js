@@ -7,7 +7,8 @@ require('dotenv/config')
 
 
 
-router.post('/', controller.inserir)
+// router.post('/', controller.inserir)
+router.post('/', controller.criaCadadastroInicial)
 router.get('/', controller.buscarTodos)
 router.get('/:id', controller.buscarUm)
 router.get('/numero_cadastro/:numero_cadastro', controller.buscarUmApp)

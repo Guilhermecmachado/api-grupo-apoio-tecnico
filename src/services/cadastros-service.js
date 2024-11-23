@@ -3,6 +3,11 @@ const db = require('../../db');
 //CADASTRO ESTÁ OK
 
 module.exports = {
+
+    criaCadadastroInicial(id) {
+
+    },
+
     inserir: (cadastro_id, cadastro_nome, data_criacao, numero_cadastro, primeiro_responsavel, projeto_codigo, projeto_id, projeto_nome, status, status_online) => {
         return new Promise((accept, reject) => {
 
@@ -50,18 +55,18 @@ module.exports = {
             });
         });
     },
-    
-    atualizarResponsavel: (id,  primeiro_responsavel,cpf) => {
+
+    atualizarResponsavel: (id, primeiro_responsavel, cpf) => {
         return new Promise((aceito, rejeitado) => {
             db.query('UPDATE gta_cadastros SET  primeiro_responsavel=?,cpf=? WHERE id = ?',
-                [ primeiro_responsavel,cpf, id],
+                [primeiro_responsavel, cpf, id],
                 (error, results) => {
                     if (error) { rejeitado(error); return; }
                     aceito(results);
                 }
             );
         });
-    }, 
+    },
 
     buscarUm: (id) => {
         return new Promise((aceito, rejeitado) => {

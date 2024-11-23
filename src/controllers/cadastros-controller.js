@@ -1,5 +1,129 @@
 const service = require('../services/cadastros-service');
+const projetoService = require('../services/projetos-service');
+const visitaService = require('../services/cadastro-visitas-service');
+
+function getCurrentDate() {
+    const objectDate = new Date();
+    let day = objectDate.getDate();
+    let month = objectDate.getMonth() + 1;
+    const year = objectDate.getFullYear();
+
+    // Garante dois dígitos para o dia e o mês
+    if (day < 10) day = '0' + day;
+    if (month < 10) month = '0' + month;
+
+    // Retorna a data formatada
+    return `${day}/${month}/${year}`;
+}
+
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        const r = (Math.random() * 16) | 0; // Número aleatório entre 0 e 15
+        const v = c === 'x' ? r : (r & 0x3) | 0x8; // Regra para 'x' ou 'y'
+        return v.toString(16); // Converte para hexadecimal
+    });
+}
+
+function gerarNumeroCadastro(codigo) {
+    // Obtém a data atual no formato DD/MM/YYYY
+    const dt = new Date().toLocaleDateString('en-ES');
+    const d = dt.split('/');
+
+    // Garante que o dia e o mês tenham dois dígitos
+    const dia = ('00' + d[1]).slice(-2);
+    const mes = ('00' + d[0]).slice(-2);
+    const ano = d[2];
+
+    // Gera o UUID ou protocolo
+    const uuid = generateUUID();
+
+    // Monta o número de cadastro
+    let numeroCadastro = `${codigo}-${ano}${mes}${dia}-${uuid.substring(0, 6).toUpperCase()}`;
+
+    return numeroCadastro;
+}
+
 module.exports = {
+
+    criaCadadastroInicial: async (req, res, next) => {
+
+        let json = { error: '', result: {} };
+
+        console.log(req.body)
+
+        //recupera dados projeto
+        let projeto = await projetoService.buscarUm(req.body.cadastro_projeto_id)
+
+        console.log(projeto)
+
+        //cria cadastro
+        let data_criacao = getCurrentDate()
+        let cadastro_id = req.body.cadastro_cadastrador_id
+        let cadastro_nome = req.body.cadastro_cadastrador_nome
+        let numero_cadastro = gerarNumeroCadastro(projeto.codigo)
+        let primeiro_responsavel = req.body.cadastro_primeiro_responsavel
+        let projeto_codigo = projeto.codigo
+        let projeto_id = projeto.id
+        let projeto_nome = projeto.nome_projeto
+        let status = req.body.cadastro_status
+        let status_online = req.body.cadastro_status
+
+        try {
+            if (numero_cadastro && projeto_codigo && projeto_id && projeto_nome) {
+                const model = await service.inserir(
+                    cadastro_id,
+                    cadastro_nome,
+                    data_criacao,
+                    numero_cadastro,
+                    primeiro_responsavel,
+                    projeto_codigo,
+                    projeto_id,
+                    projeto_nome,
+                    status,
+                    status_online
+                );
+
+                let visita_cadastrador = req.body.visita_cadastrador
+                let visita_data_criacao = getCurrentDate()
+                let visita_data = req.body.visita_data
+                let visita_numero_cadastro = numero_cadastro
+                let visita_hora = req.body.visita_hora
+                let visita_status = req.body.visita_status
+
+                let visita = await visitaService.inserir(
+                    visita_cadastrador,
+                    visita_data_criacao,
+                    visita_data,
+                    visita_data_criacao,
+                    visita_numero_cadastro,
+                    '',
+                    visita_hora,
+                    projeto_id,
+                    projeto_nome,
+                    visita_status,
+                    cadastro_id,
+                    ''
+                )
+
+                console.log(visita)
+
+                // Define o resultado na resposta JSON
+                json.result = {
+                    id: model,
+                };
+                res.json(json);
+            } else {
+                json.error = 'Campos não enviados';
+                res.json(json);
+            }
+        } catch (error) {
+            // Captura e trata o erro
+            console.error('Erro ao inserir os dados:', error);
+            json.error = 'Ocorreu um erro ao processar a requisição.';
+            res.json(json);
+        }
+
+    },
 
     inserir: async (req, res) => {
         let objectDate = new Date();
