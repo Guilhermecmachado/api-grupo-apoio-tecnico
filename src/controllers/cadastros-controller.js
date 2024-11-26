@@ -1,6 +1,21 @@
 const service = require('../services/cadastros-service');
 const projetoService = require('../services/projetos-service');
 const visitaService = require('../services/cadastro-visitas-service');
+const controleService = require('../services/cadastro-dados-controle-service')
+const responsaveisService = require('../services/cadastro-responsaveis-service')
+const familiaService = require('../services/cadastro-demografico-valor-service')
+const lazerService = require('../services/cadastro-lazer-service')
+const comunitarioService = require('../services/cadastro-esportes-service')
+const moradiaService = require('../services/cadastro-ocupacao-service')
+const animalService = require('../services/cadastro-animal-service')
+const mobilidadeService = require('../services/cadastro-mobilidade-service')
+const sustentabilidadeService = require('../services/cadastro-sustentabilidade-service')
+const violenciaMariaService = require('../services/cadastro-violencia-maria-service')
+const documentoService = require('../services/cadastra-documento-service')
+
+
+
+
 
 function getCurrentDate() {
     const objectDate = new Date();
@@ -362,6 +377,8 @@ module.exports = {
 
     },
 
+
+
     atualizarTabelas: async (req, res) => {
         console.log('atualiza')
 
@@ -391,6 +408,48 @@ module.exports = {
         res.json(json);
     },
 
+
+    buscarTodosForms: async (req, res) => {
+        let json = { error: '', result: {} };
+        //  console.log('buscam um')
+        let id = req.params.id;
+        let id_number = parseInt(id)
+        //para pegar o parametro
+        let result = await service.buscarUmForm(id_number);
+
+        let rescontrole = await controleService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let resresponsavel1 = await responsaveisService.buscarUm(result.projeto_id, result.numero_cadastro, 'primeiroResponsavel')
+        let resresponsavel2 = await responsaveisService.buscarUm(result.projeto_id, result.numero_cadastro, 'segundoResponsavel')
+        let despesas = await familiaService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let lazer = await lazerService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let comunitario = await comunitarioService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let moradia = await moradiaService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let animal = await animalService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let mobilidade = await mobilidadeService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let sustentabilidade = await sustentabilidadeService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let maria = await violenciaMariaService.buscarUm(result.projeto_id, result.numero_cadastro)
+        let documento = await documentoService.buscarUm(result.projeto_id, result.numero_cadastro)
+
+
+        json.result = {
+            'obj_controle': rescontrole,
+            'obj_responsaveis1': resresponsavel1,
+            'obj_responsaveis2': resresponsavel2,
+            'obj_despesas':despesas,
+            'obj_lazer':lazer,
+            'obj_comunitario':comunitario,
+            'obj_moradia': moradia,
+            'obj_animal':animal,
+            'obj_mobilidade':mobilidade,
+            'obj_sustentabilidade':sustentabilidade,
+            'obj_maria':maria,
+            'obj_documento':documento
+        }
+
+        res.json(json.result);
+
+
+    },
 
 
 
