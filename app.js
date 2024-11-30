@@ -58,6 +58,7 @@ app.use('/cadastro-animal', routes.cadastroAnimal)
 app.use('/cadastro-programa', routes.cadastroPrograma)
 app.use('/cadastro-entidades', routes.cadastroEntidades)
 app.use('/cadastra-documento', routes.cadastroDocumento)
+app.use('/loop',routes.loop)
 
 
 
