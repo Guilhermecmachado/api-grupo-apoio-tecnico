@@ -59,7 +59,7 @@ app.use('/cadastro-programa', routes.cadastroPrograma)
 app.use('/cadastro-entidades', routes.cadastroEntidades)
 app.use('/cadastra-documento', routes.cadastroDocumento)
 app.use('/loop',routes.loop)
-
+app.use('/cria-tudo',routes.criaTudo)
 
 
 function normalizePort(val) {
