@@ -270,7 +270,7 @@ module.exports = {
 
         let json = { error: '', result: {} };
 
-        let id = req.params.id;
+        let id = req.body.id;
 
         let primeiro_responsavel = req.body.primeiro_responsavel
 

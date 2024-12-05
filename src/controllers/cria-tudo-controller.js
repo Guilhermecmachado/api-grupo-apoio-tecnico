@@ -236,34 +236,87 @@ module.exports = {
     }
 
     try {
-      // Processar cada um dos conjuntos de dados
-      await handleControle(dados.dados_controle, projeto_id, numero_cadastro, projeto_nome);
-      await handleResponsavel(dados.dados_responsavel1, projeto_id, numero_cadastro, projeto_nome, 'primeiroResponsavel');
-      await handleResponsavel(dados.dados_responsavel2, projeto_id, numero_cadastro, projeto_nome, 'segundoResponsavel');
-      await handleDespesas(dados.dados_despesas, projeto_id, numero_cadastro, projeto_nome);
-      await handleLazer(dados.dados_lazer, projeto_id, numero_cadastro, projeto_nome);
-      await handleComunitario(dados.dados_comunitario, projeto_id, numero_cadastro, projeto_nome);
-      await handleMoradia(dados.dados_moradia, projeto_id, numero_cadastro, projeto_nome);
-      await handleAnimais(dados.dados_animais, projeto_id, numero_cadastro, projeto_nome);
-      await handleMobilidade(dados.dados_mobilidade, projeto_id, numero_cadastro, projeto_nome);
-      await handleSustentabilidade(dados.dados_sustentabilidade, projeto_id, numero_cadastro, projeto_nome);
-      await handleMaria(dados.dados_maria, projeto_id, numero_cadastro, projeto_nome);
-      await handleDocumento(dados.dados_documento, projeto_id, numero_cadastro, projeto_nome);
+      // Processar cada um dos conjuntos de dados com tratamento de erro específico
+      try {
+        await handleControle(dados.dados_controle, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de controle', details: error.message });
+      }
 
-      // Outros handlers para os diferentes conjuntos de dados dados_controle: form.form_dados_controle,
-         
-         
-     
-      // await handleLazer(dados.dados_lazer, projeto_id, ...);
-      // await handleComunitario(dados.dados_comunitario, projeto_id, ...);
+      try {
+        await handleResponsavel(dados.dados_responsavel1, projeto_id, numero_cadastro, projeto_nome, 'primeiroResponsavel');
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar o primeiro responsável', details: error.message });
+      }
+
+      try {
+        await handleResponsavel(dados.dados_responsavel2, projeto_id, numero_cadastro, projeto_nome, 'segundoResponsavel');
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar o segundo responsável', details: error.message });
+      }
+
+      try {
+        await handleDespesas(dados.dados_despesas, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de despesas', details: error.message });
+      }
+
+      try {
+        await handleLazer(dados.dados_lazer, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de lazer', details: error.message });
+      }
+
+      try {
+        await handleComunitario(dados.dados_comunitario, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados comunitários', details: error.message });
+      }
+
+      try {
+        await handleMoradia(dados.dados_moradia, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de moradia', details: error.message });
+      }
+
+      try {
+        await handleAnimais(dados.dados_animais, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de animais', details: error.message });
+      }
+
+      try {
+        await handleMobilidade(dados.dados_mobilidade, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de mobilidade', details: error.message });
+      }
+
+      try {
+        await handleSustentabilidade(dados.dados_sustentabilidade, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de sustentabilidade', details: error.message });
+      }
+
+      try {
+        await handleMaria(dados.dados_maria, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar dados de violência Maria', details: error.message });
+      }
+
+      try {
+        await handleDocumento(dados.dados_documento, projeto_id, numero_cadastro, projeto_nome);
+      } catch (error) {
+        return res.status(500).json({ error: 'Erro ao salvar documentos', details: error.message });
+      }
 
       res.status(200).json({ success: true });
     } catch (error) {
-      console.error('Erro ao processar os dados:', error);
-      res.status(500).json({ error: 'Erro interno no servidor' });
+      console.error('Erro inesperado:', error);
+      res.status(500).json({ error: 'Erro interno no servidor', details: error.message });
     }
   },
 };
+
 
 
 
