@@ -14,615 +14,257 @@ const documentoService = require('../services/cadastra-documento-service')
 function formatarDataAtual() {
   const objectDate = new Date();
 
-  let day = objectDate.getDate();
-  let month = objectDate.getMonth() + 1;
+  const day = objectDate.getDate().toString().padStart(2, '0');
+  const month = (objectDate.getMonth() + 1).toString().padStart(2, '0');
   const year = objectDate.getFullYear();
-
-  if (day < 10) day = '0' + day;
-  if (month < 10) month = '0' + month;
 
   return `${day}/${month}/${year}`;
 }
 
+async function handleControle(dados_controle, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_controle) return;
+
+  const existe = await controleService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await controleService.atualizar(existe.id, {
+      ...dados_controle,
+      data_alteracao,
+    });
+  } else {
+    await controleService.inserir({
+      ...dados_controle,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleResponsavel(dados_responsavel, projeto_id, numero_cadastro, projeto_nome, tipoResponsavel) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_responsavel) return;
+
+  const existe = await responsaveisService.buscarUm(projeto_id, numero_cadastro, tipoResponsavel);
+  if (existe) {
+    await responsaveisService.atualizar(existe.id,{
+      ...dados_responsavel,
+      data_alteracao,
+    });
+  } else {
+    await responsaveisService.inserir({
+      ...dados_responsavel,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleDespesas(dados_despesas, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_despesas) return;
+
+  const existe = await familiaService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await familiaService.atualizar(existe.id,{
+      ...dados_despesas,
+      data_alteracao,
+    });
+  } else {
+    await familiaService.inserir({
+      ...dados_despesas,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleLazer(dados_lazer, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_lazer) return;
+
+  const existe = await lazerService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await lazerService.atualizar(existe.id, { ...dados_lazer, data_alteracao });
+  } else {
+    await lazerService.inserir({
+      ...dados_lazer,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleComunitario(dados_comunitario, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_comunitario) return;
+
+  const existe = await comunitarioService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await comunitarioService.atualizar(existe.id, { ...dados_comunitario, data_alteracao });
+  } else {
+    await comunitarioService.inserir({
+      ...dados_comunitario,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleMoradia(dados_moradia, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_moradia) return;
+
+  const existe = await moradiaService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await moradiaService.atualizar(existe.id, { ...dados_moradia, data_alteracao });
+  } else {
+    await moradiaService.inserir({
+      ...dados_moradia,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleAnimais(dados_animais, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_animais) return;
+
+  const existe = await animalService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await animalService.atualizar(existe.id, { ...dados_animais, data_alteracao });
+  } else {
+    await animalService.inserir({
+      ...dados_animais,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleMobilidade(dados_mobilidade, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_mobilidade) return;
+
+  const existe = await mobilidadeService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await mobilidadeService.atualizar(existe.id, { ...dados_mobilidade, data_alteracao });
+  } else {
+    await mobilidadeService.inserir({
+      ...dados_mobilidade,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleSustentabilidade(dados_sustentabilidade, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_sustentabilidade) return;
+
+  const existe = await sustentabilidadeService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await sustentabilidadeService.atualizar(existe.id, { ...dados_sustentabilidade, data_alteracao });
+  } else {
+    await sustentabilidadeService.inserir({
+      ...dados_sustentabilidade,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleMaria(dados_maria, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_maria) return;
+
+  const existe = await violenciaMariaService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await violenciaMariaService.atualizar(existe.id, { ...dados_maria, data_alteracao });
+  } else {
+    await violenciaMariaService.inserir({
+      ...dados_maria,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
+async function handleDocumento(dados_documento, projeto_id, numero_cadastro, projeto_nome) {
+  const data_alteracao = formatarDataAtual();
+  if (!dados_documento) return;
+
+  const existe = await documentoService.buscarUm(projeto_id, numero_cadastro);
+  if (existe) {
+    await documentoService.atualizar(existe.id, { ...dados_documento, data_alteracao });
+  } else {
+    await documentoService.inserir({
+      ...dados_documento,
+      projeto_id,
+      projeto_nome,
+      numero_cadastro,
+      data_criacao: formatarDataAtual(),
+    });
+  }
+}
+
 module.exports = {
   createOrUpdate: async (req, res) => {
-    let json = { error: '', result: [] };
-    let valores = req.body.dados;
-    let projeto_id = req.body.projeto_id;
-    let numero_cadastro = req.body.numero_cadastro;
-    let projeto_nome = req.body.projeto_nome;
-    let data_criacao = formatarDataAtual();
-
-
-    // dados de cada uma das tabelas 
-    let dados_controle = valores.dados_controle
-    let dados_responsavel1 = valores.dados_responsavel1
-    let dados_responsavel2 = valores.dados_responsavel2
-    let dados_despesas = valores.dados_despesas
-    let dados_lazer = valores.dados_lazer
-    let dados_comunitario = valores.dados_comunitario
-    let dados_moradia = valores.dados_moradia
-    let dados_animais = valores.dados_animais
-    let dados_mobilidade = valores.dados_mobilidade
-    let dados_sustentabilidade = valores.dados_sustentabilidade
-    let dados_maria = valores.dados_maria
-    let dados_documento = valores.dados_documento
-    // Verifica se valores.dados_controle existe e não é nulo
-    if (dados_controle) {
-
-      let existe = controleService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(existe.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    } else if (dados_responsavel1) {
-      let existe = responsaveisService.buscarUm(projeto_id, numero_cadastro,'primeiroResponsavel')
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        responsaveisService.atualizar(
-          dados_responsavel1.id,
-          dados_responsavel1.cadastro_cohab,
-          dados_responsavel1.cpf,
-          dados_responsavel1.data_nascimento,
-          dados_responsavel1.naturalidade,
-          dados_responsavel1.nis,
-          dados_responsavel1.nome_completo,
-          dados_responsavel1.pais,
-          dados_responsavel1.rg,
-          dados_responsavel1.rg_data_expedicao,
-          dados_responsavel1.rg_uf,
-          dados_responsavel1.status_cadastro,
-          dados_responsavel1.tipo_cadastro,
-          dados_responsavel1.uf,
-          dados_responsavel1.contato1,
-          dados_responsavel1.contato2,
-          dados_responsavel1.tipo_contato1,
-          dados_responsavel1.tipo_contato2,
-          dados_responsavel1.cpf_cnpj_fonte_pegadora,
-          dados_responsavel1.tipo_renda,
-          dados_responsavel1.data_admissao,
-          dados_responsavel1.valor_renda_bruta,
-          dados_responsavel1.valor_renda_liquida,
-          dados_responsavel1.mes_referencia_renda,
-          dados_responsavel1.data_inicio_renda_declarada,
-          dados_responsavel1.valor_renda_declarada_liquida,
-          dados_responsavel1.mes_referencia_renda_declarada,
-          dados_responsavel1.beneficio_prestacao,
-          dados_responsavel1.programa_bolsa_familia,
-          dados_responsavel1.menor_18,
-          dados_responsavel1.nome_tutor,
-          dados_responsavel1.cpf_tutor,
-          dados_responsavel1.cadastrador_id,
-          dados_responsavel1.status_online,
-          data_alteracao
-        );
-        
-        
-      } else {
-        responsaveisService.inserir(
-          dados_responsavel1.cadastro_cohab,
-          dados_responsavel1.cpf,
-          data_criacao,
-          dados_responsavel1.data_alteracao,
-          dados_responsavel1.data_nascimento,
-          dados_responsavel1.naturalidade,
-          dados_responsavel1.nis,
-          dados_responsavel1.nome_completo,
-          numero_cadastro,
-          dados_responsavel1.pais,
-          projeto_id,
-          projeto_nome,
-          dados_responsavel1.rg,
-          dados_responsavel1.rg_data_expedicao,
-          dados_responsavel1.rg_uf,
-          dados_responsavel1.status_cadastro,
-          dados_responsavel1.tipo_cadastro,
-          dados_responsavel1.uf,
-          dados_responsavel1.contato1,
-          dados_responsavel1.contato2,
-          dados_responsavel1.tipo_contato1,
-          dados_responsavel1.tipo_contato2,
-          dados_responsavel1.cpf_cnpj_fonte_pegadora,
-          dados_responsavel1.tipo_renda,
-          dados_responsavel1.data_admissao,
-          dados_responsavel1.valor_renda_bruta,
-          dados_responsavel1.valor_renda_liquida,
-          dados_responsavel1.mes_referencia_renda,
-          dados_responsavel1.data_inicio_renda_declarada,
-          dados_responsavel1.valor_renda_declarada_liquida,
-          dados_responsavel1.mes_referencia_renda_declarada,
-          dados_responsavel1.beneficio_prestacao,
-          dados_responsavel1.programa_bolsa_familia,
-          dados_responsavel1.menor_18,
-          dados_responsavel1.nome_tutor,
-          dados_responsavel1.cpf_tutor,
-          dados_responsavel1.cadastrador_id,
-          dados_responsavel1.status_online
-        );
-        
-      }
-    } else if (dados_responsavel2) {
-      let existe = responsaveisService.buscarUm(projeto_id, numero_cadastro,'segundoResponsavel')
-      
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        responsaveisService.atualizar(
-          dados_responsavel2.id,
-          dados_responsavel2.cadastro_cohab,
-          dados_responsavel2.cpf,
-          dados_responsavel2.data_nascimento,
-          dados_responsavel2.naturalidade,
-          dados_responsavel2.nis,
-          dados_responsavel2.nome_completo,
-          dados_responsavel2.pais,
-          dados_responsavel2.rg,
-          dados_responsavel2.rg_data_expedicao,
-          dados_responsavel2.rg_uf,
-          dados_responsavel2.status_cadastro,
-          dados_responsavel2.tipo_cadastro,
-          dados_responsavel2.uf,
-          dados_responsavel2.contato1,
-          dados_responsavel2.contato2,
-          dados_responsavel2.tipo_contato1,
-          dados_responsavel2.tipo_contato2,
-          dados_responsavel2.cpf_cnpj_fonte_pegadora,
-          dados_responsavel2.tipo_renda,
-          dados_responsavel2.data_admissao,
-          dados_responsavel2.valor_renda_bruta,
-          dados_responsavel2.valor_renda_liquida,
-          dados_responsavel2.mes_referencia_renda,
-          dados_responsavel2.data_inicio_renda_declarada,
-          dados_responsavel2.valor_renda_declarada_liquida,
-          dados_responsavel2.mes_referencia_renda_declarada,
-          dados_responsavel2.beneficio_prestacao,
-          dados_responsavel2.programa_bolsa_familia,
-          dados_responsavel2.menor_18,
-          dados_responsavel2.nome_tutor,
-          dados_responsavel2.cpf_tutor,
-          dados_responsavel2.cadastrador_id,
-          dados_responsavel2.status_online,
-          data_alteracao
-        );
-        
-      } else {
-        responsaveisService.inserir(
-          dados_responsavel2.cadastro_cohab,
-          dados_responsavel2.cpf,
-          data_criacao,
-          dados_responsavel2.data_alteracao,
-          dados_responsavel2.data_nascimento,
-          dados_responsavel2.naturalidade,
-          dados_responsavel2.nis,
-          dados_responsavel2.nome_completo,
-          numero_cadastro,
-          dados_responsavel2.pais,
-          projeto_id,
-          projeto_nome,
-          dados_responsavel2.rg,
-          dados_responsavel2.rg_data_expedicao,
-          dados_responsavel2.rg_uf,
-          dados_responsavel2.status_cadastro,
-          dados_responsavel2.tipo_cadastro,
-          dados_responsavel2.uf,
-          dados_responsavel2.contato1,
-          dados_responsavel2.contato2,
-          dados_responsavel2.tipo_contato1,
-          dados_responsavel2.tipo_contato2,
-          dados_responsavel2.cpf_cnpj_fonte_pegadora,
-          dados_responsavel2.tipo_renda,
-          dados_responsavel2.data_admissao,
-          dados_responsavel2.valor_renda_bruta,
-          dados_responsavel2.valor_renda_liquida,
-          dados_responsavel2.mes_referencia_renda,
-          dados_responsavel2.data_inicio_renda_declarada,
-          dados_responsavel2.valor_renda_declarada_liquida,
-          dados_responsavel2.mes_referencia_renda_declarada,
-          dados_responsavel2.beneficio_prestacao,
-          dados_responsavel2.programa_bolsa_familia,
-          dados_responsavel2.menor_18,
-          dados_responsavel2.nome_tutor,
-          dados_responsavel2.cpf_tutor,
-          dados_responsavel2.cadastrador_id,
-          dados_responsavel2.status_online
-        );
-        
-      }
-    } else if (dados_despesas){
-      let existe = familiaService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        familiaService.atualizar(
-          id, despesas_agua, despesas_alimentacao, despesas_aluguel, despesas_gas, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, cadastrador_id, status_online, data_alteracao
-        );
-      } else {
-        familiaService.inserir(
-          despesas_agua, despesas_alimentacao, despesas_aluguel, numero_cadastro, despesas_gas, projeto_id, projeto_nome, despesas_luz, despesas_saude, despesas_transporte, valor_aluguel_social, data_criacao, status_online, data_alteracao, cadastrador_id
-        );
-      }
-    }else if(dados_lazer){
-      let existe = lazerService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_comunitario){
-      let existe = comunitarioService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_moradia){
-      let existe = moradiaService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_animais){
-      let existe = animalService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_mobilidade){
-      let existe = mobilidadeService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_sustentabilidade){
-      let existe = sustentabilidadeService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_maria){
-      let existe = violenciaMariaService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
-    }else if(dados_documento){
-      let existe = documentoService.buscarUm(projeto_id, numero_cadastro)
-      if (existe) {
-        data_alteracao = formatarDataAtual()
-        controleService.atualizar(dados_controle.id,
-          dados_controle.cep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.data_criacao,
-          dados_controle.cadastrador_id,
-          dados_controle.status_online,
-          dados_controle.data_alteracao)
-      } else {
-        controleService.inserir(
-          dados_controle.dadoscep,
-          dados_controle.cidade,
-          dados_controle.complemento,
-          dados_controle.data_alteracao,
-          dados_controle.data_criacao,
-          dados_controle.endereco,
-          dados_controle.entrevistado,
-          dados_controle.numero,
-          dados_controle.numero_cadastro,
-          dados_controle.observacoes_contato,
-          dados_controle.primeiro_responsavel_trabalha,
-          dados_controle.projeto_id,
-          dados_controle.projeto_nome,
-          dados_controle.segundo_responsavel_trabalha,
-          dados_controle.uf,
-          dados_controle.observacoes,
-          dados_controle.data_entrevista,
-          dados_controle.status_online,
-          dados_controle.cadastrador_id
-        );
-      }
+    const { dados, projeto_id, numero_cadastro, projeto_nome } = req.body;
+    if (!dados || !projeto_id || !numero_cadastro || !projeto_nome) {
+      return res.status(400).json({ error: 'Dados incompletos' });
     }
 
-      res.json(json); // Certifique-se de enviar uma resposta ao final
-  }
+    try {
+      // Processar cada um dos conjuntos de dados
+      await handleControle(dados.dados_controle, projeto_id, numero_cadastro, projeto_nome);
+      await handleResponsavel(dados.dados_responsavel1, projeto_id, numero_cadastro, projeto_nome, 'primeiroResponsavel');
+      await handleResponsavel(dados.dados_responsavel2, projeto_id, numero_cadastro, projeto_nome, 'segundoResponsavel');
+      await handleDespesas(dados.dados_despesas, projeto_id, numero_cadastro, projeto_nome);
+      await handleLazer(dados.dados_lazer, projeto_id, numero_cadastro, projeto_nome);
+      await handleComunitario(dados.dados_comunitario, projeto_id, numero_cadastro, projeto_nome);
+      await handleMoradia(dados.dados_moradia, projeto_id, numero_cadastro, projeto_nome);
+      await handleAnimais(dados.dados_animais, projeto_id, numero_cadastro, projeto_nome);
+      await handleMobilidade(dados.dados_mobilidade, projeto_id, numero_cadastro, projeto_nome);
+      await handleSustentabilidade(dados.dados_sustentabilidade, projeto_id, numero_cadastro, projeto_nome);
+      await handleMaria(dados.dados_maria, projeto_id, numero_cadastro, projeto_nome);
+      await handleDocumento(dados.dados_documento, projeto_id, numero_cadastro, projeto_nome);
+
+      // Outros handlers para os diferentes conjuntos de dados dados_controle: form.form_dados_controle,
+         
+         
+     
+      // await handleLazer(dados.dados_lazer, projeto_id, ...);
+      // await handleComunitario(dados.dados_comunitario, projeto_id, ...);
+
+      res.status(200).json({ success: true });
+    } catch (error) {
+      console.error('Erro ao processar os dados:', error);
+      res.status(500).json({ error: 'Erro interno no servidor' });
+    }
+  },
 };
+
+
+
 

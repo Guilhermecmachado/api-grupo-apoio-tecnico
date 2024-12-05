@@ -3,18 +3,22 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id, status_online) => {
+    inserir: (dados) => {
         return new Promise((accept, reject) => {
-
-            db.query('INSERT INTO gta_cadastro_sustentabilidade (data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, forma_coleta, numero_cadastro, separacao_material_reciclavel, projeto_id, projeto_nome, cadastrador_id, status_online],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    accept(results.insertId); //insertId
-                }
-            );
+            // Obter colunas e placeholders dinamicamente
+            const colunas = Object.keys(dados).join(', ');
+            const placeholders = Object.keys(dados).map(() => '?').join(', ');
+            const valores = Object.values(dados);
+    
+            const sql = `INSERT INTO gta_cadastro_sustentabilidade (${colunas}) VALUES (${placeholders})`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { reject(error); return; }
+                accept(results.insertId); // Retorna o ID do registro inserido
+            });
         });
     },
+    
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
@@ -24,17 +28,24 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, forma_coleta, separacao_material_reciclavel, cadastrador_id, status_online, data_alteracao) => {
+    atualizar: (id, campos) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_sustentabilidade SET forma_coleta =?, separacao_material_reciclavel=?,cadastrador_id=?, status_online=?,data_alteracao=? WHERE id = ?',
-                [forma_coleta, separacao_material_reciclavel, cadastrador_id, status_online, data_alteracao, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
+            // Construção dinâmica das colunas para o UPDATE
+            const colunas = Object.keys(campos).map(coluna => `${coluna} = ?`).join(', ');
+            const valores = Object.values(campos);
+    
+            // Adiciona o ID ao final da lista de valores
+            valores.push(id);
+    
+            const sql = `UPDATE gta_cadastro_sustentabilidade SET ${colunas} WHERE id = ?`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
         });
     },
+    
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

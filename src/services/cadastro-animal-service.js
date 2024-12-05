@@ -3,18 +3,21 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, status_online, cadastrador_id) => {
+    inserir: (dados) => {
         return new Promise((accept, reject) => {
-
-            db.query('INSERT INTO gta_cadastro_animal_moradia (animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome,status_online,cadastrador_id) VALUES (?,?,?,?,?,?,?,?)',
-                [animal_moradia, data_alteracao, data_criacao, numero_cadastro, projeto_id, projeto_nome, status_online, cadastrador_id],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    accept(results.insertId); //insertId
-                }
-            );
+            const colunas = Object.keys(dados).join(', ');
+            const placeholders = Object.keys(dados).map(() => '?').join(', ');
+            const valores = Object.values(dados);
+    
+            const sql = `INSERT INTO gta_cadastro_animal_moradia (${colunas}) VALUES (${placeholders})`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { reject(error); return; }
+                accept(results.insertId);
+            });
         });
     },
+    
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
@@ -24,17 +27,20 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, animal_moradia, cadastrador_id, status_online, data_alteracao) => {
+    atualizar: (id, dados) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_animal_moradia SET animal_moradia = ?, cadastrador_id = ?,status_online=?,data_alteracao = ? WHERE id = ?',
-                [animal_moradia, cadastrador_id, status_online, data_alteracao, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
+            const campos = Object.keys(dados).map((campo) => `${campo} = ?`).join(', ');
+            const valores = [...Object.values(dados), id];
+    
+            const sql = `UPDATE gta_cadastro_animal_moradia SET ${campos} WHERE id = ?`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
         });
     },
+    
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

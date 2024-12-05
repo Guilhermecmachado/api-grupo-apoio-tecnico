@@ -3,18 +3,40 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id, status_online) => {
-        return new Promise((accept, reject) => {
-
-            db.query('INSERT INTO gta_cadastro_mobilidade_urbana (data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhonete_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, forma_transporte, forma_transporte_outro, numero_cadastro, possui_veiculo_caminhao, possui_veiculo_caminhao_suv, possui_veiculo_carro, possui_veiculo_moto, regiao_trabalho, projeto_id, projeto_nome, cadastrador_id, status_online],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    accept(results.insertId); //insertId
-                }
-            );
+    atualizar: (id, campos) => {
+        return new Promise((aceito, rejeitado) => {
+            // Construir as colunas dinamicamente para o UPDATE
+            const colunas = Object.keys(campos).map(coluna => `${coluna} = ?`).join(', ');
+            const valores = Object.values(campos);
+    
+            // Adicionar o ID ao final da lista de valores
+            valores.push(id);
+    
+            const sql = `UPDATE gta_cadastro_mobilidade_urbana SET ${colunas} WHERE id = ?`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
         });
     },
+    
+    inserir: (campos) => {
+        return new Promise((accept, reject) => {
+            // Construir dinamicamente as colunas e os placeholders para o INSERT
+            const colunas = Object.keys(campos).join(', ');
+            const placeholders = Object.keys(campos).map(() => '?').join(', ');
+            const valores = Object.values(campos);
+    
+            const sql = `INSERT INTO gta_cadastro_mobilidade_urbana (${colunas}) VALUES (${placeholders})`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { reject(error); return; }
+                accept(results.insertId); // Retorna o ID do registro inserido
+            });
+        });
+    },
+    
 
     buscarTodos: () => {
         return new Promise((aceito, rejeitado) => {
@@ -24,21 +46,7 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, valor_carro, valor_caminhao, valor_caminhonete_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, status_online, data_alteracao) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query(
-                'UPDATE gta_cadastro_mobilidade_urbana SET possui_veiculo_carro=?, possui_veiculo_caminhao=?, possui_veiculo_caminhonete_suv=?, possui_veiculo_moto=?, forma_transporte=?, forma_transporte_outro=?, regiao_trabalho=?, cadastrador_id=?, status_online=?, data_alteracao=? WHERE id = ?',
-                [valor_carro, valor_caminhao, valor_caminhonete_suv, valor_moto, forma_transporte, forma_transporte_outro, regiao_trabalho, cadastrador_id, status_online, data_alteracao, id], // Removido a vírgula extra
-                (error, results) => {
-                    if (error) {
-                        rejeitado(error);
-                        return;
-                    }
-                    aceito(results);
-                }
-            );
-        });
-    },
+   
     
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {

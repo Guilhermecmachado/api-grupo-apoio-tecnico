@@ -3,16 +3,17 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (data_criacao, data_alteracao, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11,observacoes, projeto_id, projeto_nome, numero_cadastro, status_online, cadastrador_id) => {
-        return new Promise((accept, reject) => {
-
-            db.query('INSERT INTO gta_cadastro_documento (data_criacao, data_alteracao, documento1, documento2, documento3, documento4, documento5, documento6, documento7, documento8, documento9, documento10, documento11,observacoes, projeto_id, projeto_nome, numero_cadastro,status_online,cadastrador_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-                [data_criacao, data_alteracao, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11,observacoes, projeto_id, projeto_nome, numero_cadastro, status_online, cadastrador_id],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    accept(results.insertId); //insertId
-                }
-            );
+    atualizar: (id, dados) => {
+        return new Promise((aceito, rejeitado) => {
+            const campos = Object.keys(dados).map((campo) => `${campo}=?`).join(', ');
+            const valores = [...Object.values(dados), id];
+    
+            const sql = `UPDATE gta_cadastro_documento SET ${campos} WHERE id = ?`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
         });
     },
 
@@ -24,15 +25,18 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11,observacoes, cadastrador_id, status_online, data_alteracao) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_documento SET documento1=?, documento2=?, documento3=?, documento4=?, documento5=?, documento6=?, documento7=?, documento8=?, documento9=?, documento10=?, documento11=?,observacoes=?, cadastrador_id=?,status_online=?,data_alteracao=? WHERE id = ?',
-                [valor_documento1, valor_documento2, valor_documento3, valor_documento4, valor_documento5, valor_documento6, valor_documento7, valor_documento8, valor_documento9, valor_documento10, valor_documento11,observacoes, cadastrador_id, status_online, data_alteracao, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
+    inserir: (dados) => {
+        return new Promise((accept, reject) => {
+            const colunas = Object.keys(dados).join(', ');
+            const placeholders = Object.keys(dados).map(() => '?').join(', ');
+            const valores = Object.values(dados);
+    
+            const sql = `INSERT INTO gta_cadastro_documento (${colunas}) VALUES (${placeholders})`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { reject(error); return; }
+                accept(results.insertId);
+            });
         });
     },
     buscarUm: (id, numero_cadastro) => {

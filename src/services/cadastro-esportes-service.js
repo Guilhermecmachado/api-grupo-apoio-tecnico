@@ -4,16 +4,37 @@ const db = require('../../db');
 
 
 module.exports = {
-    inserir: (associado_bairro, data_criacao, data_alteracao, entidade_recriativas, entidades_religiosas, especifique, movimento_luta_moradia, outros, partidos_politicos, sindicatos, numero_cadastro, projeto_id, projeto_nome, cadastrador_id, status_online) => {
+    atualizar: (id, campos) => {
+        return new Promise((aceito, rejeitado) => {
+            // Montar dinamicamente as colunas e os valores para o UPDATE
+            const colunas = Object.keys(campos).map(coluna => `${coluna} = ?`).join(', ');
+            const valores = Object.values(campos);
+    
+            // Adicionar o ID ao final da lista de valores
+            valores.push(id);
+    
+            const sql = `UPDATE gta_cadastro_esporte_organizacao_comunitaria SET ${colunas} WHERE id = ?`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
+        });
+    },
+    
+    inserir: (campos) => {
         return new Promise((accept, reject) => {
-
-            db.query('INSERT INTO gta_cadastro_esporte_organizacao_comunitaria (associacao_bairro, data_criacao, data_alteracao, entidade_recreativas, entidade_relegiosa, especifique, movimento_luta_moradia, outros, partidos_politica, sindicatos, numero_cadastro, projeto_id, projeto_nome,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-                [associado_bairro, data_criacao, data_alteracao, entidade_recriativas, entidades_religiosas, especifique, movimento_luta_moradia, outros, partidos_politicos, sindicatos, numero_cadastro, projeto_id, projeto_nome, cadastrador_id, status_online],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    accept(results.insertId); //insertId
-                }
-            );
+            // Extrair as colunas e os valores dinamicamente
+            const colunas = Object.keys(campos).join(', ');
+            const placeholders = Object.keys(campos).map(() => '?').join(', ');
+            const valores = Object.values(campos);
+    
+            const sql = `INSERT INTO gta_cadastro_esporte_organizacao_comunitaria (${colunas}) VALUES (${placeholders})`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { reject(error); return; }
+                accept(results.insertId); // Retorna o ID do registro inserido
+            });
         });
     },
 
@@ -25,17 +46,7 @@ module.exports = {
             });
         });
     },
-    atualizar: (id, valor_bairro, valor_entidade_recriativa, valor_entidade_religiosa, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, especifique, cadastrador_id, status_online, data_alteracao) => {
-        return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_esporte_organizacao_comunitaria SET associacao_bairro=?,  entidade_recreativas=?, entidade_relegiosa=?, movimento_luta_moradia=?, outros=?, partidos_politica=?, sindicatos=?, especifique=?, cadastrador_id=?,status_online=?,data_alteracao=? WHERE id = ?',
-                [valor_bairro, valor_entidade_recriativa, valor_entidade_religiosa, valor_movimento_luta, valor_outros, valor_partido_politico, valor_sindicato, especifique, cadastrador_id, status_online, data_alteracao, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
-        });
-    },
+
     buscarUm: (id, numero_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 

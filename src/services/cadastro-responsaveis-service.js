@@ -1,20 +1,41 @@
 
 const db = require('../../db');
+function formatarValor(valor) {
+    if (typeof valor === 'string') {
+        // Se a string estiver vazia, retorna 0
+        if (valor.trim() === '') {
+            return 0;
+        }
+        // Remove a máscara: R$, pontos de milhar e vírgula
+        valor = valor.replace('R$', '').replace(/\./g, '').replace(',', '.');
+        return parseFloat(valor);
+    }
+    return valor; // Caso já seja número, retorna sem alteração
+}
 
 
 module.exports = {
-    inserir: (cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online) => {
-        return new Promise((accept, reject) => {
+    inserir: (campos) => {
+        return new Promise((aceito, rejeitado) => {
+            // Montar dinamicamente as colunas e os valores para o INSERT
 
-            db.query('INSERT INTO gta_cadastro_responsaveis (cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18,nome_tutor,cpf_tutor,cadastrador_id,status_online) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)',
-                [cadastro_cohab, cpf, data_criacao, data_alteracao, data_nascimento, naturalidade, nis, nome_completo, numero_cadastro, pais, projeto_id, projeto_nome, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online],
-                (error, results) => {
-                    if (error) { reject(error); return; }
-                    accept(results.insertId); //insertId
-                }
-            );
+            campos.valor_renda_bruta  = formatarValor(campos.valor_renda_bruta);
+            campos.valor_renda_declarada_liquida  = formatarValor(campos.valor_renda_declarada_liquida);
+            campos.valor_renda_liquida = formatarValor(campos.valor_renda_liquida);
+
+            const colunas = Object.keys(campos).join(', ');
+            const placeholders = Object.keys(campos).map(() => '?').join(', ');
+            const valores = Object.values(campos);
+    
+            const sql = `INSERT INTO gta_cadastro_responsaveis (${colunas}) VALUES (${placeholders})`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results.insertId);
+            });
         });
     },
+    
 
     inserirImport: (projeto_id, projeto_nome, nome_completo, tipo_cadastro, nis, numero_cadastro, data_criacao, data_alteracao) => {
         return new Promise((accept, reject) => {
@@ -49,17 +70,30 @@ module.exports = {
         });
     },
     
-    atualizar: (id, cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online, data_alteracao) => {
+    atualizar: (id, campos) => {
         return new Promise((aceito, rejeitado) => {
-            db.query('UPDATE gta_cadastro_responsaveis SET cadastro_cohab=?, cpf=?, data_nascimento=?, naturalidade=?, nis=?, nome_completo=?, pais=?, rg=?, rg_data_expedicao=?, rg_uf=?, status_cadastro=?, tipo_cadastro=?, uf=?,contato1=?,contato2=?,tipo_contato1=?,tipo_contato2=?,cpf_cnpj_fonte_pegadora=?,tipo_renda=?, data_admissao=?, valor_renda_bruta=?, valor_renda_liquida=?, mes_referencia_renda=?, data_inicio_renda_declarada=?, valor_renda_declarada_liquida=?, mes_referencia_renda_declarada=?, beneficio_prestacao=?, programa_bolsa_familia=?, menor_18=?, nome_tutor=?, cpf_tutor=?, cadastrador_id=?,status_online=?,data_alteracao=? WHERE id = ?',
-                [cadastro_cohab, cpf, data_nascimento, naturalidade, nis, nome_completo, pais, rg, rg_data_expedicao, rg_uf, status_cadastro, tipo_cadastro, uf, contato1, contato2, tipo_contato1, tipo_contato2, cpf_cnpj_fonte_pegadora,tipo_renda, data_admissao, valor_renda_bruta, valor_renda_liquida, mes_referencia_renda, data_inicio_renda_declarada, valor_renda_declarada_liquida, mes_referencia_renda_declarada, beneficio_prestacao, programa_bolsa_familia, menor_18, nome_tutor, cpf_tutor, cadastrador_id, status_online, data_alteracao, id],
-                (error, results) => {
-                    if (error) { rejeitado(error); return; }
-                    aceito(results);
-                }
-            );
+
+
+            campos.valor_renda_bruta  = formatarValor(campos.valor_renda_bruta);
+            campos.valor_renda_declarada_liquida  = formatarValor(campos.valor_renda_declarada_liquida);
+            campos.valor_renda_liquida = formatarValor(campos.valor_renda_liquida);
+           
+            // Montar dinamicamente as colunas e os valores para o UPDATE
+            const colunas = Object.keys(campos).map(coluna => `${coluna} = ?`).join(', ');
+            const valores = Object.values(campos);
+    
+            // Adicionar o ID ao final da lista de valores
+            valores.push(id);
+    
+            const sql = `UPDATE gta_cadastro_responsaveis SET ${colunas} WHERE id = ?`;
+    
+            db.query(sql, valores, (error, results) => {
+                if (error) { rejeitado(error); return; }
+                aceito(results);
+            });
         });
     },
+    
     buscarUm: (id, numero_cadastro, tipo_cadastro) => {
         return new Promise((aceito, rejeitado) => {
 
