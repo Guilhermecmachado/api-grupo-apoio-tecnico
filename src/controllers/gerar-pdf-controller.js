@@ -466,7 +466,9 @@ page2.drawText('R$' + dados_responsavel1.valor_renda_liquida.toString(), {
     font: font,
     color: rgb(0, 0, 0),
 });
-
+if(dados_responsavel1.mes_referencia_renda_declarada == null){
+    dados_responsavel1.mes_referencia_renda_declarada =''
+}
 page2.drawText( dados_responsavel1.mes_referencia_renda, {
     x: 398, // Ajuste conforme necessário
     y: height - 168, // Ajuste conforme necessário
@@ -897,7 +899,9 @@ const formattedDate3 = `${rawDate3.slice(0, 2)}  ${rawDate3.slice(2, 4)}  ${rawD
                 font: font,
                 color: rgb(0, 0, 0),
             });
-
+if(dados_responsavel2.mes_referencia_renda == null){
+    dados_responsavel2.mes_referencia_renda =''
+}
             page3.drawText(dados_responsavel2.mes_referencia_renda, {
                 x: 404, // Ajuste conforme necessário
                 y: height - 439, // Ajuste conforme necessário
@@ -924,6 +928,9 @@ const formattedDate4 = `${rawDate4.slice(0, 2)}  ${rawDate4.slice(2, 4)}  ${rawD
                 font: font,
                 color: rgb(0, 0, 0),
             });
+            if(dados_responsavel2.mes_referencia_renda_declarada == null){
+                dados_responsavel2.mes_referencia_renda_declarada =''
+            }
             page3.drawText(dados_responsavel2.mes_referencia_renda_declarada, {
                 x: 382, // Ajuste conforme necessário
                 y: height - 499, // Ajuste conforme necessário
