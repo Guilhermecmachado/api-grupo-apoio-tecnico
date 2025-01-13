@@ -1162,9 +1162,9 @@ fs.writeFileSync(outputPath, pdfBytes);
 
 // Configuração do AWS S3
 const s3 = new AWS.S3({
-    accessKeyId: process.env.AMAZON_KEY_ACESS, // Configure isso nas variáveis de ambiente
-    secretAccessKey: process.env.SECRET_ACESS_KEY,
-    region: process.env.AWS_REGION // Exemplo: 'us-east-2'
+    accessKeyId: 'AKIATCKATY4D25YP4BDU', // Configure isso nas variáveis de ambiente
+    secretAccessKey: 'POMJt6f/AUqI4Ljk48oxhBRJHCQxRDS8VDgFBf2O',
+    region:'us-east-2' // Exemplo: 'us-east-2'
 });
 
 // Ler o conteúdo do arquivo para upload
@@ -1172,7 +1172,7 @@ const fileContent = fs.readFileSync(outputPath);
 
 // Parâmetros do upload
 const params = {
-    Bucket: process.env.AWS_BUCKET_NAME, // Nome do bucket
+    Bucket:'mo-gta', // Nome do bucket
     Key: `termosgerados/mo_preenchido-${dados_responsavel1.numero_cadastro}.pdf`, // Caminho e nome do arquivo no bucket
     Body: fileContent,
     ContentType: 'application/pdf' // Tipo de conteúdo
