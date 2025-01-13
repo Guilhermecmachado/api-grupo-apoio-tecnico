@@ -60,6 +60,7 @@ app.use('/cadastro-entidades', routes.cadastroEntidades)
 app.use('/cadastra-documento', routes.cadastroDocumento)
 app.use('/loop',routes.loop)
 app.use('/cria-tudo',routes.criaTudo)
+app.use('/mo-pdf',routes.moPdf)
 
 
 function normalizePort(val) {
