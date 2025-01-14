@@ -1166,7 +1166,7 @@ if (!fs.existsSync(dir)) {
 
 // Salvar o PDF no sistema de arquivos
 fs.writeFileSync(outputPath, pdfBytes);
-
+console.log('chegou até o s3 da amazon para fazer a requisicao')
 // Configuração do AWS S3
 const s3 = new AWS.S3({
     accessKeyId: 'AKIATCKATY4D25YP4BDU', // Configure isso nas variáveis de ambiente
