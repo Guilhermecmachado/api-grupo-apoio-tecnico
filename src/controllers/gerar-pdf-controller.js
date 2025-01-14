@@ -1174,6 +1174,8 @@ const s3 = new AWS.S3({
     region:'us-east-2' // Exemplo: 'us-east-2'
 });
 
+
+
 // Ler o conteúdo do arquivo para upload
 const fileContent = fs.readFileSync(outputPath);
 
