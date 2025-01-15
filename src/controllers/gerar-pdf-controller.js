@@ -1198,7 +1198,20 @@ const fileName = `mo_preenchido-${dados_responsavel1.numero_cadastro}.pdf`;
 cadastro_arquivo.inserir(s3Url,dados_responsavel1.numero_cadastro,dados_responsavel1.nome_completo,fileName,dataCriacao)
 
 
-// Opcional: Excluir o arquivo local após o upload
+
+// Configurar cabeçalhos para download
+res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
+res.setHeader('Content-Type', 'application/pdf');
+
+// Enviar o arquivo como resposta para o cliente
+res.download(outputPath, fileName, (err) => {
+    if (err) {
+        console.error('Erro ao enviar o arquivo:', err);
+        return res.status(500).json({ message: 'Erro ao enviar o arquivo.' });
+    }
+    console.log('Arquivo enviado para o cliente com sucesso.');
+});
+
 
 // Retornar a URL do arquivo no S3 e enviar o PDF gerado como resposta
 return res.status(200).json({
