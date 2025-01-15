@@ -1199,7 +1199,6 @@ cadastro_arquivo.inserir(s3Url,dados_responsavel1.numero_cadastro,dados_responsa
 
 
 // Opcional: Excluir o arquivo local após o upload
-fs.unlinkSync(outputPath);
 
 // Retornar a URL do arquivo no S3 e enviar o PDF gerado como resposta
 return res.status(200).json({
