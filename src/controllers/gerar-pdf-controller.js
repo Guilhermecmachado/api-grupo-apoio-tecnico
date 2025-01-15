@@ -1168,22 +1168,20 @@ if (!fs.existsSync(dir)) {
 
 // Salvar o PDF no sistema de arquivos
 fs.writeFileSync(outputPath, pdfBytes);
-console.log('chegou até o s3 da amazon para fazer a requisicao')
+
 // Configuração do AWS S3
 const s3 = new AWS.S3({
     accessKeyId: 'AKIATCKATY4D25YP4BDU', // Configure isso nas variáveis de ambiente
     secretAccessKey: 'POMJt6f/AUqI4Ljk48oxhBRJHCQxRDS8VDgFBf2O',
-    region:'us-east-2' // Exemplo: 'us-east-2'
+    region: 'us-east-2' // Exemplo: 'us-east-2'
 });
-
-
 
 // Ler o conteúdo do arquivo para upload
 const fileContent = fs.readFileSync(outputPath);
 
-// Parâmetros do upload
+// Parâmetros do upload para o S3
 const params = {
-    Bucket:'mo-gta', // Nome do bucket
+    Bucket: 'mo-gta', // Nome do bucket
     Key: `termosgerados/mo_preenchido-${dados_responsavel1.numero_cadastro}.pdf`, // Caminho e nome do arquivo no bucket
     Body: fileContent,
     ContentType: 'application/pdf' // Tipo de conteúdo
@@ -1192,20 +1190,19 @@ const params = {
 // Fazer o upload para o S3
 const uploadResult = await s3.upload(params).promise();
 const s3Url = uploadResult.Location;
+
+// Dados adicionais
 const dataCriacao = moment().format('DD/MM/YYYY');
 const fileName = `mo_preenchido-${dados_responsavel1.numero_cadastro}.pdf`;
 
-
-
-cadastro_arquivo.inserir(s3Url,dados_responsavel1.numero_cadastro,dados_responsavel1.nome_completo,fileName,dataCriacao)
-
-
+// Inserir no banco de dados com a URL do S3
+cadastro_arquivo.inserir(s3Url, dados_responsavel1.numero_cadastro, dados_responsavel1.nome_completo, fileName, dataCriacao);
 
 // Configurar cabeçalhos para download
 res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
 res.setHeader('Content-Type', 'application/pdf');
 
-// Enviar o arquivo como resposta para o cliente
+// Enviar o arquivo para o cliente
 res.download(outputPath, fileName, (err) => {
     if (err) {
         console.error('Erro ao enviar o arquivo:', err);
@@ -1216,10 +1213,7 @@ res.download(outputPath, fileName, (err) => {
 
 
 // Retornar a URL do arquivo no S3 e enviar o PDF gerado como resposta
-return res.status(200).json({
-    message: 'PDF salvo no S3 com sucesso!',
-    s3Url: uploadResult.Location
-});
+
          
         } catch (error) {
             console.error('Erro ao gerar o PDF:', error);
