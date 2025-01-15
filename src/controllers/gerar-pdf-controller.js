@@ -466,8 +466,8 @@ page2.drawText('R$' + dados_responsavel1.valor_renda_liquida.toString(), {
     font: font,
     color: rgb(0, 0, 0),
 });
-if(dados_responsavel1.mes_referencia_renda_declarada == null){
-    dados_responsavel1.mes_referencia_renda_declarada =''
+if(dados_responsavel1.mes_referencia_renda == null){
+    dados_responsavel1.mes_referencia_renda =''
 }
 page2.drawText( dados_responsavel1.mes_referencia_renda, {
     x: 398, // Ajuste conforme necessário
