@@ -1212,9 +1212,7 @@ res.download(outputPath, fileName, (err) => {
 });
 
 
-// Retornar a URL do arquivo no S3 e enviar o PDF gerado como resposta
-
-         
+// Retornar a URL do arquivo no S3 e enviar o PDF gerado como respost
         } catch (error) {
             console.error('Erro ao gerar o PDF:', error);
             res.status(500).send('Erro ao gerar o PDF');
