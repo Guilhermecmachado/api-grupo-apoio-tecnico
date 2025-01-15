@@ -40,9 +40,11 @@ module.exports = {
             // Configurar a fonte
             const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
             const fontSize = 12;
-
+            function safeString(value) {
+                return value == null ? "" : value.toString();
+            }
             // Preencher o campo "Nome completo"
-            page.drawText(`${dados_responsavel1.nome_completo}`, {
+            page.drawText(safeString(dados_responsavel1.nome_completo), {
                 x: 60, // Ajuste conforme necessário (posição horizontal)
                 y: height - 190, // Ajuste conforme necessário (posição vertical)
                 size: fontSize,
@@ -50,8 +52,8 @@ module.exports = {
                 color: rgb(0, 0, 0), // Preto
             });
             const dataNascimentoFormatada = dados_responsavel1.data_nascimento.replace(/\//g, '  ');
-            page.drawText(`${dataNascimentoFormatada
-                }`, {
+            page.drawText(safeString(dataNascimentoFormatada
+            ), {
                 x: 66, // Ajuste conforme necessário (posição horizontal)
                 y: height - 235, // Ajuste conforme necessário (posição vertical)
                 size: fontSize,
@@ -62,7 +64,7 @@ module.exports = {
             let sexo
             if (dados_demografico[0].genero == 'MASCULINO') {
                 sexo = 1
-                page.drawText(sexo.toString(), {
+                page.drawText(safeString(sexo.toString()), {
                     x: 167, // Ajuste conforme necessário
                     y: height - 235, // Ajuste conforme necessário
                     width: 18,
@@ -71,7 +73,7 @@ module.exports = {
                 });
             } else {
                 sexo = 2
-                page.drawText(sexo.toString(), {
+                page.drawText(safeString(sexo.toString()), {
                     x: 167, // Ajuste conforme necessário
                     y: height - 235, // Ajuste conforme necessário
                     width: 18,
@@ -83,7 +85,7 @@ module.exports = {
             let nacionalidade
             if (dados_responsavel1.pais == 'BRASIL' || dados_responsavel1.pais == 'brasil') {
                 nacionalidade = 1
-                page.drawText(nacionalidade.toString(), {
+                page.drawText(safeString(nacionalidade.toString()), {
                     x: 253, // Ajuste conforme necessário
                     y: height - 235, // Ajuste conforme necessário
                     width: 18,
@@ -92,7 +94,7 @@ module.exports = {
                 });
             } else {
                 nacionalidade = 3
-                page.drawText(nacionalidade.toString(), {
+                page.drawText(safeString(nacionalidade.toString()), {
                     x: 253, // Ajuste conforme necessário
                     y: height - 235, // Ajuste conforme necessário
                     width: 18,
@@ -101,14 +103,14 @@ module.exports = {
                 });
             }
             //cidade estado
-            page.drawText(dados_responsavel1.uf, {
+            page.drawText(safeString(dados_responsavel1.uf), {
                 x: 407, // Ajuste conforme necessário
                 y: height - 235, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page.drawText(dados_responsavel1.naturalidade, {
+            page.drawText(safeString(dados_responsavel1.naturalidade), {
                 x: 430, // Ajuste conforme necessário
                 y: height - 235, // Ajuste conforme necessário
                 size: fontSize,
@@ -116,7 +118,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
 
-            page.drawText(req.body.nome_mae1, {
+            page.drawText(safeString(req.body.nome_mae1), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 275, // Ajuste conforme necessário
                 size: fontSize,
@@ -124,7 +126,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             //doducmentos
-            page.drawText(req.body.tipo_documento1, {
+            page.drawText(safeString(req.body.tipo_documento1), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 320, // Ajuste conforme necessário
                 size: fontSize,
@@ -132,7 +134,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             if (req.body.tipo_documento1 == 'RG') {
-                page.drawText(dados_responsavel1.rg, {
+                page.drawText(safeString(dados_responsavel1.rg), {
                     x: 203, // Ajuste conforme necessário
                     y: height - 320, // Ajuste conforme necessário
                     size: fontSize,
@@ -140,7 +142,7 @@ module.exports = {
                     color: rgb(0, 0, 0),
                 });
             } else {
-                page.drawText(dados_responsavel1.cpf, {
+                page.drawText(safeString(dados_responsavel1.cpf), {
                     x: 203, // Ajuste conforme necessário
                     y: height - 320, // Ajuste conforme necessário
                     size: fontSize,
@@ -151,7 +153,7 @@ module.exports = {
 
             //orgao emissor 
 
-            page.drawText(dados_responsavel1.rg_uf, {
+            page.drawText(safeString(dados_responsavel1.rg_uf), {
                 x: 337, // Ajuste conforme necessário
                 y: height - 320, // Ajuste conforme necessário
                 size: fontSize,
@@ -159,7 +161,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             // uf denovo
-            page.drawText(dados_responsavel1.uf, {
+            page.drawText(safeString(dados_responsavel1.uf), {
                 x: 429, // Ajuste conforme necessário
                 y: height - 320, // Ajuste conforme necessário
                 size: fontSize,
@@ -167,7 +169,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             //data documento
-            page.drawText(dados_responsavel1.rg_data_expedicao.replace(/\//g, '  '), {
+            page.drawText(safeString(dados_responsavel1.rg_data_expedicao.replace(/\//g, '  ')), {
                 x: 462, // Ajuste conforme necessário
                 y: height - 320, // Ajuste conforme necessário
                 size: fontSize,
@@ -175,7 +177,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             //nis
-            page.drawText(dados_responsavel1.nis, {
+            page.drawText(safeString(dados_responsavel1.nis), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 358, // Ajuste conforme necessário
                 size: fontSize,
@@ -183,7 +185,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             //cpf 
-            page.drawText(dados_responsavel1.cpf, {
+            page.drawText(safeString(dados_responsavel1.cpf), {
                 x: 205, // Ajuste conforme necessário
                 y: height - 358, // Ajuste conforme necessário
                 size: fontSize,
@@ -191,7 +193,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
             //profissao 
-            page.drawText(dados_demografico[0].profissao, {
+            page.drawText(safeString(dados_demografico[0].profissao), {
                 x: 375, // Ajuste conforme necessário
                 y: height - 358, // Ajuste conforme necessário
                 size: fontSize,
@@ -200,7 +202,7 @@ module.exports = {
             });
 
             //endereco
-            page.drawText(dados_controle.endereco, {
+            page.drawText(safeString(dados_controle.endereco), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 400, // Ajuste conforme necessário
                 size: fontSize,
@@ -208,7 +210,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
 
-            page.drawText(dados_controle.numero, {
+            page.drawText(safeString(dados_controle.numero), {
                 x: 408, // Ajuste conforme necessário
                 y: height - 400, // Ajuste conforme necessário
                 size: fontSize,
@@ -216,7 +218,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
 
-            page.drawText(dados_controle.complemento, {
+            page.drawText(safeString(dados_controle.complemento), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 437, // Ajuste conforme necessário
                 size: fontSize,
@@ -224,7 +226,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
 
-            page.drawText(dados_controle.cidade, {
+            page.drawText(safeString(dados_controle.cidade), {
                 x: 310, // Ajuste conforme necessário
                 y: height - 437, // Ajuste conforme necessário
                 size: fontSize,
@@ -232,7 +234,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
 
-            page.drawText(dados_controle.uf, {
+            page.drawText(safeString(dados_controle.uf), {
                 x: 422, // Ajuste conforme necessário
                 y: height - 437, // Ajuste conforme necessário
                 size: fontSize,
@@ -240,7 +242,7 @@ module.exports = {
                 color: rgb(0, 0, 0),
             });
 
-            page.drawText(dados_controle.cep, {
+            page.drawText(safeString(dados_controle.cep), {
                 x: 465, // Ajuste conforme necessário
                 y: height - 437, // Ajuste conforme necessário
                 size: fontSize,
@@ -251,7 +253,7 @@ module.exports = {
             //contatos 
             let contato
             if (dados_responsavel1.tipo_contato1 == 'RESIDENCIAL') {
-                page.drawText(dados_responsavel1.contato1, {
+                page.drawText(safeString(dados_responsavel1.contato1), {
                     x: 60, // Ajuste conforme necessário
                     y: height - 496, // Ajuste conforme necessário
                     size: fontSize,
@@ -259,7 +261,7 @@ module.exports = {
                     color: rgb(0, 0, 0),
                 });
             } else if (dados_responsavel1.tipo_contato1 == 'CELULAR') {
-                page.drawText(dados_responsavel1.contato1, {
+                page.drawText(safeString(dados_responsavel1.contato1), {
                     x: 216, // Ajuste conforme necessário
                     y: height - 496, // Ajuste conforme necessário
                     size: fontSize,
@@ -267,7 +269,7 @@ module.exports = {
                     color: rgb(0, 0, 0),
                 });
             } else if (dados_responsavel1.tipo_contato1 == 'RECADO') {
-                page.drawText(dados_responsavel1.contato1, {
+                page.drawText(safeString(dados_responsavel1.contato1), {
                     x: 371, // Ajuste conforme necessário
                     y: height - 496, // Ajuste conforme necessário
                     size: fontSize,
@@ -431,7 +433,7 @@ module.exports = {
             }
             //pagina 2
 //dados de renda
-page2.drawText(dados_responsavel1.cpf_cnpj_fonte_pegadora, {
+page2.drawText(safeString(dados_responsavel1.cpf_cnpj_fonte_pegadora), {
     x: 60, // Ajuste conforme necessário
     y: height - 130 , // Ajuste conforme necessário
     size: fontSize,
@@ -444,14 +446,14 @@ const rawDate = dados_responsavel1.data_admissao; // Exemplo: "01012023"
 const formattedDate = `${rawDate.slice(0, 2)}  ${rawDate.slice(2, 4)}  ${rawDate.slice(4)}`;
 
 // Desenhar no PDF
-page2.drawText(formattedDate, {
+page2.drawText(safeString(formattedDate), {
     x: 427, // Ajuste conforme necessário
     y: height - 130, // Ajuste conforme necessário
     size: fontSize,
     font: font,
     color: rgb(0, 0, 0),
 });
-page2.drawText('R$' + dados_responsavel1.valor_renda_bruta.toString(), {
+page2.drawText(safeString('R$' + dados_responsavel1.valor_renda_bruta.toString()), {
     x: 60, // Ajuste conforme necessário
     y: height - 168, // Ajuste conforme necessário
     size: fontSize,
@@ -459,7 +461,7 @@ page2.drawText('R$' + dados_responsavel1.valor_renda_bruta.toString(), {
     color: rgb(0, 0, 0),
 });
 
-page2.drawText('R$' + dados_responsavel1.valor_renda_liquida.toString(), {
+page2.drawText(safeString('R$' + dados_responsavel1.valor_renda_liquida.toString()), {
     x: 238, // Ajuste conforme necessário
     y: height - 168, // Ajuste conforme necessário
     size: fontSize,
@@ -469,7 +471,7 @@ page2.drawText('R$' + dados_responsavel1.valor_renda_liquida.toString(), {
 if(dados_responsavel1.mes_referencia_renda == null){
     dados_responsavel1.mes_referencia_renda =''
 }
-page2.drawText( dados_responsavel1.mes_referencia_renda, {
+page2.drawText( safeString(dados_responsavel1.mes_referencia_renda), {
     x: 398, // Ajuste conforme necessário
     y: height - 168, // Ajuste conforme necessário
     size: fontSize,
@@ -480,14 +482,14 @@ const rawDate2 = dados_responsavel1.data_inicio_renda_declarada; // Exemplo: "01
 
 // Formatar a data com espaços
 const formattedDate2 = `${rawDate2.slice(0, 2)}  ${rawDate2.slice(2, 4)}  ${rawDate2.slice(4)}`;
-page2.drawText( formattedDate2, {
+page2.drawText( safeString(formattedDate2), {
     x: 60, // Ajuste conforme necessário
     y: height - 230, // Ajuste conforme necessário
     size: fontSize,
     font: font,
     color: rgb(0, 0, 0),
 });
-page2.drawText('R$' + dados_responsavel1.valor_renda_declarada_liquida.toString(), {
+page2.drawText(safeString('R$' + dados_responsavel1.valor_renda_declarada_liquida.toString()), {
     x: 217, // Ajuste conforme necessário
     y: height - 233, // Ajuste conforme necessário
     size: fontSize,
@@ -497,7 +499,7 @@ page2.drawText('R$' + dados_responsavel1.valor_renda_declarada_liquida.toString(
 let mes_declarada =''
 if(dados_responsavel1.mes_referencia_renda_declarada == null || dados_responsavel1.mes_referencia_renda_declarada == undefined){
     mes_declarada =''
-    page2.drawText( mes_declarada, {
+    page2.drawText( safeString(mes_declarada), {
         x: 381, // Ajuste conforme necessário
         y: height - 233, // Ajuste conforme necessário
         size: fontSize,
@@ -505,7 +507,7 @@ if(dados_responsavel1.mes_referencia_renda_declarada == null || dados_responsave
         color: rgb(0, 0, 0),
     });
 }else{
-    page2.drawText( dados_responsavel1.mes_referencia_renda_declarada, {
+    page2.drawText( safeString(dados_responsavel1.mes_referencia_renda_declarada), {
         x: 381, // Ajuste conforme necessário
         y: height - 233, // Ajuste conforme necessário
         size: fontSize,
@@ -574,14 +576,14 @@ if(dados_responsavel1.menor_18 =='MENOR EMANCIPADO'){
     });
 }
 
-page2.drawText( dados_responsavel1.nome_tutor, {
+page2.drawText( safeString(dados_responsavel1.nome_tutor), {
     x: 60, // Ajuste conforme necessário
     y: height - 488, // Ajuste conforme necessário
     size: fontSize,
     font: font,
     color: rgb(0, 0, 0),
 });
-page2.drawText( dados_responsavel1.cpf_tutor, {
+page2.drawText( safeString(dados_responsavel1.cpf_tutor), {
     x: 398, // Ajuste conforme necessário
     y: height - 488, // Ajuste conforme necessário
     size: fontSize,
@@ -589,7 +591,7 @@ page2.drawText( dados_responsavel1.cpf_tutor, {
     color: rgb(0, 0, 0),
 });
 
-page2.drawText( dados_responsavel2.nome_completo, {
+page2.drawText(safeString( dados_responsavel2.nome_completo), {
     x: 60, // Ajuste conforme necessário
     y: height - 549, // Ajuste conforme necessário
     size: fontSize,
@@ -597,7 +599,7 @@ page2.drawText( dados_responsavel2.nome_completo, {
     color: rgb(0, 0, 0),
 });
 
-page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
+page2.drawText( safeString(dados_responsavel2.data_nascimento.replace(/\//g, '  ')), {
     x: 63, // Ajuste conforme necessário
     y: height - 596, // Ajuste conforme necessário
     size: fontSize,
@@ -609,7 +611,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
             let nacionalidade2
             if (dados_responsavel2.pais == 'BRASIL' || dados_responsavel2.pais == 'brasil') {
                 nacionalidade2 = 1
-                page2.drawText(nacionalidade2.toString(), {
+                page2.drawText(safeString(nacionalidade2.toString()), {
                     x: 253, // Ajuste conforme necessário
                     y: height - 596, // Ajuste conforme necessário
                     width: 18,
@@ -618,7 +620,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                 });
             } else {
                 nacionalidade2 = 3
-                page2.drawText(nacionalidade2.toString(), {
+                page2.drawText(safeString(nacionalidade2.toString()), {
                     x: 253, // Ajuste conforme necessário
                     y: height - 596, // Ajuste conforme necessário
                     width: 18,
@@ -627,14 +629,14 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                 });
             }
             //cidade estado
-            page2.drawText(dados_responsavel2.uf, {
+            page2.drawText(safeString(dados_responsavel2.uf), {
                 x: 407, // Ajuste conforme necessário
                 y: height - 596, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page2.drawText(dados_responsavel2.naturalidade, {
+            page2.drawText(safeString(dados_responsavel2.naturalidade), {
                 x: 430, // Ajuste conforme necessário
                 y: height - 596, // Ajuste conforme necessário
                 size: fontSize,
@@ -643,7 +645,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
             });
 
 
-            page2.drawText(req.body.nome_mae2, {
+            page2.drawText(safeString(req.body.nome_mae2), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 632, // Ajuste conforme necessário
                 size: fontSize,
@@ -651,7 +653,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                 color: rgb(0, 0, 0),
             });
 
-            page2.drawText(req.body.nome_mae2, {
+            page2.drawText(safeString(req.body.nome_mae2), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 632, // Ajuste conforme necessário
                 size: fontSize,
@@ -659,28 +661,28 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                 color: rgb(0, 0, 0),
             });
             
-            page2.drawText(dados_responsavel2.rg, {
+            page2.drawText(safeString(dados_responsavel2.rg), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 669, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page2.drawText(dados_responsavel2.rg_uf, {
+            page2.drawText(safeString(dados_responsavel2.rg_uf), {
                 x: 191, // Ajuste conforme necessário
                 y: height - 669, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page2.drawText(dados_responsavel2.uf, {
+            page2.drawText(safeString(dados_responsavel2.uf), {
                 x: 307, // Ajuste conforme necessário
                 y: height - 669, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page2.drawText(dados_responsavel2.rg_data_expedicao.replace(/\//g, '  '), {
+            page2.drawText(safeString(dados_responsavel2.rg_data_expedicao.replace(/\//g, '  ')), {
                 x: 341, // Ajuste conforme necessário
                 y: height - 669, // Ajuste conforme necessário
                 size: fontSize,
@@ -688,7 +690,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                 color: rgb(0, 0, 0),
             });
 
-            page2.drawText(dados_responsavel2.nis, {
+            page2.drawText(safeString(dados_responsavel2.nis), {
                 x: 434, // Ajuste conforme necessário
                 y: height - 669, // Ajuste conforme necessário
                 size: fontSize,
@@ -696,7 +698,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                 color: rgb(0, 0, 0),
             });
 
-            page2.drawText(dados_responsavel2.cpf, {
+            page2.drawText(safeString(dados_responsavel2.cpf), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 707, // Ajuste conforme necessário
                 size: fontSize,
@@ -705,7 +707,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
             });
 
             if (dados_responsavel2.tipo_contato1 == 'RESIDENCIAL') {
-                page2.drawText(dados_responsavel2.contato1, {
+                page2.drawText(safeString(dados_responsavel2.contato1), {
                     x: 60, // Ajuste conforme necessário
                     y: height - 757, // Ajuste conforme necessário
                     size: fontSize,
@@ -713,7 +715,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                     color: rgb(0, 0, 0),
                 });
             } else if (dados_responsavel2.tipo_contato1 == 'CELULAR') {
-                page2.drawText(dados_responsavel2.contato1, {
+                page2.drawText(safeString(dados_responsavel2.contato1), {
                     x: 217, // Ajuste conforme necessário
                     y: height - 757, // Ajuste conforme necessário
                     size: fontSize,
@@ -721,7 +723,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
                     color: rgb(0, 0, 0),
                 });
             } else if (dados_responsavel2.tipo_contato1 == 'RECADO') {
-                page2.drawText(dados_responsavel2.contato1, {
+                page2.drawText(safeString(dados_responsavel2.contato1), {
                     x: 372, // Ajuste conforme necessário
                     y: height - 757, // Ajuste conforme necessário
                     size: fontSize,
@@ -867,7 +869,7 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
             }
 
 
-            page3.drawText(dados_responsavel2.cpf_cnpj_fonte_pegadora, {
+            page3.drawText(safeString(dados_responsavel2.cpf_cnpj_fonte_pegadora), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 397, // Ajuste conforme necessário
                 size: fontSize,
@@ -878,21 +880,21 @@ page2.drawText( dados_responsavel2.data_nascimento.replace(/\//g, '  '), {
 
 // Formatar a data com espaços
 const formattedDate3 = `${rawDate3.slice(0, 2)}  ${rawDate3.slice(2, 4)}  ${rawDate3.slice(4)}`;
-            page3.drawText(formattedDate3, {
+            page3.drawText(safeString(formattedDate3), {
                 x: 433, // Ajuste conforme necessário
                 y: height - 391, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page3.drawText('R$'+dados_responsavel2.valor_renda_bruta.toString(), {
+            page3.drawText(safeString('R$'+dados_responsavel2.valor_renda_bruta.toString()), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 439, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page3.drawText('R$'+ dados_responsavel2.valor_renda_liquida.toString(), {
+            page3.drawText(safeString('R$'+ dados_responsavel2.valor_renda_liquida.toString()), {
                 x: 244, // Ajuste conforme necessário
                 y: height - 439, // Ajuste conforme necessário
                 size: fontSize,
@@ -902,7 +904,7 @@ const formattedDate3 = `${rawDate3.slice(0, 2)}  ${rawDate3.slice(2, 4)}  ${rawD
 if(dados_responsavel2.mes_referencia_renda == null){
     dados_responsavel2.mes_referencia_renda =''
 }
-            page3.drawText(dados_responsavel2.mes_referencia_renda, {
+            page3.drawText(safeString(dados_responsavel2.mes_referencia_renda), {
                 x: 404, // Ajuste conforme necessário
                 y: height - 439, // Ajuste conforme necessário
                 size: fontSize,
@@ -914,14 +916,14 @@ if(dados_responsavel2.mes_referencia_renda == null){
 
 // Formatar a data com espaços
 const formattedDate4 = `${rawDate4.slice(0, 2)}  ${rawDate4.slice(2, 4)}  ${rawDate4.slice(4)}`;
-            page3.drawText(formattedDate4, {
+            page3.drawText(safeString(formattedDate4), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 498, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page3.drawText('R$'+dados_responsavel2.valor_renda_declarada_liquida.toString(), {
+            page3.drawText(safeString('R$'+dados_responsavel2.valor_renda_declarada_liquida.toString()), {
                 x: 224, // Ajuste conforme necessário
                 y: height - 499, // Ajuste conforme necessário
                 size: fontSize,
@@ -931,7 +933,7 @@ const formattedDate4 = `${rawDate4.slice(0, 2)}  ${rawDate4.slice(2, 4)}  ${rawD
             if(dados_responsavel2.mes_referencia_renda_declarada == null){
                 dados_responsavel2.mes_referencia_renda_declarada =''
             }
-            page3.drawText(dados_responsavel2.mes_referencia_renda_declarada, {
+            page3.drawText(safeString(dados_responsavel2.mes_referencia_renda_declarada), {
                 x: 382, // Ajuste conforme necessário
                 y: height - 499, // Ajuste conforme necessário
                 size: fontSize,
@@ -998,14 +1000,14 @@ const formattedDate4 = `${rawDate4.slice(0, 2)}  ${rawDate4.slice(2, 4)}  ${rawD
                     color: rgb(0, 0, 0)
                 });
             }
-            page3.drawText(dados_responsavel2.nome_tutor, {
+            page3.drawText(safeString(dados_responsavel2.nome_tutor), {
                 x: 60, // Ajuste conforme necessário
                 y: height - 771, // Ajuste conforme necessário
                 size: fontSize,
                 font: font,
                 color: rgb(0, 0, 0),
             });
-            page3.drawText(dados_responsavel2.cpf_tutor, {
+            page3.drawText(safeString(dados_responsavel2.cpf_tutor), {
                 x: 403, // Ajuste conforme necessário
                 y: height - 771, // Ajuste conforme necessário
                 size: fontSize,
