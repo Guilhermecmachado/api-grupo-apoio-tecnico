@@ -45,12 +45,22 @@ module.exports = {
         // Converte valores vazios para '0' e substitui vírgulas por pontos
         function parseCurrency(value) {
             if (typeof value === 'string') {
-                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
-                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+                // Remove caracteres que não sejam números, ponto, vírgula ou traço
+                value = value.replace(/[^\d,.-]/g, '');
+        
+                // Se houver ponto como separador de milhar, removemos todos os pontos, exceto os decimais
+                if (value.includes(',') && value.includes('.')) {
+                    value = value.replace(/\./g, ''); // Remove todos os pontos (separadores de milhar)
+                }
+        
+                // Substitui a vírgula decimal por ponto
+                value = value.replace(',', '.');
             }
-            // Converte para float se o valor ainda for uma string
-            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
+        
+            // Converte para float e retorna 0 se inválido
+            return parseFloat(value) || 0;
         }
+        
         
         // Aplicando a função de conversão para cada valor
         valor_renda_liquida = parseCurrency(valor_renda_liquida);
@@ -230,12 +240,22 @@ module.exports = {
 
         function parseCurrency(value) {
             if (typeof value === 'string') {
-                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
-                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+                // Remove caracteres que não sejam números, ponto, vírgula ou traço
+                value = value.replace(/[^\d,.-]/g, '');
+        
+                // Se houver ponto como separador de milhar, removemos todos os pontos, exceto os decimais
+                if (value.includes(',') && value.includes('.')) {
+                    value = value.replace(/\./g, ''); // Remove todos os pontos (separadores de milhar)
+                }
+        
+                // Substitui a vírgula decimal por ponto
+                value = value.replace(',', '.');
             }
-            // Converte para float se o valor ainda for uma string
-            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
+        
+            // Converte para float e retorna 0 se inválido
+            return parseFloat(value) || 0;
         }
+        
         
         // Aplicando a função de conversão para cada valor
         valor_renda_liquida = parseCurrency(valor_renda_liquida);

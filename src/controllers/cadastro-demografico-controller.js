@@ -58,19 +58,24 @@ module.exports = {
 if(projeto_nome == undefined){
     projeto_nome ='ATUALIZAR FAMILIAR'
 }
-        function parseCurrency(value) {
-            if (typeof value === 'string') {
-                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
-                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
-            }
-            // Converte para float se o valor ainda for uma string
-            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
+function parseCurrency(value) {
+    if (typeof value === 'string') {
+        // Remove caracteres que não sejam números, ponto, vírgula ou traço
+        value = value.replace(/[^\d,.-]/g, '');
+
+        // Se houver ponto como separador de milhar, removemos todos os pontos, exceto os decimais
+        if (value.includes(',') && value.includes('.')) {
+            value = value.replace(/\./g, ''); // Remove todos os pontos (separadores de milhar)
         }
-        
-        // Aplicando a função de conversão para cada valor
-        outra_fonte_renda_valor = parseCurrency(outra_fonte_renda_valor);
-        renda_principal_valor = parseCurrency(renda_principal_valor);
-        beneficios_valor = parseCurrency(beneficios_valor);
+
+        // Substitui a vírgula decimal por ponto
+        value = value.replace(',', '.');
+    }
+
+    // Converte para float e retorna 0 se inválido
+    return parseFloat(value) || 0;
+}
+
 
 
 
@@ -190,15 +195,24 @@ if(projeto_nome == undefined){
         let id_grupo = req.body.id_grupo
         let id_pne = req.body.pne
         let id_curso = req.body.id_curso
-
         function parseCurrency(value) {
             if (typeof value === 'string') {
-                // Remove qualquer caractere que não seja número, vírgula, ponto ou traço
-                value = value.replace(/[^\d,.-]/g, '').replace(',', '.');
+                // Remove caracteres que não sejam números, ponto, vírgula ou traço
+                value = value.replace(/[^\d,.-]/g, '');
+        
+                // Se houver ponto como separador de milhar, removemos todos os pontos, exceto os decimais
+                if (value.includes(',') && value.includes('.')) {
+                    value = value.replace(/\./g, ''); // Remove todos os pontos (separadores de milhar)
+                }
+        
+                // Substitui a vírgula decimal por ponto
+                value = value.replace(',', '.');
             }
-            // Converte para float se o valor ainda for uma string
-            return parseFloat(value) || 0; // Retorna 0 caso o valor seja inválido ou vazio
+        
+            // Converte para float e retorna 0 se inválido
+            return parseFloat(value) || 0;
         }
+        
         
         // Aplicando a função de conversão para cada valor
         outra_fonte_renda_valor = parseCurrency(outra_fonte_renda_valor);
